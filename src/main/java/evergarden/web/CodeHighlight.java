@@ -7,7 +7,7 @@
  *
  *          https://opensource.org/licenses/MIT
  */
-package evergarden.js;
+package evergarden.web;
 
 import java.util.HashSet;
 import java.util.List;

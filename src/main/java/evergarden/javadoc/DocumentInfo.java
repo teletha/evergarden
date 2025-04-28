@@ -71,7 +71,7 @@ import com.sun.source.doctree.VersionTree;
 import com.sun.source.util.SimpleDocTreeVisitor;
 
 import evergarden.design.Styles;
-import evergarden.js.CodeHighlight;
+import evergarden.web.CodeHighlight;
 import kiss.I;
 import kiss.Variable;
 import kiss.XML;

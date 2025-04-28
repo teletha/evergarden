@@ -38,6 +38,7 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ModuleElement;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.TypeMirror;
 import javax.tools.Diagnostic;
 import javax.tools.Diagnostic.Kind;
 import javax.tools.DiagnosticListener;
@@ -47,6 +48,7 @@ import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
+import evergarden.Index.Doc;
 import evergarden.design.JavadngDesignScheme;
 import evergarden.host.Hosting;
 import evergarden.javadoc.ClassInfo;
@@ -56,10 +58,10 @@ import evergarden.javadoc.SourceCode;
 import evergarden.javadoc.TemplateStore;
 import evergarden.javadoc.TypeResolver;
 import evergarden.javadoc.Util;
-import evergarden.js.CodeHighlight;
 import evergarden.page.APIPage;
 import evergarden.page.ActivityPage;
 import evergarden.page.DocumentPage;
+import evergarden.web.CodeHighlight;
 import icy.manipulator.Icy;
 import jdk.javadoc.doclet.Doclet;
 import jdk.javadoc.doclet.DocletEnvironment;
@@ -81,8 +83,8 @@ public abstract class AutoMemoriesDollModel {
     /** The name pattern of document. */
     private static final Pattern DocName = Pattern.compile("(.*)Manual$");
 
-    /** The scanned data. */
-    public final Data data = new Data();
+    /** The scanned index. */
+    public final Index index = new Index();
 
     /** The javadoc mode. */
     private boolean processingMainSource = true;
@@ -417,7 +419,7 @@ public abstract class AutoMemoriesDollModel {
     }
 
     public final Variable<ClassInfo> api() {
-        return I.signal(data.types).first().to();
+        return I.signal(index.types).first().to();
     }
 
     /**
@@ -627,7 +629,7 @@ public abstract class AutoMemoriesDollModel {
         ClassInfo info = new ClassInfo(root, new TypeResolver(externals, internals, root));
 
         if (processingMainSource) {
-            data.add(info);
+            index.register(info);
         } else {
             Matcher matcher = DocName.matcher(info.outer().map(o -> o.name).or(""));
 
@@ -674,55 +676,49 @@ public abstract class AutoMemoriesDollModel {
     private void complete() {
         if (processingMainSource) {
             // sort data
-            data.modules.sort(Comparator.naturalOrder());
-            data.packages.sort(Comparator.naturalOrder());
-            data.types.sort(Comparator.naturalOrder());
+            index.modules.sort(Comparator.naturalOrder());
+            index.packages.sort(Comparator.naturalOrder());
+            index.types.sort(Comparator.naturalOrder());
 
             // after care
-            data.connectSubType();
+            buildTypeGraph();
 
             // build doc tree
             for (ClassInfo info : docs) {
-                Doc doc = new Doc();
-                doc.title = info.title();
-                doc.path = "doc/" + info.id() + ".html";
-                data.docs.add(doc);
+                Doc doc = new Doc(info.title(), "doc/" + info.id() + ".html");
+                index.docs.add(doc);
 
                 for (Document child : info.children()) {
-                    Doc childDoc = new Doc();
-                    childDoc.title = child.title();
-                    childDoc.path = "doc/" + info.id() + ".html#" + child.id();
-                    doc.subs.add(childDoc);
+                    Doc childDoc = new Doc(child.title(), "doc/" + info.id() + ".html#" + child.id());
+                    doc.subs().add(childDoc);
 
                     for (Document foot : child.children()) {
-                        Doc footDoc = new Doc();
-                        footDoc.title = foot.title();
-                        footDoc.path = "doc/" + info.id() + ".html#" + foot.id();
-                        childDoc.subs.add(footDoc);
+                        Doc footDoc = new Doc(foot.title(), "doc/" + info.id() + ".html#" + foot.id());
+                        childDoc.subs().add(footDoc);
                     }
                 }
             }
 
             if (output() != null) {
-                SiteBuilder site = SiteBuilder.root(output()).guard("index.html", "main.css", "mocha.html", "mimic.test.js");
+                SiteBuilder site = I.make(SiteBuilder.class).root(output()).guard("index.html", "main.css", "mocha.html", "mimic.test.js");
 
                 // build CSS
-                I.load(SiteBuilder.class);
+                I.load(AutoMemoriesDoll.class);
                 Stylist.pretty()
                         .scheme(JavadngDesignScheme.class)
                         .styles(I.findAs(StyleDeclarable.class))
                         .formatTo(output().file("main.css").asJavaPath());
 
                 // build JS
-                site.build("main.js", SiteBuilder.class.getResourceAsStream("main.js"));
-                site.build("mimic.js", SiteBuilder.class.getResourceAsStream("mimic.js"));
-                site.build("highlight.js", SiteBuilder.class.getResourceAsStream("highlight.js"), CodeHighlight.build());
+                site.build("main.js", AutoMemoriesDoll.class.getResourceAsStream("main.js"));
+                site.build("mimic.js", AutoMemoriesDoll.class.getResourceAsStream("mimic.js"));
+                site.build("highlight.js", AutoMemoriesDoll.class.getResourceAsStream("highlight.js"), CodeHighlight.build());
 
                 // build SVG
-                site.build("main.svg", SiteBuilder.class.getResourceAsStream("main.svg"));
+                site.build("main.svg", AutoMemoriesDoll.class.getResourceAsStream("main.svg"));
 
                 // build HTML
-                for (ClassInfo info : data.types) {
+                for (ClassInfo info : index.types) {
                     site.buildHTML("api/" + info.id() + ".html", new APIPage(1, this, info));
                 }
                 for (ClassInfo info : docs) {
@@ -738,6 +734,34 @@ public abstract class AutoMemoriesDollModel {
 
                 // create at last for live reload
                 site.buildHTML("index.html", new APIPage(0, this, null));
+            }
+        }
+    }
+
+    /**
+     * Establishes the subtype relationships among all collected types.
+     * <p>
+     * For each known type, this method identifies its direct and indirect supertypes
+     * and registers the current type as a subtype of them.
+     * <p>
+     * This operation is optimized to run in linear time relative to the number of types,
+     * using a fast lookup table instead of exhaustive comparison.
+     */
+    private void buildTypeGraph() {
+        Map<Element, ClassInfo> cache = new HashMap<>();
+        for (ClassInfo info : index.types) {
+            cache.put(info.e, info);
+        }
+
+        for (ClassInfo type : index.types) {
+            for (Set<TypeMirror> uppers : Util.getAllTypes(type.e)) {
+                for (TypeMirror upper : uppers) {
+                    Element e = Util.TypeUtils.asElement(upper);
+                    ClassInfo parent = cache.get(e);
+                    if (parent != null) {
+                        parent.addSub(type);
+                    }
+                }
             }
         }
     }

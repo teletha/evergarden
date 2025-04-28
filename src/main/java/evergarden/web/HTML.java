@@ -7,11 +7,13 @@
  *
  *          https://opensource.org/licenses/MIT
  */
-package evergarden;
+package evergarden.web;
 
 import java.util.function.Consumer;
 
+import evergarden.SiteBuilder;
 import evergarden.design.Styles;
+import kiss.I;
 import kiss.XML;
 import stylist.Style;
 
@@ -38,6 +40,6 @@ public abstract class HTML extends lycoris.HTML {
      * @param model A style definition class to write.
      */
     protected final void script(String path, Object model) {
-        $("script", attr("src", SiteBuilder.current.buildJSONP(path, model)));
+        $("script", attr("src", I.make(SiteBuilder.class).buildJSONP(path, model)));
     }
 }

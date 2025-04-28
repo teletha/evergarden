@@ -16,7 +16,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
+import evergarden.web.HTML;
 import kiss.I;
+import kiss.Managed;
+import kiss.Singleton;
 import kiss.XML;
 import psychopath.Directory;
 import psychopath.File;
@@ -25,43 +28,11 @@ import stylist.StyleDSL;
 import stylist.StyleDeclarable;
 import stylist.Stylist;
 
+@Managed(Singleton.class)
 public class SiteBuilder {
 
-    /** GUILTY ACCESSOR */
-    static SiteBuilder current;
-
-    /**
-     * Configure root directory.
-     * 
-     * @param pathToRootDirectory
-     * @return
-     */
-    public static final SiteBuilder root(String pathToRootDirectory) {
-        return root(Locator.directory(pathToRootDirectory));
-    }
-
-    /**
-     * Configure root directory.
-     * 
-     * @param pathToRootDirectory
-     * @return
-     */
-    public static final SiteBuilder root(Path pathToRootDirectory) {
-        return root(Locator.directory(pathToRootDirectory));
-    }
-
-    /**
-     * Configure root directory.
-     * 
-     * @param rootDirectory
-     * @return
-     */
-    public static final SiteBuilder root(Directory rootDirectory) {
-        return new SiteBuilder(rootDirectory);
-    }
-
     /** The root directory. */
-    private final Directory root;
+    private Directory root;
 
     /** The managed resources. */
     private final Map<Object, String> resources = new ConcurrentHashMap();
@@ -73,11 +44,40 @@ public class SiteBuilder {
     private List<String> protectable = I.list("!**@.*");
 
     /**
-     * @param rootDirectory
+     * Hide constructor
      */
-    private SiteBuilder(Directory rootDirectory) {
+    private SiteBuilder() {
+    }
+
+    /**
+     * Configure root directory.
+     * 
+     * @param pathToRootDirectory
+     * @return
+     */
+    public final SiteBuilder root(String pathToRootDirectory) {
+        return root(Locator.directory(pathToRootDirectory));
+    }
+
+    /**
+     * Configure root directory.
+     * 
+     * @param pathToRootDirectory
+     * @return
+     */
+    public final SiteBuilder root(Path pathToRootDirectory) {
+        return root(Locator.directory(pathToRootDirectory));
+    }
+
+    /**
+     * Configure root directory.
+     * 
+     * @param rootDirectory
+     * @return
+     */
+    public final SiteBuilder root(Directory rootDirectory) {
         this.root = Objects.requireNonNull(rootDirectory);
-        current = this;
+        return this;
     }
 
     /**

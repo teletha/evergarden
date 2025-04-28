@@ -12,9 +12,9 @@ package evergarden.page;
 import java.time.LocalDate;
 
 import evergarden.AutoMemoriesDollModel;
-import evergarden.HTML;
 import evergarden.design.JavadngDSL;
 import evergarden.host.Hosting;
+import evergarden.web.HTML;
 import stylist.Query;
 import stylist.Style;
 import stylist.Stylist;
@@ -118,7 +118,7 @@ public abstract class Page<T> extends HTML {
                 });
             });
 
-            script("root.js", model.data);
+            script("root.js", model.index);
             module("main.js");
         });
 

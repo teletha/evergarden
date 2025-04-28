@@ -199,7 +199,7 @@ public class EvergardenTestSupport {
      * @param className
      */
     final Variable<ClassInfo> findByClassName(AutoMemoriesDoll doc, String className) {
-        for (ClassInfo info : doc.data.types) {
+        for (ClassInfo info : doc.index.types) {
             if (info.id().equals(className)) {
                 return Variable.of(info);
             }

@@ -7,7 +7,7 @@
  *
  *          https://opensource.org/licenses/MIT
  */
-package evergarden.js;
+package evergarden.web;
 
 import org.junit.jupiter.api.Test;
 
