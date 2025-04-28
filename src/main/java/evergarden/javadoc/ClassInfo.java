@@ -227,8 +227,8 @@ public class ClassInfo extends ParameterizableInfo implements Document, Comparab
      * @return
      */
     @Override
-    public List<? extends Document> children() {
-        return I.signal(inners).take(m -> m.is(Modifier.PUBLIC)).toList();
+    public List<Document> children() {
+        return I.signal(inners).take(m -> m.is(Modifier.PUBLIC)).as(Document.class).toList();
     }
 
     /**

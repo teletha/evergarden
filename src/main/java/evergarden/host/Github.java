@@ -206,7 +206,7 @@ class Github implements Hosting {
          * {@inheritDoc}
          */
         @Override
-        public List<? extends Document> children() {
+        public List<Document> children() {
             return children;
         }
     }
