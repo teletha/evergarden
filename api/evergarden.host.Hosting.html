@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta content="width=device-width, initial-scale=1" name="viewport"/>
+		<meta content="Explains how to use Evergarden and its API. " name="description"/>
+		<link href="https://cdn.jsdelivr.net" rel="preconnect"/>
+		<link href="https://fonts.googleapis.com" rel="preconnect"/>
+		<link crossorigin="null" href="https://fonts.gstatic.com" rel="preconnect"/>
+		<link as="style" fetchpriority="high" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter" rel="preload"/>
+		<link href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter" media="print" onload="this.media=&apos;all&apos;" rel="stylesheet"/>
+		<link as="style" fetchpriority="high" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Material+Icons" rel="preload"/>
+		<link href="https://fonts.googleapis.com/css2?display=swap&amp;family=Material+Icons" media="print" onload="this.media=&apos;all&apos;" rel="stylesheet"/>
+		<link as="style" fetchpriority="high" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Vollkorn" rel="preload"/>
+		<link href="https://fonts.googleapis.com/css2?display=swap&amp;family=Vollkorn" media="print" onload="this.media=&apos;all&apos;" rel="stylesheet"/>
+		<title>Evergarden API</title>
+		<base href="../"/>
+		<script src="mimic.js" type="module"></script>
+		<link href="https://cdn.jsdelivr.net/npm/ress@4.0.0/dist/ress.min.css" rel="stylesheet"/>
+		<link href="main.css" rel="stylesheet"/>
+	</head>
+	<body class="c">
+		<header class="a" date="" ver="1.0">
+			<h1 class="b"><code>Evergarden</code></h1>
+			<nav class="T"><a href="api/" id="API"><svg class="package A svg" viewBox="0 0 24 24">
+						<use href="main.svg#package"/>
+					</svg>
+				</a><a href="https://github.com/teletha/evergarden/discussions" id="Community" target="_blank"><svg class="user A svg" viewBox="0 0 24 24">
+						<use href="main.svg#user"/>
+					</svg>
+				</a><a href="doc/changelog.html" id="Activity"><svg class="activity A svg" viewBox="0 0 24 24">
+						<use href="main.svg#activity"/>
+					</svg>
+				</a><a href="https://github.com/teletha/evergarden" id="Repository" target="_blank"><svg class="github A svg" viewBox="0 0 24 24">
+						<use href="main.svg#github"/>
+					</svg>
+				</a></nav>
+			<div class="Q"><a aria-label="Change color scheme" id="theme"><svg class="sun A svg" viewBox="0 0 24 24">
+						<use href="main.svg#sun"/>
+					</svg><svg class="moon A svg" viewBox="0 0 24 24">
+						<use href="main.svg#moon"/>
+					</svg>
+				</a></div>
+		</header>
+		<nav class="d"></nav>
+		<article class="U" id="Article">
+			<section class="O"><code class="r">evergarden.host</code>
+				<h2 class="Interface I"><code class="N">Hosting</code></h2>
+				<div class="n"></div><span class="B"><p>Represents an abstraction for repository hosting platforms (e.g., GitHub).</p><p>
+ This class provides a unified interface to compute platform-specific URLs and
+ retrieve metadata such as changelogs and publish dates. Concrete subclasses
+ should implement service-specific behavior.
+ </p></span></section>
+			<section class="O" id="locate()">
+				<h2 class="i"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code class="N">locate</code><code class="e">()</code><i class="p"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></i></h2>
+				<table class="s">
+					<tr class="Z">
+						<td><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></td>
+						<td><span><p>The repository URL.</p></span></td>
+					</tr>
+				</table><span class="B"><p>Returns the URL of the repository&apos;s main page.</p></span></section>
+			<section class="O" id="locateCommunity()">
+				<h2 class="i"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code class="N">locateCommunity</code><code class="e">()</code><i class="p"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></i></h2>
+				<table class="s">
+					<tr class="Z">
+						<td><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></td>
+						<td><span><p>The community page URL.</p></span></td>
+					</tr>
+				</table><span class="B"><p>Returns the URL of the community discussion page.</p></span></section>
+			<section class="O" id="locateChangeLog()">
+				<h2 class="i"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code class="N">locateChangeLog</code><code class="e">()</code><i class="p"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></i></h2>
+				<table class="s">
+					<tr class="Z">
+						<td><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></td>
+						<td><span><p>The changelog page URL.</p></span></td>
+					</tr>
+				</table><span class="B"><p>Returns the URL of the changelog page.</p></span></section>
+			<section class="O" id="locateIssues()">
+				<h2 class="i"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code class="N">locateIssues</code><code class="e">()</code><i class="p"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></i></h2>
+				<table class="s">
+					<tr class="Z">
+						<td><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></td>
+						<td><span><p>The issue tracker page URL.</p></span></td>
+					</tr>
+				</table><span class="B"><p>Returns the URL of the issue tracker page.</p></span></section>
+			<section class="O" id="locateEditor(evergarden.Region)">
+				<h2 class="i"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code class="N">locateEditor</code><code class="e">(<code><a aria-label="evergarden.Region" href="api/evergarden.Region.html">Region</a></code><code class="parameterName">region</code>)</code><i class="p"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></i></h2>
+				<table class="s">
+					<tr class="Y">
+						<td><code><a aria-label="evergarden.Region" href="api/evergarden.Region.html">Region</a></code><code class="parameterName">region</code></td>
+						<td><span><p>The region to locate the editor for.</p></span></td>
+					</tr>
+					<tr class="Z">
+						<td><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></td>
+						<td><span><p>The editor page URL.</p></span></td>
+					</tr>
+				</table><span class="B"><p>Returns the URL to edit a specific region of code or documentation.</p></span></section>
+			<section class="O" id="getChangeLog(java.lang.String)">
+				<h2 class="i"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code class="N">getChangeLog</code><code class="e">(<code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">text</code>)</code><i class="p"><code><a aria-label="evergarden.Document" href="api/evergarden.Document.html">Document</a></code></i></h2>
+				<table class="s">
+					<tr class="Y">
+						<td><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">text</code></td>
+						<td><span><p>The raw changelog text.</p></span></td>
+					</tr>
+					<tr class="Z">
+						<td><code><a aria-label="evergarden.Document" href="api/evergarden.Document.html">Document</a></code></td>
+						<td><span><p>A <code><a aria-label="evergarden.Document" href="api/evergarden.Document.html">Document</a></code> instance representing the changelog.</p></span></td>
+					</tr>
+				</table><span class="B"><p>Builds a <code><a aria-label="evergarden.Document" href="api/evergarden.Document.html">Document</a></code> representing the parsed changelog content.</p></span></section>
+			<section class="O" id="getLatestPublishedDate()">
+				<h2 class="i"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code class="N">getLatestPublishedDate</code><code class="e">()</code><i class="p"><code><a aria-label="java.time.LocalDate 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/time/LocalDate.html">LocalDate</a></code></i></h2>
+				<table class="s">
+					<tr class="Z">
+						<td><code><a aria-label="java.time.LocalDate 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/time/LocalDate.html">LocalDate</a></code></td>
+						<td><span><p>The latest published date as a string.</p></span></td>
+					</tr>
+				</table><span class="B"><p>Retrieves the published date of the latest version.</p></span></section>
+			<section class="O" id="of(java.lang.String)">
+				<h2 class="i"><i class="STATIC PUBLIC"></i><code class="N">of</code><code class="e">(<code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">uri</code>)</code><i class="p"><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.host.Hosting" href="api/evergarden.host.Hosting.html">Hosting</a></code></code></code></i></h2>
+				<table class="s">
+					<tr class="Y">
+						<td><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">uri</code></td>
+						<td><span><p>The URI as a string.</p></span></td>
+					</tr>
+					<tr class="Z">
+						<td><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.host.Hosting" href="api/evergarden.host.Hosting.html">Hosting</a></code></code></code></td>
+						<td><span><p>A <code><a aria-label="evergarden.host.Hosting" href="api/evergarden.host.Hosting.html">Hosting</a></code> instance, or <code>null</code> if unsupported.</p></span></td>
+					</tr>
+				</table><span class="B"><p>Infers and constructs a <code><a aria-label="evergarden.host.Hosting" href="api/evergarden.host.Hosting.html">Hosting</a></code> instance from the given URI string.</p></span></section>
+			<section class="O" id="of(java.net.URI)">
+				<h2 class="i"><i class="STATIC PUBLIC"></i><code class="N">of</code><code class="e">(<code><a aria-label="java.net.URI 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/net/URI.html">URI</a></code><code class="parameterName">uri</code>)</code><i class="p"><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.host.Hosting" href="api/evergarden.host.Hosting.html">Hosting</a></code></code></code></i></h2>
+				<table class="s">
+					<tr class="Y">
+						<td><code><a aria-label="java.net.URI 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/net/URI.html">URI</a></code><code class="parameterName">uri</code></td>
+						<td><span><p>The <code><a aria-label="java.net.URI 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/net/URI.html">URI</a></code>.</p></span></td>
+					</tr>
+					<tr class="Z">
+						<td><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.host.Hosting" href="api/evergarden.host.Hosting.html">Hosting</a></code></code></code></td>
+						<td><span><p>A <code><a aria-label="evergarden.host.Hosting" href="api/evergarden.host.Hosting.html">Hosting</a></code> instance, or <code>null</code> if unsupported.</p></span></td>
+					</tr>
+				</table><span class="B"><p>Infers and constructs a <code><a aria-label="evergarden.host.Hosting" href="api/evergarden.host.Hosting.html">Hosting</a></code> instance from the given <code><a aria-label="java.net.URI 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/net/URI.html">URI</a></code>.</p></span></section>
+		</article>
+		<aside class="K">
+			<div class="h">
+				<h5 class="g">Static Methods</h5>
+				<ul>
+					<li class="f"><i class="STATIC PUBLIC"></i><code><a href="api/evergarden.host.Hosting.html#of(java.lang.String)">of</a></code><code class="e">(<code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">uri</code>)</code><i class="J"><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.host.Hosting" href="api/evergarden.host.Hosting.html">Hosting</a></code></code></code></i></li>
+					<li class="f"><i class="STATIC PUBLIC"></i><code><a href="api/evergarden.host.Hosting.html#of(java.net.URI)">of</a></code><code class="e">(<code><a aria-label="java.net.URI 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/net/URI.html">URI</a></code><code class="parameterName">uri</code>)</code><i class="J"><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.host.Hosting" href="api/evergarden.host.Hosting.html">Hosting</a></code></code></code></i></li>
+				</ul>
+				<h5 class="g">Methods</h5>
+				<ul>
+					<li class="f"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code><a href="api/evergarden.host.Hosting.html#locate()">locate</a></code><code class="e">()</code><i class="J"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></i></li>
+					<li class="f"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code><a href="api/evergarden.host.Hosting.html#locateCommunity()">locateCommunity</a></code><code class="e">()</code><i class="J"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></i></li>
+					<li class="f"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code><a href="api/evergarden.host.Hosting.html#locateChangeLog()">locateChangeLog</a></code><code class="e">()</code><i class="J"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></i></li>
+					<li class="f"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code><a href="api/evergarden.host.Hosting.html#locateIssues()">locateIssues</a></code><code class="e">()</code><i class="J"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></i></li>
+					<li class="f"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code><a href="api/evergarden.host.Hosting.html#locateEditor(evergarden.Region)">locateEditor</a></code><code class="e">(<code><a aria-label="evergarden.Region" href="api/evergarden.Region.html">Region</a></code><code class="parameterName">region</code>)</code><i class="J"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></i></li>
+					<li class="f"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code><a href="api/evergarden.host.Hosting.html#getChangeLog(java.lang.String)">getChangeLog</a></code><code class="e">(<code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">text</code>)</code><i class="J"><code><a aria-label="evergarden.Document" href="api/evergarden.Document.html">Document</a></code></i></li>
+					<li class="f"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code><a href="api/evergarden.host.Hosting.html#getLatestPublishedDate()">getLatestPublishedDate</a></code><code class="e">()</code><i class="J"><code><a aria-label="java.time.LocalDate 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/time/LocalDate.html">LocalDate</a></code></i></li>
+				</ul>
+			</div>
+		</aside>
+		<footer class="k"/>
+	</body>
+	<script src="root.js"></script>
+	<script src="main.js" type="module"></script>
+</html>
