@@ -14,7 +14,10 @@ import stylist.util.Browsers;
 import stylist.value.Color;
 import stylist.value.Numeric;
 
-public class Styles implements JavadngDSL {
+public class Styles implements EvergardenDSL {
+
+    public static final Style NONE = () -> {
+    };
 
     // =====================================================
     // HTML Elements
@@ -29,11 +32,37 @@ public class Styles implements JavadngDSL {
         });
     });
 
-    public static Style HTMLCode = Style.named("code", () -> {
+    public static Style HEADING2 = Style.named("h2", () -> {
+        font.size(1.75, rem).color(Theme.front);
+        padding.size(0.5, rem).left(0, rem);
+        margin.bottom(-0.6, rem);
+
+        $.firstLetter(() -> {
+            font.color(Theme.accent);
+        });
+    });
+
+    public static Style HEADING3 = Style.named("h3", () -> {
+        font.size(1.4, rem).color(Theme.front);
+        margin.bottom(-0.6, rem);
+    
+        $.before(() -> {
+            content.attr("icon");
+            display.inline();
+            margin.right(0.3, rem);
+        });
+    });
+
+    public static Style HEADING4 = Style.named("h4", () -> {
+        font.size(1.2, rem).color(Theme.front).weight.normal();
+        margin.bottom(-1.4, rem).top(1.8, rem);
+    });
+
+    public static Style CODE = Style.named("code", () -> {
         font.family("inherit");
     });
 
-    public static Style HTMLAnchor = Style.named("a", () -> {
+    public static Style ANCHOR = Style.named("a", () -> {
         font.color(Color.Inherit);
         text.decorationStyle.solid().decorationColor.color(Theme.front.opacify(-0.6)).decorationThickness(1, px).underlineOffset
                 .length(2, px);
@@ -44,11 +73,11 @@ public class Styles implements JavadngDSL {
         });
     });
 
-    public static Style HTMLCheckbox = Browsers.checkbox(Theme.link);
+    public static Style CHECKBOX = Browsers.checkbox(Theme.link);
 
-    public static Style HTMLSelectbox = Browsers.selectbox(Theme.back, Theme.front);
+    public static Style SELECTBOX = Browsers.selectbox(Theme.back, Theme.front);
 
-    public static Style HTMLToolTip = Browsers.tooltip("aria-label", true, Theme.front, Theme.back);
+    public static Style TOOLTIP = Browsers.tooltip("aria-label", true, Theme.front, Theme.back);
 
     public static Style SVG = Style.named(".svg", () -> {
         display.width(16, px);
@@ -212,32 +241,6 @@ public class Styles implements JavadngDSL {
     });
 
     public static Style JavadocComment = () -> {
-        $.select("h2", () -> {
-            font.size(1.75, rem).color(Theme.front);
-            padding.size(0.5, rem).left(0, rem);
-            margin.bottom(-0.6, rem);
-
-            $.firstLetter(() -> {
-                font.color(Theme.accent);
-            });
-        });
-
-        $.select("h3", () -> {
-            font.size(1.4, rem).color(Theme.front);
-            margin.bottom(-0.6, rem);
-
-            $.before(() -> {
-                content.text("📄");
-                display.inline();
-                margin.right(0.3, rem);
-            });
-        });
-
-        $.select("h4", () -> {
-            font.size(1.2, rem).color(Theme.front).weight.normal();
-            margin.bottom(-1.4, rem).top(1.8, rem);
-        });
-
         $.select("p", () -> {
             block();
 
@@ -681,7 +684,7 @@ public class Styles implements JavadngDSL {
     });
 
     public static final Style Tree = Style.named(".tree", () -> {
-        JavadngDSL.scrollable();
+        EvergardenDSL.scrollable();
         display.height(70, dvh);
         background.color(Color.Inherit);
 

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import evergarden.AutoMemoriesDollModel;
-import evergarden.design.JavadngDSL;
+import evergarden.design.EvergardenDSL;
 import evergarden.design.Styles;
 import evergarden.javadoc.ClassInfo;
 import evergarden.javadoc.ExecutableInfo;
@@ -240,11 +240,11 @@ public class APIPage extends Page<ClassInfo> {
     /**
      * Style definition.
      */
-    private interface css extends JavadngDSL {
+    interface css extends EvergardenDSL {
 
         Style outline = () -> {
-            JavadngDSL.scrollable();
-            display.block().height($.num(91, vh).subtract(15, px)).maxWidth(JavadngDSL.RightNavigationWidth);
+            EvergardenDSL.scrollable();
+            display.block().height($.num(91, vh).subtract(15, px)).maxWidth(EvergardenDSL.RightNavigationWidth);
             text.whiteSpace.nowrap();
             font.size(0.8, em);
         };
@@ -264,12 +264,12 @@ public class APIPage extends Page<ClassInfo> {
         };
 
         Style TypeName = () -> {
-            font.family(JavadngDSL.Theme.base).size(1.2, rem).weight.normal();
+            font.family(EvergardenDSL.Theme.base).size(1.2, rem).weight.normal();
             margin.bottom(0.3, rem);
         };
 
         Style MemberName = () -> {
-            font.family(JavadngDSL.Theme.base).size(1, rem).weight.normal();
+            font.family(EvergardenDSL.Theme.base).size(1, rem).weight.normal();
             display.block();
             margin.left(-1.1, rem);
         };
@@ -403,7 +403,7 @@ public class APIPage extends Page<ClassInfo> {
             });
 
             $.select("li").not($.lastChild()).after(() -> {
-                font.color(JavadngDSL.Theme.front.lighten(30)).size.smaller();
+                font.color(EvergardenDSL.Theme.front.lighten(30)).size.smaller();
                 content.text("\\025b6");
                 margin.horizontal(0.8, rem);
             });

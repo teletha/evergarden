@@ -12,9 +12,10 @@ package evergarden.page;
 import java.time.LocalDate;
 
 import evergarden.AutoMemoriesDollModel;
-import evergarden.design.JavadngDSL;
+import evergarden.design.EvergardenDSL;
 import evergarden.host.Hosting;
 import evergarden.web.HTML;
+import kiss.XML;
 import stylist.Query;
 import stylist.Style;
 import stylist.Stylist;
@@ -122,6 +123,15 @@ public abstract class Page<T> extends HTML {
             module("main.js");
         });
 
+        root.forEach(this::transform);
+    }
+
+    /**
+     * Transform HTML
+     * 
+     * @param xml
+     */
+    protected void transform(XML xml) {
     }
 
     private void link(String id, String path, String icon) {
@@ -137,7 +147,7 @@ public abstract class Page<T> extends HTML {
 
     protected abstract void declareSubNavigation();
 
-    private interface css extends JavadngDSL {
+    private interface css extends EvergardenDSL {
 
         Numeric HEADER_HEIGHT = Numeric.num(80, px);
 
@@ -175,7 +185,7 @@ public abstract class Page<T> extends HTML {
                     display.height(BODY_HEIGHT);
                     scroll.thin().color(Theme.front.opacify(-0.7), Color.Transparent);
                     overflow.y.auto();
-                    JavadngDSL.scrollable();
+                    EvergardenDSL.scrollable();
                 });
             });
 
@@ -244,7 +254,7 @@ public abstract class Page<T> extends HTML {
                 display.width(20, px).height(20, px);
             });
 
-            $.when(JavadngDSL.Small, () -> {
+            $.when(EvergardenDSL.Small, () -> {
                 display.none();
             });
         };
@@ -327,7 +337,7 @@ public abstract class Page<T> extends HTML {
 
             $.after(() -> {
                 content.text("");
-                position.absolute().top(JavadngDSL.BlockVerticalGap).left(0, px);
+                position.absolute().top(EvergardenDSL.BlockVerticalGap).left(0, px);
                 display.width(100, percent).height(100, percent).zIndex(5).opacity(0).block();
                 background.color(Theme.surface);
                 pointerEvents.none();

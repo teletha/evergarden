@@ -11,7 +11,7 @@ package evergarden.page;
 
 import evergarden.AutoMemoriesDollModel;
 import evergarden.Document;
-import evergarden.design.JavadngDSL;
+import evergarden.design.EvergardenDSL;
 import evergarden.design.Styles;
 import kiss.I;
 import kiss.XML;
@@ -33,11 +33,19 @@ public class DocumentPage extends Page<Document> {
      * {@inheritDoc}
      */
     @Override
+    protected void transform(XML xml) {
+        xml.find("h3").attr("icon", "📄");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void declareContents() {
         try {
             if (contents.hasContents()) {
                 $("section", Styles.Section, Styles.JavadocComment, () -> {
-                    write(2, contents, S.SectionLevel1, true);
+                    write(2, contents, CSS.SectionLevel2, true);
                 });
             }
 
@@ -45,13 +53,13 @@ public class DocumentPage extends Page<Document> {
                 if (child.hasContents()) {
                     $("div", Styles.Section, () -> {
                         $("section", id(child.id()), Styles.JavadocComment, () -> {
-                            write(2, child, S.SectionLevel1, true);
+                            write(2, child, CSS.SectionLevel2, true);
                         });
 
                         for (Document foot : child.children()) {
                             if (foot.hasContents()) {
-                                $("section", id(foot.id()), Styles.JavadocComment, S.foot, () -> {
-                                    write(3, foot, S.SectionLevel2, false);
+                                $("section", id(foot.id()), Styles.JavadocComment, CSS.foot, () -> {
+                                    write(3, foot, CSS.SectionLevel3, false);
                                 });
                             }
                         }
@@ -70,12 +78,12 @@ public class DocumentPage extends Page<Document> {
         $("header", Styles.JavadocComment, additionalStyle, () -> {
             $(xml(heading.size() != 0 ? heading : I.xml("h" + level).text(document.title())));
             if (useIcons) {
-                $("div", S.meta, () -> {
-                    $("span", clazz("perp"), S.icon, () -> {
+                $("div", CSS.meta, () -> {
+                    $("span", clazz("perp"), CSS.icon, () -> {
                         $(svg("copy"));
                     });
 
-                    $("a", clazz("tweet"), S.icon, () -> {
+                    $("a", clazz("tweet"), CSS.icon, () -> {
                         $(svg("twitter"));
                     });
 
@@ -83,7 +91,7 @@ public class DocumentPage extends Page<Document> {
                         document.region().ifPresent(area -> {
                             String editor = repo.locateEditor(area);
                             if (editor != null) {
-                                $("a", href(editor), clazz("edit"), S.icon, () -> {
+                                $("a", href(editor), clazz("edit"), CSS.icon, () -> {
                                     $(svg("edit"));
                                 });
                             }
@@ -102,15 +110,15 @@ public class DocumentPage extends Page<Document> {
     protected void declareSubNavigation() {
     }
 
-    interface S extends JavadngDSL {
+    interface CSS extends EvergardenDSL {
 
         Numeric IconSize = Numeric.num(16, px);
 
-        Style SectionLevel1 = () -> {
+        Style SectionLevel2 = () -> {
             position.relative();
         };
 
-        Style SectionLevel2 = () -> {
+        Style SectionLevel3 = () -> {
             position.relative();
         };
 
@@ -126,11 +134,7 @@ public class DocumentPage extends Page<Document> {
         };
 
         Style foot = () -> {
-            margin.top(3.6, rem).bottom(1, rem);
-
-            $.prev(SectionLevel1, () -> {
-                margin.top(1, rem);
-            });
+            margin.top(2.5, rem).bottom(1, rem);
         };
     }
 }

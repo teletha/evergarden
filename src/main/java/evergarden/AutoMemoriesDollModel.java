@@ -49,7 +49,7 @@ import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
 import evergarden.Index.Doc;
-import evergarden.design.JavadngDesignScheme;
+import evergarden.design.EvergardenDesignScheme;
 import evergarden.host.Hosting;
 import evergarden.javadoc.ClassInfo;
 import evergarden.javadoc.MethodInfo;
@@ -705,7 +705,7 @@ public abstract class AutoMemoriesDollModel {
                 // build CSS
                 I.load(AutoMemoriesDoll.class);
                 Stylist.pretty()
-                        .scheme(JavadngDesignScheme.class)
+                        .scheme(EvergardenDesignScheme.class)
                         .styles(I.findAs(StyleDeclarable.class))
                         .formatTo(output().file("main.css").asJavaPath());
 

@@ -11,6 +11,9 @@ package evergarden.page;
 
 import evergarden.AutoMemoriesDollModel;
 import evergarden.Document;
+import evergarden.design.EvergardenDSL;
+import kiss.XML;
+import stylist.Style;
 
 public class ActivityPage extends DocumentPage {
 
@@ -28,10 +31,37 @@ public class ActivityPage extends DocumentPage {
      */
     @Override
     protected void declareSubNavigation() {
-        $("ul", foŕ(contents.children(), section -> {
-            $("li", () -> {
-                $("a", href("doc/changelog.html#" + section.id()), text(section.title()));
+        $("div", APIPage.css.outline, foŕ(contents.children(), sec -> {
+            $("div", css.member, () -> {
+                $("a", href("doc/changelog.html#" + sec.id()), text(sec.title()));
             });
         }));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void transform(XML xml) {
+        xml.find("h3:contains(Features)").attr("icon", "🚀");
+        xml.find("h3:contains(Bug Fixes)").attr("icon", "🛠️");
+        xml.find("h3:contains(Assets)").attr("icon", "💾");
+        xml.find("h3:contains(⚠ BREAKING CHANGES)").attr("icon", "☢️").text("Breaking Changes");
+        xml.find("section").removeClass(DocumentPage.CSS.foot.className()).addClass(css.foot.className());
+    }
+
+    private interface css extends EvergardenDSL {
+
+        Style member = () -> {
+            padding.vertical(0.2, em).left(0.4, em);
+
+            $.has("a.now", () -> {
+                font.color(Theme.accent).weight.bold();
+            });
+        };
+
+        Style foot = () -> {
+            padding.top(0.6, rem).bottom(1.2, rem);
+        };
     }
 }

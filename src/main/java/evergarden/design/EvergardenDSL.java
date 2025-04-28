@@ -18,10 +18,10 @@ import stylist.value.Numeric;
 /**
  * Base style for Javadng.
  */
-public interface JavadngDSL extends StyleDSL {
+public interface EvergardenDSL extends StyleDSL {
 
     /** The singleton. */
-    JavadngDesignScheme Theme = I.make(JavadngDesignScheme.class);
+    EvergardenDesignScheme Theme = I.make(EvergardenDesignScheme.class);
 
     Query Small = Query.screen().width(0, 900, px);
 

@@ -122,7 +122,7 @@ class Github implements Hosting {
         matcher.appendTail(b);
         b.append("</section></section></section>");
 
-        return new ChangeLogProvider(I.xml(b.toString()), 1);
+        return new ChangeLog(I.xml(b.toString()), 1);
     }
 
     /**
@@ -144,7 +144,7 @@ class Github implements Hosting {
     /**
      * Document for change log.
      */
-    private class ChangeLogProvider implements Document {
+    private class ChangeLog implements Document {
 
         private final List<Document> children = new ArrayList();
 
@@ -157,16 +157,16 @@ class Github implements Hosting {
         /**
          * Build the document for change log from markdown in Github.
          */
-        private ChangeLogProvider(XML xml, int nest) {
+        private ChangeLog(XML xml, int nest) {
             this.nest = nest;
             this.title = xml.find(">h" + nest).text();
             this.doc = xml.find(">ul)");
             xml.find(">section").forEach(sec -> {
-                children.add(new ChangeLogProvider(sec, nest + 1));
+                children.add(new ChangeLog(sec, nest + 1));
             });
 
             if (nest == 2) {
-                children.add(new AssetProvider(title.substring(0, title.indexOf(" "))));
+                children.add(new Asset(title.substring(0, title.indexOf(" "))));
             }
         }
 
@@ -214,11 +214,11 @@ class Github implements Hosting {
     /**
      * 
      */
-    private class AssetProvider implements Document {
+    private class Asset implements Document {
 
         private final String version;
 
-        private AssetProvider(String version) {
+        private Asset(String version) {
             this.version = version;
         }
 
@@ -243,7 +243,7 @@ class Github implements Hosting {
          */
         @Override
         public XML contents() {
-            return I.xml("<ul><li><a href=\"https://github.com/" + owner + "/" + name + "/archive/refs/tags/v" + version + ".zip\">Source code</a> (zip)</li></ul>");
+            return I.xml("<ul><li><a href=\"https://github.com/" + owner + "/" + name + "/archive/refs/tags/" + version + ".zip\">Source code</a> (zip)</li></ul>");
         }
     }
 }
