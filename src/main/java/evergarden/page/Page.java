@@ -187,6 +187,10 @@ public abstract class Page<T> extends HTML {
                 $.when(Small, () -> {
                     margin.bottom(0.2, rem);
                 });
+
+                $.select("a").hover(() -> {
+                    font.color(Theme.accent);
+                });
             });
 
             $.select(".sub", () -> {
@@ -218,6 +222,7 @@ public abstract class Page<T> extends HTML {
                     $.lastMatch(".now", () -> {
                         border.right.radius(Theme.radius);
                     });
+
                 });
             });
 
