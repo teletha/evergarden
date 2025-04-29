@@ -17,6 +17,7 @@ import evergarden.host.Hosting;
 import evergarden.javadoc.ClassInfo;
 import evergarden.javadoc.SampleInfo;
 import kiss.Variable;
+import psychopath.Directory;
 
 public abstract class Epistle {
 
@@ -39,6 +40,8 @@ public abstract class Epistle {
      * The tree of documentation nodes representing external documents and structured sections.
      */
     public List<Chapter> docs = new ArrayList();
+
+    public abstract Directory output();
 
     public abstract String title();
 

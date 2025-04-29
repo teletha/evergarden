@@ -261,6 +261,12 @@ public abstract class AutoMemoriesDollModel {
         return o -> System.out.println(o);
     }
 
+    @Icy.Overload("listener")
+    private DiagnosticListener<? super JavaFileObject> mute() {
+        return o -> {
+        };
+    }
+
     /**
      * Specify the code repository.
      * 
@@ -311,7 +317,7 @@ public abstract class AutoMemoriesDollModel {
     /**
      * Generate documents.
      */
-    public final AutoMemoriesDoll write() {
+    public final Epistle write() {
         synchronized (AutoMemoriesDollModel.class) {
             Internal.model = this;
 
@@ -340,7 +346,7 @@ public abstract class AutoMemoriesDollModel {
                             listener().report(new Message(OTHER, "sample", "Succeed in scanning sample sources."));
                         } else {
                             listener().report(new Message(ERROR, "sample", "Fail in scanning sample sources."));
-                            return (AutoMemoriesDoll) this;
+                            throw new Error("Fail in scanning sample sources.");
                         }
                     }
                 } catch (Throwable e) {
@@ -372,7 +378,7 @@ public abstract class AutoMemoriesDollModel {
                 throw I.quiet(e);
             }
         }
-        return (AutoMemoriesDoll) this;
+        return dicatation;
     }
 
     private boolean accept(String name) {
@@ -658,7 +664,6 @@ public abstract class AutoMemoriesDollModel {
 
             // build doc tree
             for (ClassInfo info : docs) {
-                System.out.println(info.id());
                 Chapter chapter = new Chapter(info.title(), "doc/" + info.id() + ".html");
                 dicatation.docs.add(chapter);
 
@@ -740,6 +745,14 @@ public abstract class AutoMemoriesDollModel {
     }
 
     class Dictation extends Epistle {
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Directory output() {
+            return AutoMemoriesDollModel.this.output();
+        }
 
         /**
          * {@inheritDoc}

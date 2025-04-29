@@ -85,6 +85,9 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
     private static final MethodHandle samples$478361692= invoker("samples", Path.class);
 
     /** The overload or intercept method invoker. */
+    private static final MethodHandle mute$1= invoker("mute");
+
+    /** The overload or intercept method invoker. */
     private static final MethodHandle host$927011984= invoker("host", String.class);
 
     /**
@@ -901,6 +904,19 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
         default Next listener(DiagnosticListener<? super JavaFileObject> value) {
             ((AutoMemoriesDoll) this).setListener((javax.tools.DiagnosticListener)value);
             return (Next) this;
+        }
+
+        /**
+         * Assign listener property.
+         * 
+         * @return The next assignable model.
+         */
+        default Next mute() {
+            try {
+                return listener((DiagnosticListener<? super JavaFileObject>) mute$1.invoke(this));
+            } catch (Throwable e) {
+                throw quiet(e);
+            }
         }
 
         /**

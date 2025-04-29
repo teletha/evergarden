@@ -33,7 +33,7 @@ public class DollDemo {
         path.add(repo + "org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar");
         path.add(repo + "com/github/teletha/antibug/1.0.3/antibug-1.0.3.jar");
 
-        AutoMemoriesDoll doll = AutoMemoriesDoll.with.sources("../sinobu/src/main/java")
+        Epistle epistle = AutoMemoriesDoll.with.sources("../sinobu/src/main/java")
                 .output("docs")
                 .title("Sinobu")
                 .description("Sinobu is not obsolete framework but utility, which can manipulate objects as a extremely-condensed facade.")
@@ -43,6 +43,6 @@ public class DollDemo {
                 .useExternalJDKDoc()
                 .write();
 
-        Launcher.launch(doll.output);
+        Launcher.launch(epistle.output());
     }
 }
