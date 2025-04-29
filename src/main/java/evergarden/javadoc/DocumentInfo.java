@@ -10,12 +10,12 @@
 package evergarden.javadoc;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.StringJoiner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
@@ -110,9 +110,6 @@ public class DocumentInfo {
     /** Tag info. */
     protected final Variable<XML> returnTag = Variable.empty();
 
-    /** Tag info. */
-    protected final TemplateStore templateTags;
-
     /** The type resolver. */
     protected final TypeResolver resolver;
 
@@ -122,22 +119,20 @@ public class DocumentInfo {
 
     private final HtmlRenderer htmlRenderer = HtmlRenderer.builder().extensions(List.of(TablesExtension.create())).build();
 
+    private final TemplateVariables variables = new TemplateVariables();
+
     protected DocumentInfo(Element e, TypeResolver resolver, DocumentInfo parent) {
         this.e = e;
         this.resolver = resolver;
-        this.templateTags = new TemplateStore(parent == null ? null : parent.templateTags);
+        if (parent != null) this.variables.putAll(parent.variables);
 
-        try {
-            DocCommentTree docs = Util.DocUtils.getDocCommentTree(e);
-            if (docs != null) {
-                comment.set(transform(xml(docs.getFullBody())));
-                comment.to(x -> x.addClass(Styles.JavadocComment.className()));
-                docs.getBlockTags().forEach(tag -> tag.accept(new TagScanner(), this));
+        DocCommentTree docs = Util.DocUtils.getDocCommentTree(e);
+        if (docs != null) {
+            comment.set(transform(xml(docs.getFullBody())));
+            comment.to(x -> x.addClass(Styles.JavadocComment.className()));
+            docs.getBlockTags().forEach(tag -> tag.accept(new TagScanner(), this));
 
-                documentLines = Util.getDocumentLineNumbers(e);
-            }
-        } catch (Throwable error) {
-            error.printStackTrace();
+            documentLines = Util.getDocumentLineNumbers(e);
         }
     }
 
@@ -228,15 +223,6 @@ public class DocumentInfo {
      */
     public final Variable<XML> getReturnTag() {
         return returnTag;
-    }
-
-    /**
-     * Get the templateTags property of this {@link DocumentInfo}.
-     * 
-     * @return The templateTags property.
-     */
-    public final TemplateStore getTemplateTags() {
-        return templateTags;
     }
 
     /**
@@ -484,7 +470,7 @@ public class DocumentInfo {
          */
         @Override
         public DocumentInfo visitUnknownBlockTag(UnknownBlockTagTree node, DocumentInfo p) {
-            templateTags.put(node.getTagName(), I.signal(node.getContent()).map(DocTree::toString).scan(Collectors.joining()).to().exact());
+            variables.put(node.getTagName(), xml(node.getContent()).children().toString());
             return p;
         }
     }
@@ -838,7 +824,7 @@ public class DocumentInfo {
          * @return
          */
         private String resolve(String text) {
-            return XML.escape(I.express(text, "{@var", "}", new Object[] {templateTags}));
+            return I.express(XML.escape(text), "{@var", "}", new Object[] {variables});
         }
     }
 
@@ -1002,5 +988,9 @@ public class DocumentInfo {
             }
             return xml;
         }
+    }
+
+    @SuppressWarnings("serial")
+    private static class TemplateVariables extends HashMap<String, String> {
     }
 }

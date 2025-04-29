@@ -25,7 +25,7 @@ import evergarden.javadoc.ClassInfo;
  * Packages and types are collected as encountered, preserving their original discovery order.
  * Documentation nodes are managed as a tree of {@link Document} implementations.
  */
-public final class Index {
+public class Index {
 
     /**
      * The list of JPMS module names declared in the project.

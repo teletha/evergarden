@@ -34,18 +34,14 @@ public class EvergardenTestSupport {
 
     private static final AutoMemoriesDoll doc = AutoMemoriesDoll.with.sources("src/test/java")
             .output((Directory) null)
-            .product("test")
-            .project("test")
-            .version("1.0")
+            .title("test")
             .listener(e -> {
             })
             .build();
 
     private static final AutoMemoriesDoll docEx = AutoMemoriesDoll.with.sources("src/test/java")
             .output((Directory) null)
-            .product("test")
-            .project("test")
-            .version("1.0")
+            .title("test")
             .listener(e -> {
             })
             .useExternalJDKDoc()

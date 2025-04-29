@@ -54,14 +54,14 @@ public abstract class Page<T> extends HTML {
             $("head", () -> {
                 $("meta", charset(model.encoding().displayName()));
                 $("meta", name("viewport"), content("width=device-width, initial-scale=1"));
-                $("meta", name("description"), content("Explains how to use " + model.product() + " and its API. " + model.description()));
+                $("meta", name("description"), content("Explains how to use " + model.title() + " and its API. " + model.description()));
                 $("link", rel("preconnect"), href("https://cdn.jsdelivr.net"));
                 $("link", rel("preconnect"), href("https://fonts.googleapis.com"));
                 $("link", rel("preconnect"), href("https://fonts.gstatic.com"), attr("crossorigin"));
                 for (Font font : Font.fromGoogle()) {
                     stylesheetAsync(font.uri);
                 }
-                $("title", text(model.product() + " API"));
+                $("title", text(model.title() + " API"));
                 $("base", href(base));
                 module("mimic.js");
                 stylesheet(Stylist.NormalizeCSS);
@@ -71,10 +71,8 @@ public abstract class Page<T> extends HTML {
                 // =============================
                 // Top Navigation
                 // =============================
-                String published = model.host().map(Hosting::getLatestPublishedDate).or(LocalDate.now()).toString();
-
-                $("header", css.header, attr("date", published), attr("ver", model.version()), () -> {
-                    $("h1", css.title, code(model.product()));
+                $("header", css.header, attr("date", model.host().map(Hosting::getLatestPublishedDate).or(LocalDate.now())), () -> {
+                    $("h1", css.title, code(model.title()));
                     $("nav", css.links, () -> {
                         model.doc().to(doc -> link(doc.name, ("doc/" + doc.children().get(0).id() + ".html"), "text"));
                         model.api().to(api -> link("API", "api/", "package"));
@@ -324,7 +322,7 @@ public abstract class Page<T> extends HTML {
 
             $.after(() -> {
                 position.absolute().top(5, px).right(1, rem);
-                content.text("Updated\\00A0").attr("date").text("　　Version\\00A0").attr("ver");
+                content.text("Updated\\00A0").attr("date");
                 font.size(0.8, rem).color(Theme.front).family(Theme.base).letterSpacing(-0.5, px);
                 text.whiteSpace.pre();
             });

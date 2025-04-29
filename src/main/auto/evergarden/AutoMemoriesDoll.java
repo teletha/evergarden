@@ -70,19 +70,19 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
     private static final MethodHandle output$478361692= invoker("output", Path.class);
 
     /** The overload or intercept method invoker. */
-    private static final MethodHandle capitalize$927011984= invoker("capitalize", String.class);
-
-    /** The overload or intercept method invoker. */
     private static final MethodHandle classpath$640847889= invoker("classpath", String[].class);
 
     /** The overload or intercept method invoker. */
     private static final MethodHandle classpath$1893898243= invoker("classpath", Path[].class);
 
     /** The overload or intercept method invoker. */
-    private static final MethodHandle sample$927011984= invoker("sample", String.class);
+    private static final MethodHandle classpathBy$754143386= invoker("classpathBy", List.class);
 
     /** The overload or intercept method invoker. */
-    private static final MethodHandle sample$478361692= invoker("sample", Path.class);
+    private static final MethodHandle samples$927011984= invoker("samples", String.class);
+
+    /** The overload or intercept method invoker. */
+    private static final MethodHandle samples$478361692= invoker("samples", Path.class);
 
     /** The overload or intercept method invoker. */
     private static final MethodHandle host$927011984= invoker("host", String.class);
@@ -130,22 +130,10 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
     private static final MethodHandle outputUpdater = handler(outputField);
 
     /** The final property updater. */
-    private static final Field productField = updater("product");
+    private static final Field titleField = updater("title");
 
     /** The fast final property updater. */
-    private static final MethodHandle productUpdater = handler(productField);
-
-    /** The final property updater. */
-    private static final Field projectField = updater("project");
-
-    /** The fast final property updater. */
-    private static final MethodHandle projectUpdater = handler(projectField);
-
-    /** The final property updater. */
-    private static final Field versionField = updater("version");
-
-    /** The fast final property updater. */
-    private static final MethodHandle versionUpdater = handler(versionField);
+    private static final MethodHandle titleUpdater = handler(titleField);
 
     /** The final property updater. */
     private static final Field classpathField = updater("classpath");
@@ -160,10 +148,10 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
     private static final MethodHandle descriptionUpdater = handler(descriptionField);
 
     /** The final property updater. */
-    private static final Field sampleField = updater("sample");
+    private static final Field samplesField = updater("samples");
 
     /** The fast final property updater. */
-    private static final MethodHandle sampleUpdater = handler(sampleField);
+    private static final MethodHandle samplesUpdater = handler(samplesField);
 
     /** The final property updater. */
     private static final Field encodingField = updater("encoding");
@@ -190,13 +178,7 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
     public final Directory output;
 
     /** The exposed property. */
-    public final String product;
-
-    /** The exposed property. */
-    public final String project;
-
-    /** The exposed property. */
-    public final String version;
+    public final String title;
 
     /** The exposed property. */
     public final List<Location> classpath;
@@ -205,7 +187,7 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
     public final String description;
 
     /** The exposed property. */
-    public final List<Directory> sample;
+    public final List<Directory> samples;
 
     /** The exposed property. */
     public final Charset encoding;
@@ -222,12 +204,10 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
     protected AutoMemoriesDoll() {
         this.sources = null;
         this.output = null;
-        this.product = null;
-        this.project = null;
-        this.version = null;
+        this.title = null;
         this.classpath = super.classpath();
         this.description = super.description();
-        this.sample = super.sample();
+        this.samples = super.samples();
         this.encoding = super.encoding();
         this.listener = super.listener();
         this.host = super.host();
@@ -310,105 +290,31 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
      *  @return
      */
     @Override
-    public final String product() {
-        return this.product;
+    public final String title() {
+        return this.title;
     }
 
     /**
      * Provide classic getter API.
      *
-     * @return A value of product property.
+     * @return A value of title property.
      */
     @SuppressWarnings("unused")
-    private final String getProduct() {
-        return this.product;
+    private final String getTitle() {
+        return this.title;
     }
 
     /**
      * Provide classic setter API.
      *
-     * @paran value A new value of product property to assign.
+     * @paran value A new value of title property to assign.
      */
-    private final void setProduct(String value) {
+    private final void setTitle(String value) {
         if (value == null) {
-            throw new IllegalArgumentException("The product property requires non-null value.");
+            throw new IllegalArgumentException("The title property requires non-null value.");
         }
         try {
-            productUpdater.invoke(this, capitalize$927011984.invoke(this, value));
-        } catch (UnsupportedOperationException e) {
-        } catch (Throwable e) {
-            throw quiet(e);
-        }
-    }
-
-    /**
-     * The project name.
-     *  
-     *  @return
-     */
-    @Override
-    public final String project() {
-        return this.project;
-    }
-
-    /**
-     * Provide classic getter API.
-     *
-     * @return A value of project property.
-     */
-    @SuppressWarnings("unused")
-    private final String getProject() {
-        return this.project;
-    }
-
-    /**
-     * Provide classic setter API.
-     *
-     * @paran value A new value of project property to assign.
-     */
-    private final void setProject(String value) {
-        if (value == null) {
-            throw new IllegalArgumentException("The project property requires non-null value.");
-        }
-        try {
-            projectUpdater.invoke(this, value);
-        } catch (UnsupportedOperationException e) {
-        } catch (Throwable e) {
-            throw quiet(e);
-        }
-    }
-
-    /**
-     * The product version.
-     *  
-     *  @return
-     */
-    @Override
-    public final String version() {
-        return this.version;
-    }
-
-    /**
-     * Provide classic getter API.
-     *
-     * @return A value of version property.
-     */
-    @SuppressWarnings("unused")
-    private final String getVersion() {
-        return this.version;
-    }
-
-    /**
-     * Provide classic setter API.
-     *
-     * @paran value A new value of version property to assign.
-     */
-    private final void setVersion(String value) {
-        if (value == null) {
-            throw new IllegalArgumentException("The version property requires non-null value.");
-        }
-        try {
-            versionUpdater.invoke(this, value);
+            titleUpdater.invoke(this, value);
         } catch (UnsupportedOperationException e) {
         } catch (Throwable e) {
             throw quiet(e);
@@ -495,31 +401,31 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
      *  @return
      */
     @Override
-    public final List<Directory> sample() {
-        return this.sample;
+    public final List<Directory> samples() {
+        return this.samples;
     }
 
     /**
      * Provide classic getter API.
      *
-     * @return A value of sample property.
+     * @return A value of samples property.
      */
     @SuppressWarnings("unused")
-    private final List<Directory> getSample() {
-        return this.sample;
+    private final List<Directory> getSamples() {
+        return this.samples;
     }
 
     /**
      * Provide classic setter API.
      *
-     * @paran value A new value of sample property to assign.
+     * @paran value A new value of samples property to assign.
      */
-    private final void setSample(List<Directory> value) {
+    private final void setSamples(List<Directory> value) {
         if (value == null) {
-            value = super.sample();
+            value = super.samples();
         }
         try {
-            sampleUpdater.invoke(this, value);
+            samplesUpdater.invoke(this, value);
         } catch (UnsupportedOperationException e) {
         } catch (Throwable e) {
             throw quiet(e);
@@ -647,12 +553,10 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
         StringBuilder builder = new StringBuilder("AutoMemoriesDoll [");
         builder.append("sources=").append(sources).append(", ");
         builder.append("output=").append(output).append(", ");
-        builder.append("product=").append(product).append(", ");
-        builder.append("project=").append(project).append(", ");
-        builder.append("version=").append(version).append(", ");
+        builder.append("title=").append(title).append(", ");
         builder.append("classpath=").append(classpath).append(", ");
         builder.append("description=").append(description).append(", ");
-        builder.append("sample=").append(sample).append(", ");
+        builder.append("samples=").append(samples).append(", ");
         builder.append("encoding=").append(encoding).append(", ");
         builder.append("listener=").append(listener).append(", ");
         builder.append("host=").append(host).append("]");
@@ -666,7 +570,7 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(sources, output, product, project, version, classpath, description, sample, encoding, listener, host);
+        return Objects.hash(sources, output, title, classpath, description, samples, encoding, listener, host);
     }
 
     /**
@@ -683,12 +587,10 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
         AutoMemoriesDoll other = (AutoMemoriesDoll) o;
         if (!Objects.equals(sources, other.sources)) return false;
         if (!Objects.equals(output, other.output)) return false;
-        if (!Objects.equals(product, other.product)) return false;
-        if (!Objects.equals(project, other.project)) return false;
-        if (!Objects.equals(version, other.version)) return false;
+        if (!Objects.equals(title, other.title)) return false;
         if (!Objects.equals(classpath, other.classpath)) return false;
         if (!Objects.equals(description, other.description)) return false;
-        if (!Objects.equals(sample, other.sample)) return false;
+        if (!Objects.equals(samples, other.samples)) return false;
         if (!Objects.equals(encoding, other.encoding)) return false;
         if (!Objects.equals(listener, other.listener)) return false;
         if (!Objects.equals(host, other.host)) return false;
@@ -708,7 +610,7 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
          * 
          * @return The next assignable model.
          */
-        public ÅssignableOutput<ÅssignableProduct<ÅssignableProject<ÅssignableVersion<Self>>>> sources(List<Directory> sources) {
+        public ÅssignableOutput<ÅssignableTitle<Self>> sources(List<Directory> sources) {
             Åssignable o = new Åssignable();
             o.sources(sources);
             return o;
@@ -719,7 +621,7 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
          * 
          * @return The next assignable model.
          */
-        public ÅssignableOutput<ÅssignableProduct<ÅssignableProject<ÅssignableVersion<Self>>>> sources(Directory... values) {
+        public ÅssignableOutput<ÅssignableTitle<Self>> sources(Directory... values) {
             return sources(List.of(values));
         }
 
@@ -728,7 +630,7 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
          *  
          *  @return
          */
-        public ÅssignableOutput<ÅssignableProduct<ÅssignableProject<ÅssignableVersion<Self>>>> sources(String... paths) {
+        public ÅssignableOutput<ÅssignableTitle<Self>> sources(String... paths) {
             Åssignable o = new Åssignable();
             o.sources(paths);
             return o;
@@ -739,7 +641,7 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
          *  
          *  @return
          */
-        public ÅssignableOutput<ÅssignableProduct<ÅssignableProject<ÅssignableVersion<Self>>>> sources(Path... paths) {
+        public ÅssignableOutput<ÅssignableTitle<Self>> sources(Path... paths) {
             Åssignable o = new Åssignable();
             o.sources(paths);
             return o;
@@ -844,50 +746,16 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
     /**
      * Property assignment API.
      */
-    public static interface ÅssignableProduct<Next> {
+    public static interface ÅssignableTitle<Next> {
 
         /**
-         * Assign product property.
+         * Assign title property.
          * 
          * @param value A new value to assign.
          * @return The next assignable model.
          */
-        default Next product(String value) {
-            ((AutoMemoriesDoll) this).setProduct(value);
-            return (Next) this;
-        }
-    }
-
-    /**
-     * Property assignment API.
-     */
-    public static interface ÅssignableProject<Next> {
-
-        /**
-         * Assign project property.
-         * 
-         * @param value A new value to assign.
-         * @return The next assignable model.
-         */
-        default Next project(String value) {
-            ((AutoMemoriesDoll) this).setProject(value);
-            return (Next) this;
-        }
-    }
-
-    /**
-     * Property assignment API.
-     */
-    public static interface ÅssignableVersion<Next> {
-
-        /**
-         * Assign version property.
-         * 
-         * @param value A new value to assign.
-         * @return The next assignable model.
-         */
-        default Next version(String value) {
-            ((AutoMemoriesDoll) this).setVersion(value);
+        default Next title(String value) {
+            ((AutoMemoriesDoll) this).setTitle(value);
             return (Next) this;
         }
     }
@@ -944,6 +812,19 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
         }
 
         /**
+         * The list of source directories.
+         *  
+         *  @return
+         */
+        default Next classpathBy(List<String> paths) {
+            try {
+                return classpath((List<Location>) classpathBy$754143386.invoke(this, paths));
+            } catch (Throwable e) {
+                throw quiet(e);
+            }
+        }
+
+        /**
          * Assign description property.
          * 
          * @param value A new value to assign.
@@ -955,23 +836,23 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
         }
 
         /**
-         * Assign sample property.
+         * Assign samples property.
          * 
          * @param value A new value to assign.
          * @return The next assignable model.
          */
-        default Next sample(List<? extends Directory> value) {
-            ((AutoMemoriesDoll) this).setSample((java.util.List)value);
+        default Next samples(List<? extends Directory> value) {
+            ((AutoMemoriesDoll) this).setSamples((java.util.List)value);
             return (Next) this;
         }
 
         /**
-         * Assign sample property.
+         * Assign samples property.
          * 
          * @return The next assignable model.
          */
-        default Next sample(Directory... values) {
-            return sample(List.of(values));
+        default Next samples(Directory... values) {
+            return samples(List.of(values));
         }
 
         /**
@@ -979,9 +860,9 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
          *  
          *  @return
          */
-        default Next sample(String path) {
+        default Next samples(String path) {
             try {
-                return sample((List<Directory>) sample$927011984.invoke(this, path));
+                return samples((List<Directory>) samples$927011984.invoke(this, path));
             } catch (Throwable e) {
                 throw quiet(e);
             }
@@ -992,9 +873,9 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
          *  
          *  @return
          */
-        default Next sample(Path path) {
+        default Next samples(Path path) {
             try {
-                return sample((List<Directory>) sample$478361692.invoke(this, path));
+                return samples((List<Directory>) samples$478361692.invoke(this, path));
             } catch (Throwable e) {
                 throw quiet(e);
             }
@@ -1059,7 +940,7 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
     /**
      * Internal aggregated API.
      */
-    protected static interface ÅssignableAll extends ÅssignableSources, ÅssignableOutput, ÅssignableProduct, ÅssignableProject, ÅssignableVersion {
+    protected static interface ÅssignableAll extends ÅssignableSources, ÅssignableOutput, ÅssignableTitle {
     }
 
     /**
@@ -1074,12 +955,10 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
     static final class My {
         static final String Sources = "sources";
         static final String Output = "output";
-        static final String Product = "product";
-        static final String Project = "project";
-        static final String Version = "version";
+        static final String Title = "title";
         static final String Classpath = "classpath";
         static final String Description = "description";
-        static final String Sample = "sample";
+        static final String Samples = "samples";
         static final String Encoding = "encoding";
         static final String Listener = "listener";
         static final String Host = "host";

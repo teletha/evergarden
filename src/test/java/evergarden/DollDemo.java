@@ -35,12 +35,10 @@ public class DollDemo {
 
         AutoMemoriesDoll doll = AutoMemoriesDoll.with.sources("../sinobu/src/main/java")
                 .output("docs")
-                .product("Sinobu")
-                .project("Sinobu")
-                .version("1.0")
+                .title("Sinobu")
                 .description("Sinobu is not obsolete framework but utility, which can manipulate objects as a extremely-condensed facade.")
-                .sample("../sinobu/src/test/java")
-                .classpath(path.toArray(String[]::new))
+                .samples("../sinobu/src/test/java")
+                .classpathBy(path)
                 .host("https://github.com/teletha/sinobu")
                 .useExternalJDKDoc()
                 .build();

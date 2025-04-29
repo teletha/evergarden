@@ -22,6 +22,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -55,7 +56,6 @@ import evergarden.javadoc.ClassInfo;
 import evergarden.javadoc.MethodInfo;
 import evergarden.javadoc.SampleInfo;
 import evergarden.javadoc.SourceCode;
-import evergarden.javadoc.TemplateStore;
 import evergarden.javadoc.TypeResolver;
 import evergarden.javadoc.Util;
 import evergarden.page.APIPage;
@@ -77,9 +77,6 @@ import stylist.Stylist;
 @Icy
 public abstract class AutoMemoriesDollModel {
 
-    /** The default JDK API's location. */
-    public static final String JDK = "https://docs.oracle.com/en/java/javase/24/docs/api/";
-
     /** The name pattern of document. */
     private static final Pattern DocName = Pattern.compile("(.*)Manual$");
 
@@ -93,7 +90,7 @@ public abstract class AutoMemoriesDollModel {
     private final List<ClassInfo> docs = new ArrayList();
 
     /** MethodID-SampleCode mapping. */
-    public final Map<String, List<SampleInfo>> samples = new HashMap();
+    private final Map<String, List<SampleInfo>> samples = new HashMap();
 
     /** PackageName-URL pair. */
     private final Map<String, String> externals = new HashMap();
@@ -160,6 +157,16 @@ public abstract class AutoMemoriesDollModel {
     }
 
     /**
+     * The list of source directories.
+     * 
+     * @return
+     */
+    @Icy.Overload("classpath")
+    private List<psychopath.Location> classpathBy(List<String> paths) {
+        return I.signal(paths).map(Locator::locate).toList();
+    }
+
+    /**
      * Specify the directory where the product is output.
      * 
      * @return
@@ -193,28 +200,7 @@ public abstract class AutoMemoriesDollModel {
      * @return
      */
     @Icy.Property
-    public abstract String product();
-
-    @Icy.Intercept("product")
-    private String capitalize(String name) {
-        return Character.toUpperCase(name.charAt(0)) + name.substring(1);
-    }
-
-    /**
-     * The project name.
-     * 
-     * @return
-     */
-    @Icy.Property
-    public abstract String project();
-
-    /**
-     * The product version.
-     * 
-     * @return
-     */
-    @Icy.Property
-    public abstract String version();
+    public abstract String title();
 
     /**
      * The product version.
@@ -232,7 +218,7 @@ public abstract class AutoMemoriesDollModel {
      * @return
      */
     @Icy.Property
-    public List<Directory> sample() {
+    public List<Directory> samples() {
         return List.of();
     }
 
@@ -241,8 +227,8 @@ public abstract class AutoMemoriesDollModel {
      * 
      * @return
      */
-    @Icy.Overload("sample")
-    private List<Directory> sample(String path) {
+    @Icy.Overload("samples")
+    private List<Directory> samples(String path) {
         return List.of(Locator.directory(path));
     }
 
@@ -251,8 +237,8 @@ public abstract class AutoMemoriesDollModel {
      * 
      * @return
      */
-    @Icy.Overload("sample")
-    private List<Directory> sample(Path path) {
+    @Icy.Overload("samples")
+    private List<Directory> samples(Path path) {
         return List.of(Locator.directory(path));
     }
 
@@ -297,7 +283,7 @@ public abstract class AutoMemoriesDollModel {
      * @return
      */
     public final AutoMemoriesDoll useExternalJDKDoc() {
-        return useExternalDoc(JDK);
+        return useExternalDoc("https://docs.oracle.com/en/java/javase/24/docs/api/");
     }
 
     /**
@@ -328,10 +314,6 @@ public abstract class AutoMemoriesDollModel {
      */
     public final AutoMemoriesDoll build() {
         synchronized (AutoMemoriesDollModel.class) {
-            TemplateStore.register("product", product());
-            TemplateStore.register("project", project());
-            TemplateStore.register("version", version());
-
             Internal.model = this;
 
             DocumentationTool tool = ToolProvider.getSystemDocumentationTool();
@@ -339,12 +321,12 @@ public abstract class AutoMemoriesDollModel {
             // ========================================================
             // Collect sample source
             // ========================================================
-            if (!sample().isEmpty()) {
+            if (!samples().isEmpty()) {
                 processingMainSource = false;
 
                 try (ToListener listener = new ToListener("sample");
                         StandardJavaFileManager m = tool.getStandardFileManager(listener(), Locale.getDefault(), encoding())) {
-                    m.setLocation(SOURCE_PATH, I.signal(sources()).startWith(sample()).map(Directory::asJavaFile).toList());
+                    m.setLocation(SOURCE_PATH, I.signal(sources()).startWith(samples()).map(Directory::asJavaFile).toList());
                     m.setLocation(CLASS_PATH, classpath() == null ? null
                             : classpath().stream().map(psychopath.Location::asJavaFile).collect(Collectors.toList()));
 
@@ -395,7 +377,7 @@ public abstract class AutoMemoriesDollModel {
     }
 
     private boolean accept(String name) {
-        for (Directory directory : sample()) {
+        for (Directory directory : samples()) {
             if (name.startsWith(directory.toString())) {
                 return true;
             }
@@ -420,6 +402,10 @@ public abstract class AutoMemoriesDollModel {
 
     public final Variable<ClassInfo> api() {
         return I.signal(index.types).first().to();
+    }
+
+    public final List<SampleInfo> sample(String id) {
+        return samples.getOrDefault(id, Collections.EMPTY_LIST);
     }
 
     /**
@@ -557,7 +543,7 @@ public abstract class AutoMemoriesDollModel {
             Util.DocUtils = env.getDocTrees();
             Util.ElementUtils = env.getElementUtils();
             Util.TypeUtils = env.getTypeUtils();
-            Util.Samples = model.sample();
+            Util.Samples = model.samples();
 
             try {
                 model.initialize();

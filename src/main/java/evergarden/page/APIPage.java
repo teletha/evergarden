@@ -20,7 +20,6 @@ import evergarden.javadoc.ExecutableInfo;
 import evergarden.javadoc.FieldInfo;
 import evergarden.javadoc.MemberInfo;
 import evergarden.javadoc.MethodInfo;
-import evergarden.javadoc.SampleInfo;
 import kiss.XML;
 import stylist.Style;
 import stylist.value.Color;
@@ -122,14 +121,11 @@ public class APIPage extends Page<ClassInfo> {
 
             $(member.contents());
 
-            List<SampleInfo> list = model.samples.get(contents.id() + "#" + member.id());
-            if (list != null) {
-                for (SampleInfo sample : list) {
-                    $("pre", clazz("lang-java"), () -> {
-                        $("code", text(sample.code));
-                    });
-                }
-            }
+            model.sample(contents.id() + "#" + member.id()).forEach(sample -> {
+                $("pre", clazz("lang-java"), () -> {
+                    $("code", text(sample.code));
+                });
+            });
         });
     }
 
@@ -187,14 +183,11 @@ public class APIPage extends Page<ClassInfo> {
             }
             $(member.contents());
 
-            List<SampleInfo> list = model.samples.get(contents.id() + "#" + member.id());
-            if (list != null) {
-                for (SampleInfo sample : list) {
-                    $("pre", clazz("lang-java"), () -> {
-                        $("code", text(sample.code));
-                    });
-                }
-            }
+            model.sample(contents.id() + "#" + member.id()).forEach(sample -> {
+                $("pre", clazz("lang-java"), () -> {
+                    $("code", text(sample.code));
+                });
+            });
         });
     }
 

@@ -14,7 +14,6 @@ import java.io.IOError;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Text;
 
-import evergarden.AutoMemoriesDoll;
 import evergarden.EvergardenTestSupport;
 import kiss.XML;
 import kiss.Ⅱ;
@@ -227,7 +226,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void linkTagRegisteredExternalType() {
         ExecutableInfo info = currentMethodEx();
-        assert sameXML(info.comment, "<span class='B'><code><a href='" + AutoMemoriesDoll.JDK + "java.base/java/lang/String.html' aria-label='java.lang.String 🚀'>String</a></code></span>");
+        assert sameXML(info.comment, "<span class='B'><code><a href='https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html' aria-label='java.lang.String 🚀'>String</a></code></span>");
     }
 
     /**
@@ -236,7 +235,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void linkTagRegisteredExternalTypeAndMethod() {
         ExecutableInfo info = currentMethodEx();
-        assert sameXML(info.comment, "<span class='B'><code><a href='" + AutoMemoriesDoll.JDK + "java.base/java/lang/String.html#chars()' aria-label='java.lang.String 🚀'>String#chars()</a></code></span>");
+        assert sameXML(info.comment, "<span class='B'><code><a href='https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html#chars()' aria-label='java.lang.String 🚀'>String#chars()</a></code></span>");
     }
 
     /**
