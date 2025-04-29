@@ -28,6 +28,8 @@ import stylist.value.Numeric;
 
 public abstract class Page<T> extends HTML {
 
+    public final String path;
+
     protected final Epistle epistle;
 
     protected final T contents;
@@ -35,14 +37,14 @@ public abstract class Page<T> extends HTML {
     private final String base;
 
     /**
-     * @param depth
      * @param epistle
      * @param content
      */
-    protected Page(int depth, Epistle epistle, T content) {
+    protected Page(String path, Epistle epistle, T content) {
+        this.path = path;
         this.epistle = epistle;
         this.contents = content;
-        this.base = "../".repeat(depth);
+        this.base = "../".repeat((int) path.chars().filter(c -> c == '/').count());
     }
 
     /**
@@ -75,7 +77,7 @@ public abstract class Page<T> extends HTML {
                 $("header", css.header, attr("date", epistle.authority().map(Hosting::getLatestPublishedDate).or(LocalDate.now())), () -> {
                     $("h1", css.title, code(epistle.title()));
                     $("nav", css.links, () -> {
-                        epistle.doc().to(doc -> link(doc.name, ("doc/" + doc.children().get(0).id() + ".html"), "text"));
+                        epistle.doc().to(doc -> link("Manual", doc.path(), "text"));
                         epistle.api().to(api -> link("API", "api/", "package"));
                         epistle.authority().to(repo -> {
                             link("Activity", "doc/changelog.html", "activity");

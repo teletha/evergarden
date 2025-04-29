@@ -21,12 +21,11 @@ import stylist.value.Numeric;
 public class DocumentPage extends Page<Document> {
 
     /**
-     * @param depth
      * @param epistle
      * @param content
      */
-    public DocumentPage(int depth, Epistle epistle, Document content) {
-        super(depth, epistle, content);
+    public DocumentPage(String path, Epistle epistle, Document content) {
+        super(path, epistle, content);
     }
 
     /**

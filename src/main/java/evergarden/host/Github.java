@@ -227,7 +227,7 @@ class Github implements Hosting {
          */
         @Override
         public String id() {
-            return "Asserts";
+            return "Assets";
         }
 
         /**

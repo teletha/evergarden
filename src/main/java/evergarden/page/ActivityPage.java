@@ -17,13 +17,8 @@ import stylist.Style;
 
 public class ActivityPage extends DocumentPage {
 
-    /**
-     * @param depth
-     * @param epistle
-     * @param content
-     */
-    public ActivityPage(int depth, Epistle epistle, Document content) {
-        super(depth, epistle, content);
+    public ActivityPage(String path, Epistle epistle, Document content) {
+        super(path, epistle, content);
     }
 
     /**

@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
+import evergarden.page.Page;
 import evergarden.web.HTML;
 import kiss.I;
 import kiss.Managed;
@@ -121,9 +122,13 @@ public class SiteBuilder {
 
     /**
      * Build HTML file.
-     * 
-     * @param path
-     * @param html
+     */
+    public final void buildHTML(Page page) {
+        buildHTML(page.path, page);
+    }
+
+    /**
+     * Build HTML file.
      */
     public final void buildHTML(String path, HTML html) {
         initialize();

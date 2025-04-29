@@ -311,7 +311,7 @@ public abstract class AutoMemoriesDollModel {
     /**
      * Generate documents.
      */
-    public final AutoMemoriesDoll build() {
+    public final AutoMemoriesDoll write() {
         synchronized (AutoMemoriesDollModel.class) {
             Internal.model = this;
 
@@ -389,7 +389,7 @@ public abstract class AutoMemoriesDollModel {
      * 
      * @return
      */
-    public final Class<? extends Doclet> buildDoclet() {
+    public final Class<? extends Doclet> writeDoclet() {
         Internal.model = this;
 
         return Internal.class;
@@ -658,6 +658,7 @@ public abstract class AutoMemoriesDollModel {
 
             // build doc tree
             for (ClassInfo info : docs) {
+                System.out.println(info.id());
                 Chapter chapter = new Chapter(info.title(), "doc/" + info.id() + ".html");
                 dicatation.docs.add(chapter);
 
@@ -691,21 +692,21 @@ public abstract class AutoMemoriesDollModel {
 
                 // build HTML
                 for (ClassInfo info : dicatation.types) {
-                    site.buildHTML("api/" + info.id() + ".html", new APIPage(1, dicatation, info));
+                    site.buildHTML(new APIPage("api/" + info.id() + ".html", dicatation, info));
                 }
                 for (ClassInfo info : docs) {
-                    site.buildHTML("doc/" + info.id() + ".html", new DocumentPage(1, dicatation, info));
+                    site.buildHTML(new DocumentPage("doc/" + info.id() + ".html", dicatation, info));
                 }
 
                 // build change log
                 host().to(repo -> {
                     I.http(repo.locateChangeLog(), String.class).waitForTerminate().skipError().to(md -> {
-                        site.buildHTML("doc/changelog.html", new ActivityPage(1, dicatation, repo.getChangeLog(md)));
+                        site.buildHTML(new ActivityPage("doc/changelog.html", dicatation, repo.getChangeLog(md)));
                     });
                 });
 
                 // create at last for live reload
-                site.buildHTML("index.html", new APIPage(0, dicatation, null));
+                site.buildHTML(new APIPage("index.html", dicatation, null));
             }
         }
     }
@@ -770,22 +771,6 @@ public abstract class AutoMemoriesDollModel {
         @Override
         public Variable<Hosting> authority() {
             return AutoMemoriesDollModel.this.host();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public Variable<ClassInfo> api() {
-            return I.signal(types).first().to();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public Variable<ClassInfo> doc() {
-            return I.signal(AutoMemoriesDollModel.this.docs).map(ClassInfo::outermost).skipNull().first().to();
         }
 
         /**

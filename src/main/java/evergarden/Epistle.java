@@ -48,9 +48,13 @@ public abstract class Epistle {
 
     public abstract Variable<Hosting> authority();
 
-    public abstract Variable<ClassInfo> doc();
+    public final Variable<Chapter> doc() {
+        return docs.isEmpty() ? Variable.empty() : Variable.of(docs.getFirst());
+    }
 
-    public abstract Variable<ClassInfo> api();
+    public final Variable<ClassInfo> api() {
+        return types.isEmpty() ? Variable.empty() : Variable.of(types.getFirst());
+    }
 
     public abstract List<SampleInfo> sample(String id);
 

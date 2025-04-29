@@ -37,7 +37,7 @@ public class EvergardenTestSupport {
             .title("test")
             .listener(e -> {
             })
-            .build();
+            .write();
 
     private static final AutoMemoriesDoll docEx = AutoMemoriesDoll.with.sources("src/test/java")
             .output((Directory) null)
@@ -45,7 +45,7 @@ public class EvergardenTestSupport {
             .listener(e -> {
             })
             .useExternalJDKDoc()
-            .build();
+            .write();
 
     protected final MethodInfo currentMethod() {
         StackFrame frame = caller();

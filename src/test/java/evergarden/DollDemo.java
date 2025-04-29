@@ -41,7 +41,7 @@ public class DollDemo {
                 .classpathBy(path)
                 .host("https://github.com/teletha/sinobu")
                 .useExternalJDKDoc()
-                .build();
+                .write();
 
         Launcher.launch(doll.output);
     }

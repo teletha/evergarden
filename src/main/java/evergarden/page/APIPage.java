@@ -27,13 +27,8 @@ import stylist.value.Numeric;
 
 public class APIPage extends Page<ClassInfo> {
 
-    /**
-     * @param depth
-     * @param epistle
-     * @param info
-     */
-    public APIPage(int depth, Epistle epistle, ClassInfo info) {
-        super(depth, epistle, info);
+    public APIPage(String path, Epistle epistle, ClassInfo info) {
+        super(path, epistle, info);
     }
 
     /**
