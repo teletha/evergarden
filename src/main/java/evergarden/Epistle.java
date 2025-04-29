@@ -1,31 +1,24 @@
 /*
- * Copyright (C) 2025 The EVERGARDEN Development Team
+ * Copyright (C) 2025 Nameless Production Committee
  *
  * Licensed under the MIT License (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *          https://opensource.org/licenses/MIT
+ *          http://opensource.org/licenses/mit-license.php
  */
 package evergarden;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+import evergarden.host.Hosting;
 import evergarden.javadoc.ClassInfo;
+import evergarden.javadoc.SampleInfo;
+import kiss.Variable;
 
-/**
- * A scanned snapshot of the project's structure and documentation.
- * <p>
- * This repository holds modules, packages, types, and documentation entries extracted from source
- * code. It acts as a memory of the scanned landscape, ready to be processed into final
- * documentation.
- * <p>
- * Modules represent JPMS modules declared via {@code module-info.java}.
- * Packages and types are collected as encountered, preserving their original discovery order.
- * Documentation nodes are managed as a tree of {@link Document} implementations.
- */
-public class Index {
+public abstract class Epistle {
 
     /**
      * The list of JPMS module names declared in the project.
@@ -45,7 +38,21 @@ public class Index {
     /**
      * The tree of documentation nodes representing external documents and structured sections.
      */
-    public List<Doc> docs = new ArrayList();
+    public List<Chapter> docs = new ArrayList();
+
+    public abstract String title();
+
+    public abstract String description();
+
+    public abstract Charset charset();
+
+    public abstract Variable<Hosting> authority();
+
+    public abstract Variable<ClassInfo> doc();
+
+    public abstract Variable<ClassInfo> api();
+
+    public abstract List<SampleInfo> sample(String id);
 
     /**
      * Registers a new type into the repository, ensuring its package is recorded.
@@ -66,9 +73,9 @@ public class Index {
      * Each node has a title, a path (typically a file path or URL),
      * and optional child documentation nodes.
      */
-    public static record Doc(String title, String path, List<Doc> subs) {
+    public static record Chapter(String title, String path, List<Chapter> subs) {
 
-        public Doc(String title, String path) {
+        public Chapter(String title, String path) {
             this(title, path, new ArrayList());
         }
     }

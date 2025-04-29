@@ -49,7 +49,7 @@ import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
-import evergarden.Index.Doc;
+import evergarden.Epistle.Chapter;
 import evergarden.design.EvergardenDesignScheme;
 import evergarden.host.Hosting;
 import evergarden.javadoc.ClassInfo;
@@ -80,9 +80,6 @@ public abstract class AutoMemoriesDollModel {
     /** The name pattern of document. */
     private static final Pattern DocName = Pattern.compile("(.*)Manual$");
 
-    /** The scanned index. */
-    public final Index index = new Index();
-
     /** The javadoc mode. */
     private boolean processingMainSource = true;
 
@@ -97,6 +94,8 @@ public abstract class AutoMemoriesDollModel {
 
     /** The internal pacakage names. */
     private final Set<String> internals = new HashSet();
+
+    final Dictation dicatation = new Dictation();
 
     /**
      * The list of source directories.
@@ -396,18 +395,6 @@ public abstract class AutoMemoriesDollModel {
         return Internal.class;
     }
 
-    public final Variable<ClassInfo> doc() {
-        return I.signal(docs).map(ClassInfo::outermost).skipNull().first().to();
-    }
-
-    public final Variable<ClassInfo> api() {
-        return I.signal(index.types).first().to();
-    }
-
-    public final List<SampleInfo> sample(String id) {
-        return samples.getOrDefault(id, Collections.EMPTY_LIST);
-    }
-
     /**
      * 
      */
@@ -615,7 +602,7 @@ public abstract class AutoMemoriesDollModel {
         ClassInfo info = new ClassInfo(root, new TypeResolver(externals, internals, root));
 
         if (processingMainSource) {
-            index.register(info);
+            dicatation.register(info);
         } else {
             Matcher matcher = DocName.matcher(info.outer().map(o -> o.name).or(""));
 
@@ -662,25 +649,24 @@ public abstract class AutoMemoriesDollModel {
     private void complete() {
         if (processingMainSource) {
             // sort data
-            index.modules.sort(Comparator.naturalOrder());
-            index.packages.sort(Comparator.naturalOrder());
-            index.types.sort(Comparator.naturalOrder());
+            dicatation.modules.sort(Comparator.naturalOrder());
+            dicatation.packages.sort(Comparator.naturalOrder());
+            dicatation.types.sort(Comparator.naturalOrder());
 
             // after care
             buildTypeGraph();
 
             // build doc tree
             for (ClassInfo info : docs) {
-                Doc doc = new Doc(info.title(), "doc/" + info.id() + ".html");
-                index.docs.add(doc);
+                Chapter chapter = new Chapter(info.title(), "doc/" + info.id() + ".html");
+                dicatation.docs.add(chapter);
 
                 for (Document child : info.children()) {
-                    Doc childDoc = new Doc(child.title(), "doc/" + info.id() + ".html#" + child.id());
-                    doc.subs().add(childDoc);
+                    Chapter childChapter = new Chapter(child.title(), "doc/" + info.id() + ".html#" + child.id());
+                    chapter.subs().add(childChapter);
 
-                    for (Document foot : child.children()) {
-                        Doc footDoc = new Doc(foot.title(), "doc/" + info.id() + ".html#" + foot.id());
-                        childDoc.subs().add(footDoc);
+                    for (Document grandchild : child.children()) {
+                        childChapter.subs().add(new Chapter(grandchild.title(), "doc/" + info.id() + ".html#" + grandchild.id()));
                     }
                 }
             }
@@ -704,22 +690,22 @@ public abstract class AutoMemoriesDollModel {
                 site.build("main.svg", AutoMemoriesDoll.class.getResourceAsStream("main.svg"));
 
                 // build HTML
-                for (ClassInfo info : index.types) {
-                    site.buildHTML("api/" + info.id() + ".html", new APIPage(1, this, info));
+                for (ClassInfo info : dicatation.types) {
+                    site.buildHTML("api/" + info.id() + ".html", new APIPage(1, dicatation, info));
                 }
                 for (ClassInfo info : docs) {
-                    site.buildHTML("doc/" + info.id() + ".html", new DocumentPage(1, this, info));
+                    site.buildHTML("doc/" + info.id() + ".html", new DocumentPage(1, dicatation, info));
                 }
 
                 // build change log
                 host().to(repo -> {
                     I.http(repo.locateChangeLog(), String.class).waitForTerminate().skipError().to(md -> {
-                        site.buildHTML("doc/changelog.html", new ActivityPage(1, this, repo.getChangeLog(md)));
+                        site.buildHTML("doc/changelog.html", new ActivityPage(1, dicatation, repo.getChangeLog(md)));
                     });
                 });
 
                 // create at last for live reload
-                site.buildHTML("index.html", new APIPage(0, this, null));
+                site.buildHTML("index.html", new APIPage(0, dicatation, null));
             }
         }
     }
@@ -735,11 +721,11 @@ public abstract class AutoMemoriesDollModel {
      */
     private void buildTypeGraph() {
         Map<Element, ClassInfo> cache = new HashMap<>();
-        for (ClassInfo info : index.types) {
+        for (ClassInfo info : dicatation.types) {
             cache.put(info.e, info);
         }
 
-        for (ClassInfo type : index.types) {
+        for (ClassInfo type : dicatation.types) {
             for (Set<TypeMirror> uppers : Util.getAllTypes(type.e)) {
                 for (TypeMirror upper : uppers) {
                     Element e = Util.TypeUtils.asElement(upper);
@@ -749,6 +735,65 @@ public abstract class AutoMemoriesDollModel {
                     }
                 }
             }
+        }
+    }
+
+    class Dictation extends Epistle {
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String title() {
+            return AutoMemoriesDollModel.this.title();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String description() {
+            return AutoMemoriesDollModel.this.description();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Charset charset() {
+            return AutoMemoriesDollModel.this.encoding();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Variable<Hosting> authority() {
+            return AutoMemoriesDollModel.this.host();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Variable<ClassInfo> api() {
+            return I.signal(types).first().to();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Variable<ClassInfo> doc() {
+            return I.signal(AutoMemoriesDollModel.this.docs).map(ClassInfo::outermost).skipNull().first().to();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public List<SampleInfo> sample(String id) {
+            return samples.getOrDefault(id, Collections.EMPTY_LIST);
         }
     }
 }

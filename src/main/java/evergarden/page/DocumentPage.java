@@ -9,8 +9,8 @@
  */
 package evergarden.page;
 
-import evergarden.AutoMemoriesDollModel;
 import evergarden.Document;
+import evergarden.Epistle;
 import evergarden.design.EvergardenDSL;
 import evergarden.design.Styles;
 import kiss.I;
@@ -22,11 +22,11 @@ public class DocumentPage extends Page<Document> {
 
     /**
      * @param depth
-     * @param model
+     * @param epistle
      * @param content
      */
-    public DocumentPage(int depth, AutoMemoriesDollModel model, Document content) {
-        super(depth, model, content);
+    public DocumentPage(int depth, Epistle epistle, Document content) {
+        super(depth, epistle, content);
     }
 
     /**
@@ -87,7 +87,7 @@ public class DocumentPage extends Page<Document> {
                         $(svg("twitter"));
                     });
 
-                    model.host().to(repo -> {
+                    epistle.authority().to(repo -> {
                         document.region().ifPresent(area -> {
                             String editor = repo.locateEditor(area);
                             if (editor != null) {

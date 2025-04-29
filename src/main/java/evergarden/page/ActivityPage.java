@@ -9,8 +9,8 @@
  */
 package evergarden.page;
 
-import evergarden.AutoMemoriesDollModel;
 import evergarden.Document;
+import evergarden.Epistle;
 import evergarden.design.EvergardenDSL;
 import kiss.XML;
 import stylist.Style;
@@ -19,11 +19,11 @@ public class ActivityPage extends DocumentPage {
 
     /**
      * @param depth
-     * @param model
+     * @param epistle
      * @param content
      */
-    public ActivityPage(int depth, AutoMemoriesDollModel model, Document content) {
-        super(depth, model, content);
+    public ActivityPage(int depth, Epistle epistle, Document content) {
+        super(depth, epistle, content);
     }
 
     /**

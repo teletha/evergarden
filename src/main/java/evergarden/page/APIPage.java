@@ -12,7 +12,7 @@ package evergarden.page;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import evergarden.AutoMemoriesDollModel;
+import evergarden.Epistle;
 import evergarden.design.EvergardenDSL;
 import evergarden.design.Styles;
 import evergarden.javadoc.ClassInfo;
@@ -29,11 +29,11 @@ public class APIPage extends Page<ClassInfo> {
 
     /**
      * @param depth
-     * @param model
+     * @param epistle
      * @param info
      */
-    public APIPage(int depth, AutoMemoriesDollModel model, ClassInfo info) {
-        super(depth, model, info);
+    public APIPage(int depth, Epistle epistle, ClassInfo info) {
+        super(depth, epistle, info);
     }
 
     /**
@@ -121,7 +121,7 @@ public class APIPage extends Page<ClassInfo> {
 
             $(member.contents());
 
-            model.sample(contents.id() + "#" + member.id()).forEach(sample -> {
+            epistle.sample(contents.id() + "#" + member.id()).forEach(sample -> {
                 $("pre", clazz("lang-java"), () -> {
                     $("code", text(sample.code));
                 });
@@ -183,7 +183,7 @@ public class APIPage extends Page<ClassInfo> {
             }
             $(member.contents());
 
-            model.sample(contents.id() + "#" + member.id()).forEach(sample -> {
+            epistle.sample(contents.id() + "#" + member.id()).forEach(sample -> {
                 $("pre", clazz("lang-java"), () -> {
                     $("code", text(sample.code));
                 });

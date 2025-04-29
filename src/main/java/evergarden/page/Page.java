@@ -11,7 +11,7 @@ package evergarden.page;
 
 import java.time.LocalDate;
 
-import evergarden.AutoMemoriesDollModel;
+import evergarden.Epistle;
 import evergarden.design.EvergardenDSL;
 import evergarden.host.Hosting;
 import evergarden.web.HTML;
@@ -28,7 +28,7 @@ import stylist.value.Numeric;
 
 public abstract class Page<T> extends HTML {
 
-    protected final AutoMemoriesDollModel model;
+    protected final Epistle epistle;
 
     protected final T contents;
 
@@ -36,11 +36,11 @@ public abstract class Page<T> extends HTML {
 
     /**
      * @param depth
-     * @param model
+     * @param epistle
      * @param content
      */
-    protected Page(int depth, AutoMemoriesDollModel model, T content) {
-        this.model = model;
+    protected Page(int depth, Epistle epistle, T content) {
+        this.epistle = epistle;
         this.contents = content;
         this.base = "../".repeat(depth);
     }
@@ -52,16 +52,17 @@ public abstract class Page<T> extends HTML {
     public void declare() {
         $("html", attr("lang", "en"), () -> {
             $("head", () -> {
-                $("meta", charset(model.encoding().displayName()));
+                $("meta", charset(epistle.charset().displayName()));
                 $("meta", name("viewport"), content("width=device-width, initial-scale=1"));
-                $("meta", name("description"), content("Explains how to use " + model.title() + " and its API. " + model.description()));
+                $("meta", name("description"), content("Explains how to use " + epistle.title() + " and its API. " + epistle
+                        .description()));
                 $("link", rel("preconnect"), href("https://cdn.jsdelivr.net"));
                 $("link", rel("preconnect"), href("https://fonts.googleapis.com"));
                 $("link", rel("preconnect"), href("https://fonts.gstatic.com"), attr("crossorigin"));
                 for (Font font : Font.fromGoogle()) {
                     stylesheetAsync(font.uri);
                 }
-                $("title", text(model.title() + " API"));
+                $("title", text(epistle.title() + " API"));
                 $("base", href(base));
                 module("mimic.js");
                 stylesheet(Stylist.NormalizeCSS);
@@ -71,12 +72,12 @@ public abstract class Page<T> extends HTML {
                 // =============================
                 // Top Navigation
                 // =============================
-                $("header", css.header, attr("date", model.host().map(Hosting::getLatestPublishedDate).or(LocalDate.now())), () -> {
-                    $("h1", css.title, code(model.title()));
+                $("header", css.header, attr("date", epistle.authority().map(Hosting::getLatestPublishedDate).or(LocalDate.now())), () -> {
+                    $("h1", css.title, code(epistle.title()));
                     $("nav", css.links, () -> {
-                        model.doc().to(doc -> link(doc.name, ("doc/" + doc.children().get(0).id() + ".html"), "text"));
-                        model.api().to(api -> link("API", "api/", "package"));
-                        model.host().to(repo -> {
+                        epistle.doc().to(doc -> link(doc.name, ("doc/" + doc.children().get(0).id() + ".html"), "text"));
+                        epistle.api().to(api -> link("API", "api/", "package"));
+                        epistle.authority().to(repo -> {
                             link("Activity", "doc/changelog.html", "activity");
                             link("Community", repo.locateCommunity(), "user");
                             link("Repository", repo.locate(), "github");
@@ -117,7 +118,7 @@ public abstract class Page<T> extends HTML {
                 });
             });
 
-            script("root.js", model.index);
+            script("root.js", epistle);
             module("main.js");
         });
 
