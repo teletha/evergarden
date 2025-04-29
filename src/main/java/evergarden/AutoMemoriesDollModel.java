@@ -95,7 +95,55 @@ public abstract class AutoMemoriesDollModel {
     /** The internal pacakage names. */
     private final Set<String> internals = new HashSet();
 
-    final Dictation dicatation = new Dictation();
+    private final Epistle epistle = new Epistle() {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Directory output() {
+            return AutoMemoriesDollModel.this.output();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String title() {
+            return AutoMemoriesDollModel.this.title();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String description() {
+            return AutoMemoriesDollModel.this.description();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Charset charset() {
+            return AutoMemoriesDollModel.this.encoding();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Variable<Hosting> authority() {
+            return AutoMemoriesDollModel.this.host();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public List<SampleInfo> sample(String id) {
+            return samples.getOrDefault(id, Collections.EMPTY_LIST);
+        }
+    };
 
     /**
      * The list of source directories.
@@ -378,7 +426,7 @@ public abstract class AutoMemoriesDollModel {
                 throw I.quiet(e);
             }
         }
-        return dicatation;
+        return epistle;
     }
 
     private boolean accept(String name) {
@@ -608,7 +656,7 @@ public abstract class AutoMemoriesDollModel {
         ClassInfo info = new ClassInfo(root, new TypeResolver(externals, internals, root));
 
         if (processingMainSource) {
-            dicatation.register(info);
+            epistle.register(info);
         } else {
             Matcher matcher = DocName.matcher(info.outer().map(o -> o.name).or(""));
 
@@ -655,9 +703,9 @@ public abstract class AutoMemoriesDollModel {
     private void complete() {
         if (processingMainSource) {
             // sort data
-            dicatation.modules.sort(Comparator.naturalOrder());
-            dicatation.packages.sort(Comparator.naturalOrder());
-            dicatation.types.sort(Comparator.naturalOrder());
+            epistle.modules.sort(Comparator.naturalOrder());
+            epistle.packages.sort(Comparator.naturalOrder());
+            epistle.types.sort(Comparator.naturalOrder());
 
             // after care
             buildTypeGraph();
@@ -665,7 +713,7 @@ public abstract class AutoMemoriesDollModel {
             // build doc tree
             for (ClassInfo info : docs) {
                 Chapter chapter = new Chapter(info.title(), "doc/" + info.id() + ".html");
-                dicatation.docs.add(chapter);
+                epistle.docs.add(chapter);
 
                 for (Document child : info.children()) {
                     Chapter childChapter = new Chapter(child.title(), "doc/" + info.id() + ".html#" + child.id());
@@ -696,22 +744,22 @@ public abstract class AutoMemoriesDollModel {
                 site.build("main.svg", AutoMemoriesDoll.class.getResourceAsStream("main.svg"));
 
                 // build HTML
-                for (ClassInfo info : dicatation.types) {
-                    site.buildHTML(new APIPage("api/" + info.id() + ".html", dicatation, info));
+                for (ClassInfo info : epistle.types) {
+                    site.buildHTML(new APIPage("api/" + info.id() + ".html", epistle, info));
                 }
                 for (ClassInfo info : docs) {
-                    site.buildHTML(new DocumentPage("doc/" + info.id() + ".html", dicatation, info));
+                    site.buildHTML(new DocumentPage("doc/" + info.id() + ".html", epistle, info));
                 }
 
                 // build change log
                 host().to(repo -> {
                     I.http(repo.locateChangeLog(), String.class).waitForTerminate().skipError().to(md -> {
-                        site.buildHTML(new ActivityPage("doc/changelog.html", dicatation, repo.getChangeLog(md)));
+                        site.buildHTML(new ActivityPage("doc/changelog.html", epistle, repo.getChangeLog(md)));
                     });
                 });
 
                 // create at last for live reload
-                site.buildHTML(new APIPage("index.html", dicatation, null));
+                site.buildHTML(new APIPage("index.html", epistle, null));
             }
         }
     }
@@ -727,11 +775,11 @@ public abstract class AutoMemoriesDollModel {
      */
     private void buildTypeGraph() {
         Map<Element, ClassInfo> cache = new HashMap<>();
-        for (ClassInfo info : dicatation.types) {
+        for (ClassInfo info : epistle.types) {
             cache.put(info.e, info);
         }
 
-        for (ClassInfo type : dicatation.types) {
+        for (ClassInfo type : epistle.types) {
             for (Set<TypeMirror> uppers : Util.getAllTypes(type.e)) {
                 for (TypeMirror upper : uppers) {
                     Element e = Util.TypeUtils.asElement(upper);
@@ -741,57 +789,6 @@ public abstract class AutoMemoriesDollModel {
                     }
                 }
             }
-        }
-    }
-
-    class Dictation extends Epistle {
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public Directory output() {
-            return AutoMemoriesDollModel.this.output();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public String title() {
-            return AutoMemoriesDollModel.this.title();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public String description() {
-            return AutoMemoriesDollModel.this.description();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public Charset charset() {
-            return AutoMemoriesDollModel.this.encoding();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public Variable<Hosting> authority() {
-            return AutoMemoriesDollModel.this.host();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public List<SampleInfo> sample(String id) {
-            return samples.getOrDefault(id, Collections.EMPTY_LIST);
         }
     }
 }
