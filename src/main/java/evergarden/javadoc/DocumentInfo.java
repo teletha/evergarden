@@ -126,7 +126,7 @@ public class DocumentInfo {
         this.resolver = resolver;
         if (parent != null) this.variables.putAll(parent.variables);
 
-        DocCommentTree docs = Util.DocUtils.getDocCommentTree(e);
+        DocCommentTree docs = Util.DocUtils.get().getDocCommentTree(e);
         if (docs != null) {
             comment.set(transform(xml(docs.getFullBody())));
             comment.to(x -> x.addClass(Styles.JavadocComment.className()));
@@ -355,7 +355,7 @@ public class DocumentInfo {
             // type being processed, the FQCN cannot be resolved properly and should be
             // resolved separately.
             if (fqcn.equals(linkLike) && linkLike.indexOf(".") == -1) {
-                fqcn = Util.ElementUtils.getPackageOf(Util.getTopLevelTypeElement(e)).getQualifiedName() + "." + linkLike;
+                fqcn = Util.ElementUtils.get().getPackageOf(Util.getTopLevelTypeElement(e)).getQualifiedName() + "." + linkLike;
             }
             return new String[] {fqcn, null};
         } else if (index == 0) {
@@ -369,7 +369,7 @@ public class DocumentInfo {
             // type being processed, the FQCN cannot be resolved properly and should be
             // resolved separately.
             if (fqcn.equals(type) && type.indexOf(".") == -1) {
-                fqcn = Util.ElementUtils.getPackageOf(Util.getTopLevelTypeElement(e)).getQualifiedName() + "." + type;
+                fqcn = Util.ElementUtils.get().getPackageOf(Util.getTopLevelTypeElement(e)).getQualifiedName() + "." + type;
             }
             return new String[] {fqcn, qualify(member)};
         }

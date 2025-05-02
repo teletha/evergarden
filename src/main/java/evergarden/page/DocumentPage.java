@@ -10,7 +10,7 @@
 package evergarden.page;
 
 import evergarden.Document;
-import evergarden.Epistle;
+import evergarden.Letter;
 import evergarden.design.EvergardenDSL;
 import evergarden.design.Styles;
 import kiss.I;
@@ -21,11 +21,11 @@ import stylist.value.Numeric;
 public class DocumentPage extends Page<Document> {
 
     /**
-     * @param epistle
+     * @param letter
      * @param content
      */
-    public DocumentPage(String path, Epistle epistle, Document content) {
-        super(path, epistle, content);
+    public DocumentPage(String path, Letter letter, Document content) {
+        super(path, letter, content);
     }
 
     /**
@@ -86,7 +86,7 @@ public class DocumentPage extends Page<Document> {
                         $(svg("twitter"));
                     });
 
-                    epistle.authority().to(repo -> {
+                    letter.authority().to(repo -> {
                         document.region().ifPresent(area -> {
                             String editor = repo.locateEditor(area);
                             if (editor != null) {

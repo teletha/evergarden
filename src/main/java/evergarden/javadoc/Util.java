@@ -41,16 +41,16 @@ public final class Util {
     }
 
     /** Guilty Accessor. */
-    public static DocTrees DocUtils;
+    public static final InheritableThreadLocal<DocTrees> DocUtils = new InheritableThreadLocal();
 
     /** Guilty Accessor. */
-    public static Elements ElementUtils;
+    public static final InheritableThreadLocal<Elements> ElementUtils = new InheritableThreadLocal();
 
     /** Guilty Accessor. */
-    public static Types TypeUtils;
+    public static final InheritableThreadLocal<Types> TypeUtils = new InheritableThreadLocal();
 
     /** Guilty Accessor. */
-    public static List<Directory> Samples;
+    public static final InheritableThreadLocal<List<Directory>> Samples = new InheritableThreadLocal();
 
     /**
      * Find the top-level {@link TypeElement} (not member class).
@@ -76,12 +76,12 @@ public final class Util {
      */
     public static int[] getDocumentLineNumbers(Element e) {
         try {
-            DocSourcePositions positions = DocUtils.getSourcePositions();
+            DocSourcePositions positions = DocUtils.get().getSourcePositions();
 
-            TreePath path = Util.DocUtils.getPath(e);
+            TreePath path = Util.DocUtils.get().getPath(e);
             CompilationUnitTree cut = path.getCompilationUnit();
 
-            DocCommentTree tree = Util.DocUtils.getDocCommentTree(e);
+            DocCommentTree tree = Util.DocUtils.get().getDocCommentTree(e);
             int start = (int) positions.getStartPosition(cut, tree, tree);
             int end = (int) positions.getEndPosition(cut, tree, tree);
 
@@ -109,7 +109,7 @@ public final class Util {
     public static Set<TypeMirror>[] getAllTypes(Element type) {
         Set<TypeMirror> supers = new LinkedHashSet();
         Set<TypeMirror> interfaces = new TreeSet<>(Comparator
-                .<TypeMirror, String> comparing(t -> ((TypeElement) Util.TypeUtils.asElement(t)).getSimpleName().toString()));
+                .<TypeMirror, String> comparing(t -> ((TypeElement) Util.TypeUtils.get().asElement(t)).getSimpleName().toString()));
         collect(type.asType(), supers, interfaces);
 
         return new Set[] {supers, interfaces};
@@ -123,12 +123,12 @@ public final class Util {
      * @param interfaceTypes
      */
     private static void collect(TypeMirror type, Set<TypeMirror> superTypes, Set<TypeMirror> interfaceTypes) {
-        for (TypeMirror up : Util.TypeUtils.directSupertypes(type)) {
+        for (TypeMirror up : Util.TypeUtils.get().directSupertypes(type)) {
             if (up.toString().equals("java.lang.Object")) {
                 continue;
             }
 
-            Element e = Util.TypeUtils.asElement(up);
+            Element e = Util.TypeUtils.get().asElement(up);
             if (e.getKind() == ElementKind.INTERFACE) {
                 interfaceTypes.add(up);
             } else {

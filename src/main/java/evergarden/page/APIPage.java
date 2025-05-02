@@ -12,7 +12,7 @@ package evergarden.page;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import evergarden.Epistle;
+import evergarden.Letter;
 import evergarden.design.EvergardenDSL;
 import evergarden.design.Styles;
 import evergarden.javadoc.ClassInfo;
@@ -27,8 +27,8 @@ import stylist.value.Numeric;
 
 public class APIPage extends Page<ClassInfo> {
 
-    public APIPage(String path, Epistle epistle, ClassInfo info) {
-        super(path, epistle, info);
+    public APIPage(String path, Letter letter, ClassInfo info) {
+        super(path, letter, info);
     }
 
     /**
@@ -116,9 +116,9 @@ public class APIPage extends Page<ClassInfo> {
 
             $(member.contents());
 
-            epistle.sample(contents.id() + "#" + member.id()).forEach(sample -> {
+            letter.doodle(contents.id() + "#" + member.id()).forEach(sample -> {
                 $("pre", clazz("lang-java"), () -> {
-                    $("code", text(sample.code));
+                    $("code", text(sample.code()));
                 });
             });
         });
@@ -178,9 +178,9 @@ public class APIPage extends Page<ClassInfo> {
             }
             $(member.contents());
 
-            epistle.sample(contents.id() + "#" + member.id()).forEach(sample -> {
+            letter.doodle(contents.id() + "#" + member.id()).forEach(sample -> {
                 $("pre", clazz("lang-java"), () -> {
-                    $("code", text(sample.code));
+                    $("code", text(sample.code()));
                 });
             });
         });

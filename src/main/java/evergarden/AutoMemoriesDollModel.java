@@ -22,7 +22,6 @@ import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -30,6 +29,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -39,7 +39,6 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ModuleElement;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.type.TypeMirror;
 import javax.tools.Diagnostic;
 import javax.tools.Diagnostic.Kind;
 import javax.tools.DiagnosticListener;
@@ -49,12 +48,10 @@ import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
-import evergarden.Epistle.Chapter;
 import evergarden.design.EvergardenDesignScheme;
 import evergarden.host.Hosting;
 import evergarden.javadoc.ClassInfo;
 import evergarden.javadoc.MethodInfo;
-import evergarden.javadoc.SampleInfo;
 import evergarden.javadoc.SourceCode;
 import evergarden.javadoc.TypeResolver;
 import evergarden.javadoc.Util;
@@ -80,14 +77,8 @@ public abstract class AutoMemoriesDollModel {
     /** The name pattern of document. */
     private static final Pattern DocName = Pattern.compile("(.*)Manual$");
 
-    /** The javadoc mode. */
-    private boolean processingMainSource = true;
-
     /** The document repository. */
     private final List<ClassInfo> docs = new ArrayList();
-
-    /** MethodID-SampleCode mapping. */
-    private final Map<String, List<SampleInfo>> samples = new HashMap();
 
     /** PackageName-URL pair. */
     private final Map<String, String> externals = new HashMap();
@@ -95,13 +86,13 @@ public abstract class AutoMemoriesDollModel {
     /** The internal pacakage names. */
     private final Set<String> internals = new HashSet();
 
-    private final Epistle epistle = new Epistle() {
+    private final Letter letter = new Letter() {
         /**
          * {@inheritDoc}
          */
         @Override
-        public Directory output() {
-            return AutoMemoriesDollModel.this.output();
+        public Directory address() {
+            return AutoMemoriesDollModel.this.address();
         }
 
         /**
@@ -134,14 +125,6 @@ public abstract class AutoMemoriesDollModel {
         @Override
         public Variable<Hosting> authority() {
             return AutoMemoriesDollModel.this.host();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public List<SampleInfo> sample(String id) {
-            return samples.getOrDefault(id, Collections.EMPTY_LIST);
         }
     };
 
@@ -219,15 +202,15 @@ public abstract class AutoMemoriesDollModel {
      * @return
      */
     @Icy.Property(nullable = true)
-    public abstract Directory output();
+    public abstract Directory address();
 
     /**
      * Specify the directory where the product is output.
      * 
      * @return
      */
-    @Icy.Overload("output")
-    private Directory output(String path) {
+    @Icy.Overload("address")
+    private Directory address(String path) {
         return Locator.directory(path);
     }
 
@@ -236,8 +219,8 @@ public abstract class AutoMemoriesDollModel {
      * 
      * @return
      */
-    @Icy.Overload("output")
-    private Directory output(Path path) {
+    @Icy.Overload("address")
+    private Directory address(Path path) {
         return Locator.directory(path);
     }
 
@@ -310,6 +293,7 @@ public abstract class AutoMemoriesDollModel {
     }
 
     @Icy.Overload("listener")
+    @SuppressWarnings("unused")
     private DiagnosticListener<? super JavaFileObject> mute() {
         return o -> {
         };
@@ -365,68 +349,85 @@ public abstract class AutoMemoriesDollModel {
     /**
      * Generate documents.
      */
-    public final Epistle write() {
+    public final Letter write() {
         synchronized (AutoMemoriesDollModel.class) {
-            Internal.model = this;
+            InternalScanner.model = this;
 
+            long start = System.currentTimeMillis();
+            
+            // Find all package names in the source directory.
+            I.signal(sources()).flatMap(Directory::walkDirectoryWithBase).to(sub -> {
+                internals.add(sub.ⅰ.relativize(sub.ⅱ).toString().replace(File.separatorChar, '.'));
+            });
+
+            List<CompletableFuture> futures = new ArrayList();
             DocumentationTool tool = ToolProvider.getSystemDocumentationTool();
 
             // ========================================================
             // Collect sample source
             // ========================================================
             if (!samples().isEmpty()) {
-                processingMainSource = false;
+                futures.add(I.schedule(() -> {
+                    try (ToListener listener = new ToListener("sample");
+                            StandardJavaFileManager m = tool.getStandardFileManager(listener(), Locale.getDefault(), encoding())) {
+                        m.setLocation(SOURCE_PATH, I.signal(sources()).startWith(samples()).map(Directory::asJavaFile).toList());
+                        m.setLocation(CLASS_PATH, classpath() == null ? null
+                                : classpath().stream().map(psychopath.Location::asJavaFile).collect(Collectors.toList()));
 
-                try (ToListener listener = new ToListener("sample");
-                        StandardJavaFileManager m = tool.getStandardFileManager(listener(), Locale.getDefault(), encoding())) {
-                    m.setLocation(SOURCE_PATH, I.signal(sources()).startWith(samples()).map(Directory::asJavaFile).toList());
-                    m.setLocation(CLASS_PATH, classpath() == null ? null
-                            : classpath().stream().map(psychopath.Location::asJavaFile).collect(Collectors.toList()));
+                        List<JavaFileObject> files = I.signal(m.list(SOURCE_PATH, "", Set.of(SOURCE), true))
+                                .take(o -> accept(o
+                                        .getName()) && (o.getName().endsWith("Test.java") || o.getName().endsWith("Manual.java")))
+                                .toList();
 
-                    List<JavaFileObject> files = I.signal(m.list(SOURCE_PATH, "", Set.of(SOURCE), true))
-                            .take(o -> accept(o.getName()) && (o.getName().endsWith("Test.java") || o.getName().endsWith("Manual.java")))
-                            .toList();
+                        if (!files.isEmpty()) {
+                            DocumentationTask task = tool.getTask(listener, m, listener(), SampleScanner.class, List.of("-package"), files);
 
-                    if (!files.isEmpty()) {
-                        DocumentationTask task = tool.getTask(listener, m, listener(), Internal.class, List.of("-package"), files);
-
-                        if (task.call()) {
-                            listener().report(new Message(OTHER, "sample", "Succeed in scanning sample sources."));
-                        } else {
-                            listener().report(new Message(ERROR, "sample", "Fail in scanning sample sources."));
-                            throw new Error("Fail in scanning sample sources.");
+                            if (task.call()) {
+                                listener().report(new Message(OTHER, "sample", "Succeed in scanning sample sources."));
+                            } else {
+                                listener().report(new Message(ERROR, "sample", "Fail in scanning sample sources."));
+                                throw new Error("Fail in scanning sample sources.");
+                            }
                         }
+                    } catch (Throwable e) {
+                        throw I.quiet(e);
                     }
-                } catch (Throwable e) {
-                    throw I.quiet(e);
-                } finally {
-                    processingMainSource = true;
-                }
+                }));
             }
 
             // ========================================================
             // Scan javadoc from main source
             // ========================================================
-            try (ToListener listener = new ToListener("build");
-                    StandardJavaFileManager m = tool.getStandardFileManager(listener(), Locale.getDefault(), encoding())) {
-                m.setLocation(SOURCE_PATH, I.signal(sources()).map(Directory::asJavaFile).toList());
-                m.setLocation(CLASS_PATH, classpath() == null ? null
-                        : classpath().stream().map(psychopath.Location::asJavaFile).collect(Collectors.toList()));
-                m.setLocationFromPaths(DOCUMENTATION_OUTPUT, List.of(output() == null ? Path.of("") : output().create().asJavaPath()));
+            futures.add(I.schedule(() -> {
+                try (ToListener listener = new ToListener("build");
+                        StandardJavaFileManager m = tool.getStandardFileManager(listener(), Locale.getDefault(), encoding())) {
+                    m.setLocation(SOURCE_PATH, I.signal(sources()).map(Directory::asJavaFile).toList());
+                    m.setLocation(CLASS_PATH, classpath() == null ? null
+                            : classpath().stream().map(psychopath.Location::asJavaFile).collect(Collectors.toList()));
+                    m.setLocationFromPaths(DOCUMENTATION_OUTPUT, List
+                            .of(address() == null ? Path.of("") : address().create().asJavaPath()));
 
-                DocumentationTask task = tool.getTask(listener, m, listener(), Internal.class, List.of("-protected"), m
-                        .list(SOURCE_PATH, "", Set.of(SOURCE), true));
+                    DocumentationTask task = tool.getTask(listener, m, listener(), SourceScanner.class, List.of("-protected"), m
+                            .list(SOURCE_PATH, "", Set.of(SOURCE), true));
 
-                if (task.call()) {
-                    listener().report(new Message(OTHER, "build", "Succeed in building documents."));
-                } else {
-                    listener().report(new Message(ERROR, "build", "Fail in building documents."));
+                    if (task.call()) {
+                        listener().report(new Message(OTHER, "build", "Succeed in building documents."));
+                    } else {
+                        listener().report(new Message(ERROR, "build", "Fail in building documents."));
+                    }
+                } catch (Throwable e) {
+                    throw I.quiet(e);
                 }
-            } catch (Throwable e) {
-                throw I.quiet(e);
-            }
+            }));
+
+            CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new)).join();
+
+            complete();
+            
+            long end = System.currentTimeMillis();
+            System.out.println((end - start));
         }
-        return epistle;
+        return letter;
     }
 
     private boolean accept(String name) {
@@ -444,9 +445,9 @@ public abstract class AutoMemoriesDollModel {
      * @return
      */
     public final Class<? extends Doclet> writeDoclet() {
-        Internal.model = this;
+        InternalScanner.model = this;
 
-        return Internal.class;
+        return SourceScanner.class;
     }
 
     /**
@@ -564,50 +565,16 @@ public abstract class AutoMemoriesDollModel {
      * the specifications of the documentation tool.
      * </p>
      */
-    public static class Internal implements Doclet {
+    private static abstract class InternalScanner implements Doclet {
 
         /** The setting model. */
-        private static AutoMemoriesDollModel model;
+        static AutoMemoriesDollModel model;
 
         /**
          * {@inheritDoc}
          */
         @Override
         public final void init(Locale locale, Reporter reporter) {
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public final boolean run(DocletEnvironment env) {
-            Util.DocUtils = env.getDocTrees();
-            Util.ElementUtils = env.getElementUtils();
-            Util.TypeUtils = env.getTypeUtils();
-            Util.Samples = model.samples();
-
-            try {
-                model.initialize();
-
-                for (Element element : env.getSpecifiedElements()) {
-                    switch (element.getKind()) {
-                    case MODULE:
-                        model.process((ModuleElement) element);
-                        break;
-
-                    case PACKAGE:
-                        model.process((PackageElement) element);
-                        break;
-
-                    default:
-                        model.process((TypeElement) element);
-                        break;
-                    }
-                }
-            } finally {
-                model.complete();
-            }
-            return true;
         }
 
         /**
@@ -633,162 +600,180 @@ public abstract class AutoMemoriesDollModel {
         public final SourceVersion getSupportedSourceVersion() {
             return SourceVersion.latest();
         }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public final boolean run(DocletEnvironment env) {
+            Util.DocUtils.set(env.getDocTrees());
+            Util.ElementUtils.set(env.getElementUtils());
+            Util.TypeUtils.set(env.getTypeUtils());
+            Util.Samples.set(model.samples());
+
+            for (Element element : env.getSpecifiedElements()) {
+                switch (element.getKind()) {
+                case MODULE:
+                    process((ModuleElement) element);
+                    break;
+
+                case PACKAGE:
+                    process((PackageElement) element);
+                    break;
+
+                default:
+                    TypeElement type = (TypeElement) element;
+                    process(new ClassInfo(type, new TypeResolver(model.externals, model.internals, type)));
+                    break;
+                }
+            }
+            complete();
+
+            return true;
+        }
+
+        /**
+         * Process a class or interface program element. Provides access to information about the
+         * type
+         * and its members. Note that an enum type is a kind of class and an annotation type is a
+         * kind
+         * of interface.
+         * 
+         * @param root A class or interface program element root.
+         */
+        protected abstract void process(ClassInfo root);
+
+        /**
+         * Process a package program element. Provides access to information about the package and
+         * its
+         * members.
+         * 
+         * @param root A package program element root.
+         */
+        protected void process(PackageElement root) {
+        }
+
+        /**
+         * Process a module program element. Provides access to information about the module, its
+         * directives, and its members.
+         * 
+         * @param root A module program element root.
+         */
+        protected void process(ModuleElement root) {
+        }
+
+        protected abstract void complete();
     }
 
     /**
-     * Initialization phase.
+     * <h>DONT USE THIS CLASS</h>
+     * <p>
+     * It is a Doclet for internal use, but it is public because it cannot be made private due to
+     * the specifications of the documentation tool.
+     * </p>
      */
-    private void initialize() {
-        // Find all package names in the source directory.
-        I.signal(sources()).flatMap(Directory::walkDirectoryWithBase).to(sub -> {
-            internals.add(sub.ⅰ.relativize(sub.ⅱ).toString().replace(File.separatorChar, '.'));
-        });
-    }
+    public static class SampleScanner extends InternalScanner {
 
-    /**
-     * Process a class or interface program element. Provides access to information about the type
-     * and its members. Note that an enum type is a kind of class and an annotation type is a kind
-     * of interface.
-     * 
-     * @param root A class or interface program element root.
-     */
-    private void process(TypeElement root) {
-        ClassInfo info = new ClassInfo(root, new TypeResolver(externals, internals, root));
-
-        if (processingMainSource) {
-            epistle.register(info);
-        } else {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void process(ClassInfo info) {
             Matcher matcher = DocName.matcher(info.outer().map(o -> o.name).or(""));
 
             if (matcher.matches() && info.isPublic()) {
-                docs.add(0, info);
+                model.docs.add(0, info);
             } else {
                 for (MethodInfo method : info.methods()) {
                     if (!method.getSeeTags().isEmpty()) {
                         String code = SourceCode.read(method);
                         for (XML see : method.getSeeTags()) {
                             String[] id = info.identify(see.text());
-                            SampleInfo sample = new SampleInfo(id[0], id[1], code);
-                            sample.comment.set(method.contents());
-
-                            samples.computeIfAbsent(sample.id(), x -> new ArrayList()).add(sample);
+                            model.letter.register(new Doodle(id[0], id[1], code, method.contents()));
                         }
                     }
                 }
             }
         }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void complete() {
+            model.letter.buildDocumentTree(model.docs);
+        }
     }
 
     /**
-     * Process a package program element. Provides access to information about the package and its
-     * members.
-     * 
-     * @param root A package program element root.
+     * <h>DONT USE THIS CLASS</h>
+     * <p>
+     * It is a Doclet for internal use, but it is public because it cannot be made private due to
+     * the specifications of the documentation tool.
+     * </p>
      */
-    private void process(PackageElement root) {
+    public static class SourceScanner extends InternalScanner {
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void process(ClassInfo info) {
+            model.letter.register(info);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void complete() {
+            model.letter.buildTypeRelationship();
+        }
     }
 
-    /**
-     * Process a module program element. Provides access to information about the module, its
-     * directives, and its members.
-     * 
-     * @param root A module program element root.
-     */
-    private void process(ModuleElement root) {
-    }
+    protected void complete() {
+        // sort data
+        letter.modules.sort(Comparator.naturalOrder());
+        letter.packages.sort(Comparator.naturalOrder());
+        letter.types.sort(Comparator.naturalOrder());
 
-    /**
-     * Completion phase.
-     */
-    private void complete() {
-        if (processingMainSource) {
-            // sort data
-            epistle.modules.sort(Comparator.naturalOrder());
-            epistle.packages.sort(Comparator.naturalOrder());
-            epistle.types.sort(Comparator.naturalOrder());
+        if (letter.address() != null) {
+            SiteBuilder site = I.make(SiteBuilder.class)
+                    .root(letter.address())
+                    .guard("index.html", "main.css", "mocha.html", "mimic.test.js");
 
-            // after care
-            buildTypeGraph();
+            // build CSS
+            I.load(AutoMemoriesDoll.class);
+            Stylist.pretty()
+                    .scheme(EvergardenDesignScheme.class)
+                    .styles(I.findAs(StyleDeclarable.class))
+                    .formatTo(letter.address().file("main.css").asJavaPath());
 
-            // build doc tree
+            // build JS
+            site.build("main.js", AutoMemoriesDoll.class.getResourceAsStream("main.js"));
+            site.build("mimic.js", AutoMemoriesDoll.class.getResourceAsStream("mimic.js"));
+            site.build("highlight.js", AutoMemoriesDoll.class.getResourceAsStream("highlight.js"), CodeHighlight.build());
+
+            // build SVG
+            site.build("main.svg", AutoMemoriesDoll.class.getResourceAsStream("main.svg"));
+
+            // build HTML
+            for (ClassInfo info : letter.types) {
+                site.buildHTML(new APIPage("api/" + info.id() + ".html", letter, info));
+            }
             for (ClassInfo info : docs) {
-                Chapter chapter = new Chapter(info.title(), "doc/" + info.id() + ".html");
-                epistle.docs.add(chapter);
-
-                for (Document child : info.children()) {
-                    Chapter childChapter = new Chapter(child.title(), "doc/" + info.id() + ".html#" + child.id());
-                    chapter.subs().add(childChapter);
-
-                    for (Document grandchild : child.children()) {
-                        childChapter.subs().add(new Chapter(grandchild.title(), "doc/" + info.id() + ".html#" + grandchild.id()));
-                    }
-                }
+                site.buildHTML(new DocumentPage("doc/" + info.id() + ".html", letter, info));
             }
 
-            if (output() != null) {
-                SiteBuilder site = I.make(SiteBuilder.class).root(output()).guard("index.html", "main.css", "mocha.html", "mimic.test.js");
-
-                // build CSS
-                I.load(AutoMemoriesDoll.class);
-                Stylist.pretty()
-                        .scheme(EvergardenDesignScheme.class)
-                        .styles(I.findAs(StyleDeclarable.class))
-                        .formatTo(output().file("main.css").asJavaPath());
-
-                // build JS
-                site.build("main.js", AutoMemoriesDoll.class.getResourceAsStream("main.js"));
-                site.build("mimic.js", AutoMemoriesDoll.class.getResourceAsStream("mimic.js"));
-                site.build("highlight.js", AutoMemoriesDoll.class.getResourceAsStream("highlight.js"), CodeHighlight.build());
-
-                // build SVG
-                site.build("main.svg", AutoMemoriesDoll.class.getResourceAsStream("main.svg"));
-
-                // build HTML
-                for (ClassInfo info : epistle.types) {
-                    site.buildHTML(new APIPage("api/" + info.id() + ".html", epistle, info));
-                }
-                for (ClassInfo info : docs) {
-                    site.buildHTML(new DocumentPage("doc/" + info.id() + ".html", epistle, info));
-                }
-
-                // build change log
-                host().to(repo -> {
-                    I.http(repo.locateChangeLog(), String.class).waitForTerminate().skipError().to(md -> {
-                        site.buildHTML(new ActivityPage("doc/changelog.html", epistle, repo.getChangeLog(md)));
-                    });
+            // build change log
+            letter.authority().to(repo -> {
+                I.http(repo.locateChangeLog(), String.class).waitForTerminate().skipError().to(md -> {
+                    site.buildHTML(new ActivityPage("doc/changelog.html", letter, repo.getChangeLog(md)));
                 });
+            });
 
-                // create at last for live reload
-                site.buildHTML(new APIPage("index.html", epistle, null));
-            }
-        }
-    }
-
-    /**
-     * Establishes the subtype relationships among all collected types.
-     * <p>
-     * For each known type, this method identifies its direct and indirect supertypes
-     * and registers the current type as a subtype of them.
-     * <p>
-     * This operation is optimized to run in linear time relative to the number of types,
-     * using a fast lookup table instead of exhaustive comparison.
-     */
-    private void buildTypeGraph() {
-        Map<Element, ClassInfo> cache = new HashMap<>();
-        for (ClassInfo info : epistle.types) {
-            cache.put(info.e, info);
-        }
-
-        for (ClassInfo type : epistle.types) {
-            for (Set<TypeMirror> uppers : Util.getAllTypes(type.e)) {
-                for (TypeMirror upper : uppers) {
-                    Element e = Util.TypeUtils.asElement(upper);
-                    ClassInfo parent = cache.get(e);
-                    if (parent != null) {
-                        parent.addSub(type);
-                    }
-                }
-            }
+            // create at last for live reload
+            site.buildHTML(new APIPage("index.html", letter, null));
         }
     }
 }

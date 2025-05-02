@@ -32,10 +32,10 @@ import psychopath.Directory;
 
 public class EvergardenTestSupport {
 
-    private static final Epistle doc = AutoMemoriesDoll.with.sources("src/test/java").output((Directory) null).title("test").mute().write();
+    private static final Letter doc = AutoMemoriesDoll.with.sources("src/test/java").address((Directory) null).title("test").mute().write();
 
-    private static final Epistle docEx = AutoMemoriesDoll.with.sources("src/test/java")
-            .output((Directory) null)
+    private static final Letter docEx = AutoMemoriesDoll.with.sources("src/test/java")
+            .address((Directory) null)
             .title("test")
             .mute()
             .useExternalJDKDoc()
@@ -188,7 +188,7 @@ public class EvergardenTestSupport {
      * 
      * @param className
      */
-    final Variable<ClassInfo> findByClassName(Epistle epistle, String className) {
+    final Variable<ClassInfo> findByClassName(Letter epistle, String className) {
         for (ClassInfo info : epistle.types) {
             if (info.id().equals(className)) {
                 return Variable.of(info);

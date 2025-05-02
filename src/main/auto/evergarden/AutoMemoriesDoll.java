@@ -64,10 +64,10 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
     private static final MethodHandle sources$1893898243= invoker("sources", Path[].class);
 
     /** The overload or intercept method invoker. */
-    private static final MethodHandle output$927011984= invoker("output", String.class);
+    private static final MethodHandle address$927011984= invoker("address", String.class);
 
     /** The overload or intercept method invoker. */
-    private static final MethodHandle output$478361692= invoker("output", Path.class);
+    private static final MethodHandle address$478361692= invoker("address", Path.class);
 
     /** The overload or intercept method invoker. */
     private static final MethodHandle classpath$640847889= invoker("classpath", String[].class);
@@ -127,10 +127,10 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
     private static final MethodHandle sourcesUpdater = handler(sourcesField);
 
     /** The final property updater. */
-    private static final Field outputField = updater("output");
+    private static final Field addressField = updater("address");
 
     /** The fast final property updater. */
-    private static final MethodHandle outputUpdater = handler(outputField);
+    private static final MethodHandle addressUpdater = handler(addressField);
 
     /** The final property updater. */
     private static final Field titleField = updater("title");
@@ -178,7 +178,7 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
     public final List<Directory> sources;
 
     /** The exposed property. */
-    public final Directory output;
+    public final Directory address;
 
     /** The exposed property. */
     public final String title;
@@ -206,7 +206,7 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
      */
     protected AutoMemoriesDoll() {
         this.sources = null;
-        this.output = null;
+        this.address = null;
         this.title = null;
         this.classpath = super.classpath();
         this.description = super.description();
@@ -259,28 +259,28 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
      *  @return
      */
     @Override
-    public final Directory output() {
-        return this.output;
+    public final Directory address() {
+        return this.address;
     }
 
     /**
      * Provide classic getter API.
      *
-     * @return A value of output property.
+     * @return A value of address property.
      */
     @SuppressWarnings("unused")
-    private final Directory getOutput() {
-        return this.output;
+    private final Directory getAddress() {
+        return this.address;
     }
 
     /**
      * Provide classic setter API.
      *
-     * @paran value A new value of output property to assign.
+     * @paran value A new value of address property to assign.
      */
-    private final void setOutput(Directory value) {
+    private final void setAddress(Directory value) {
         try {
-            outputUpdater.invoke(this, value);
+            addressUpdater.invoke(this, value);
         } catch (UnsupportedOperationException e) {
         } catch (Throwable e) {
             throw quiet(e);
@@ -555,7 +555,7 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
     public String toString() {
         StringBuilder builder = new StringBuilder("AutoMemoriesDoll [");
         builder.append("sources=").append(sources).append(", ");
-        builder.append("output=").append(output).append(", ");
+        builder.append("address=").append(address).append(", ");
         builder.append("title=").append(title).append(", ");
         builder.append("classpath=").append(classpath).append(", ");
         builder.append("description=").append(description).append(", ");
@@ -573,7 +573,7 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(sources, output, title, classpath, description, samples, encoding, listener, host);
+        return Objects.hash(sources, address, title, classpath, description, samples, encoding, listener, host);
     }
 
     /**
@@ -589,7 +589,7 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
 
         AutoMemoriesDoll other = (AutoMemoriesDoll) o;
         if (!Objects.equals(sources, other.sources)) return false;
-        if (!Objects.equals(output, other.output)) return false;
+        if (!Objects.equals(address, other.address)) return false;
         if (!Objects.equals(title, other.title)) return false;
         if (!Objects.equals(classpath, other.classpath)) return false;
         if (!Objects.equals(description, other.description)) return false;
@@ -613,7 +613,7 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
          * 
          * @return The next assignable model.
          */
-        public ÅssignableOutput<ÅssignableTitle<Self>> sources(List<Directory> sources) {
+        public ÅssignableAddress<ÅssignableTitle<Self>> sources(List<Directory> sources) {
             Åssignable o = new Åssignable();
             o.sources(sources);
             return o;
@@ -624,7 +624,7 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
          * 
          * @return The next assignable model.
          */
-        public ÅssignableOutput<ÅssignableTitle<Self>> sources(Directory... values) {
+        public ÅssignableAddress<ÅssignableTitle<Self>> sources(Directory... values) {
             return sources(List.of(values));
         }
 
@@ -633,7 +633,7 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
          *  
          *  @return
          */
-        public ÅssignableOutput<ÅssignableTitle<Self>> sources(String... paths) {
+        public ÅssignableAddress<ÅssignableTitle<Self>> sources(String... paths) {
             Åssignable o = new Åssignable();
             o.sources(paths);
             return o;
@@ -644,7 +644,7 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
          *  
          *  @return
          */
-        public ÅssignableOutput<ÅssignableTitle<Self>> sources(Path... paths) {
+        public ÅssignableAddress<ÅssignableTitle<Self>> sources(Path... paths) {
             Åssignable o = new Åssignable();
             o.sources(paths);
             return o;
@@ -706,16 +706,16 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
     /**
      * Property assignment API.
      */
-    public static interface ÅssignableOutput<Next> {
+    public static interface ÅssignableAddress<Next> {
 
         /**
-         * Assign output property.
+         * Assign address property.
          * 
          * @param value A new value to assign.
          * @return The next assignable model.
          */
-        default Next output(Directory value) {
-            ((AutoMemoriesDoll) this).setOutput(value);
+        default Next address(Directory value) {
+            ((AutoMemoriesDoll) this).setAddress(value);
             return (Next) this;
         }
 
@@ -724,9 +724,9 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
          *  
          *  @return
          */
-        default Next output(String path) {
+        default Next address(String path) {
             try {
-                return output((Directory) output$927011984.invoke(this, path));
+                return address((Directory) address$927011984.invoke(this, path));
             } catch (Throwable e) {
                 throw quiet(e);
             }
@@ -737,9 +737,9 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
          *  
          *  @return
          */
-        default Next output(Path path) {
+        default Next address(Path path) {
             try {
-                return output((Directory) output$478361692.invoke(this, path));
+                return address((Directory) address$478361692.invoke(this, path));
             } catch (Throwable e) {
                 throw quiet(e);
             }
@@ -956,7 +956,7 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
     /**
      * Internal aggregated API.
      */
-    protected static interface ÅssignableAll extends ÅssignableSources, ÅssignableOutput, ÅssignableTitle {
+    protected static interface ÅssignableAll extends ÅssignableSources, ÅssignableAddress, ÅssignableTitle {
     }
 
     /**
@@ -970,7 +970,7 @@ public class AutoMemoriesDoll extends AutoMemoriesDollModel {
      */
     static final class My {
         static final String Sources = "sources";
-        static final String Output = "output";
+        static final String Address = "address";
         static final String Title = "title";
         static final String Classpath = "classpath";
         static final String Description = "description";

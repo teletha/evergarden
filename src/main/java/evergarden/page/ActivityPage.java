@@ -10,15 +10,15 @@
 package evergarden.page;
 
 import evergarden.Document;
-import evergarden.Epistle;
+import evergarden.Letter;
 import evergarden.design.EvergardenDSL;
 import kiss.XML;
 import stylist.Style;
 
 public class ActivityPage extends DocumentPage {
 
-    public ActivityPage(String path, Epistle epistle, Document content) {
-        super(path, epistle, content);
+    public ActivityPage(String path, Letter letter, Document content) {
+        super(path, letter, content);
     }
 
     /**
