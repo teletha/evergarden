@@ -42,8 +42,8 @@ public final class Tool {
     /** Holds the current {@link DocletEnvironment} per thread. */
     static final InheritableThreadLocal<DocletEnvironment> ENVIRONMENT = new InheritableThreadLocal<>();
 
-    /** Holds the current {@link AutoMemoriesDoll} per thread. */
-    static final InheritableThreadLocal<AutoMemoriesDollModel> DOLL = new InheritableThreadLocal();
+    /** Holds the current {@link VioletEvergarden} per thread. */
+    static final InheritableThreadLocal<VioletEvergardenModel> DOLL = new InheritableThreadLocal();
 
     /** Thread-local {@link JavaParser} instance configured for Java 21. */
     private static final ThreadLocal<JavaParser> PARSER = ThreadLocal.withInitial(() -> {
@@ -87,11 +87,11 @@ public final class Tool {
     }
 
     /**
-     * Returns the {@link AutoMemoriesDoll} from the current environment.
+     * Returns the {@link VioletEvergarden} from the current environment.
      *
      * @return the AutoMemoriesDoll instance.
      */
-    public static AutoMemoriesDollModel useDoll() {
+    public static VioletEvergardenModel useDoll() {
         return DOLL.get();
     }
 

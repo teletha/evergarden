@@ -32,9 +32,9 @@ import psychopath.Directory;
 
 public class EvergardenTestSupport {
 
-    private static final Letter doc = AutoMemoriesDoll.with.sources("src/test/java").address((Directory) null).title("test").mute().write();
+    private static final Letter doc = VioletEvergarden.with.sources("src/test/java").address((Directory) null).title("test").mute().write();
 
-    private static final Letter docEx = AutoMemoriesDoll.with.sources("src/test/java")
+    private static final Letter docEx = VioletEvergarden.with.sources("src/test/java")
             .address((Directory) null)
             .title("test")
             .mute()

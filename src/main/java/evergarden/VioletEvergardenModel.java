@@ -71,7 +71,7 @@ import stylist.StyleDeclarable;
 import stylist.Stylist;
 
 @Icy
-public abstract class AutoMemoriesDollModel {
+public abstract class VioletEvergardenModel {
 
     /** The name pattern of document. */
     private static final Pattern DocName = Pattern.compile("(.*)Manual$");
@@ -91,7 +91,7 @@ public abstract class AutoMemoriesDollModel {
          */
         @Override
         public Directory address() {
-            return AutoMemoriesDollModel.this.address();
+            return VioletEvergardenModel.this.address();
         }
 
         /**
@@ -99,7 +99,7 @@ public abstract class AutoMemoriesDollModel {
          */
         @Override
         public String title() {
-            return AutoMemoriesDollModel.this.title();
+            return VioletEvergardenModel.this.title();
         }
 
         /**
@@ -107,7 +107,7 @@ public abstract class AutoMemoriesDollModel {
          */
         @Override
         public String description() {
-            return AutoMemoriesDollModel.this.description();
+            return VioletEvergardenModel.this.description();
         }
 
         /**
@@ -115,7 +115,7 @@ public abstract class AutoMemoriesDollModel {
          */
         @Override
         public Charset charset() {
-            return AutoMemoriesDollModel.this.encoding();
+            return VioletEvergardenModel.this.encoding();
         }
 
         /**
@@ -123,7 +123,7 @@ public abstract class AutoMemoriesDollModel {
          */
         @Override
         public Variable<Hosting> authority() {
-            return AutoMemoriesDollModel.this.host();
+            return VioletEvergardenModel.this.host();
         }
     };
 
@@ -318,7 +318,7 @@ public abstract class AutoMemoriesDollModel {
      * 
      * @return
      */
-    public final AutoMemoriesDoll useExternalJDKDoc() {
+    public final VioletEvergarden useExternalJDKDoc() {
         return useExternalDoc("https://docs.oracle.com/en/java/javase/24/docs/api/");
     }
 
@@ -328,7 +328,7 @@ public abstract class AutoMemoriesDollModel {
      * @param urls A list of document URL．
      * @return Chainable API.
      */
-    public final AutoMemoriesDoll useExternalDoc(String... urls) {
+    public final VioletEvergarden useExternalDoc(String... urls) {
         if (urls != null) {
             for (String url : urls) {
                 if (url != null && url.startsWith("http") && url.endsWith("/api/")) {
@@ -342,7 +342,7 @@ public abstract class AutoMemoriesDollModel {
                 }
             }
         }
-        return (AutoMemoriesDoll) this;
+        return (VioletEvergarden) this;
     }
 
     /**
@@ -563,7 +563,7 @@ public abstract class AutoMemoriesDollModel {
      */
     private static abstract class BaseDoclet implements Doclet {
 
-        protected final AutoMemoriesDollModel doll = Tool.useDoll();
+        protected final VioletEvergardenModel doll = Tool.useDoll();
 
         /**
          * {@inheritDoc}
@@ -735,19 +735,19 @@ public abstract class AutoMemoriesDollModel {
                     .guard("index.html", "main.css", "mocha.html", "mimic.test.js");
 
             // build CSS
-            I.load(AutoMemoriesDoll.class);
+            I.load(VioletEvergarden.class);
             Stylist.pretty()
                     .scheme(EvergardenDesignScheme.class)
                     .styles(I.findAs(StyleDeclarable.class))
                     .formatTo(letter.address().file("main.css").asJavaPath());
 
             // build JS
-            site.build("main.js", AutoMemoriesDoll.class.getResourceAsStream("main.js"));
-            site.build("mimic.js", AutoMemoriesDoll.class.getResourceAsStream("mimic.js"));
-            site.build("highlight.js", AutoMemoriesDoll.class.getResourceAsStream("highlight.js"), CodeHighlight.build());
+            site.build("main.js", VioletEvergarden.class.getResourceAsStream("main.js"));
+            site.build("mimic.js", VioletEvergarden.class.getResourceAsStream("mimic.js"));
+            site.build("highlight.js", VioletEvergarden.class.getResourceAsStream("highlight.js"), CodeHighlight.build());
 
             // build SVG
-            site.build("main.svg", AutoMemoriesDoll.class.getResourceAsStream("main.svg"));
+            site.build("main.svg", VioletEvergarden.class.getResourceAsStream("main.svg"));
 
             // build HTML
             for (ClassInfo info : letter.types) {
