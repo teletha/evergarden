@@ -349,83 +349,80 @@ public abstract class AutoMemoriesDollModel {
      * Generate documents.
      */
     public final Letter write() {
-        synchronized (AutoMemoriesDollModel.class) {
-            InternalScanner.model = this;
+        Tool.DOLL.set(this);
 
-            long start = System.currentTimeMillis();
+        long start = System.currentTimeMillis();
 
-            // Find all package names in the source directory.
-            I.signal(sources()).flatMap(Directory::walkDirectoryWithBase).to(sub -> {
-                internals.add(sub.ⅰ.relativize(sub.ⅱ).toString().replace(File.separatorChar, '.'));
-            });
+        // Find all package names in the source directory.
+        I.signal(sources()).flatMap(Directory::walkDirectoryWithBase).to(sub -> {
+            internals.add(sub.ⅰ.relativize(sub.ⅱ).toString().replace(File.separatorChar, '.'));
+        });
 
-            List<CompletableFuture> futures = new ArrayList();
-            DocumentationTool tool = ToolProvider.getSystemDocumentationTool();
+        List<CompletableFuture> futures = new ArrayList();
+        DocumentationTool tool = ToolProvider.getSystemDocumentationTool();
 
-            // ========================================================
-            // Collect sample source
-            // ========================================================
-            if (!samples().isEmpty()) {
-                futures.add(I.schedule(() -> {
-                    try (ToListener listener = new ToListener("sample");
-                            StandardJavaFileManager m = tool.getStandardFileManager(listener(), Locale.getDefault(), encoding())) {
-                        m.setLocation(SOURCE_PATH, I.signal(sources()).startWith(samples()).map(Directory::asJavaFile).toList());
-                        m.setLocation(CLASS_PATH, classpath() == null ? null
-                                : classpath().stream().map(psychopath.Location::asJavaFile).collect(Collectors.toList()));
-
-                        List<JavaFileObject> files = I.signal(m.list(SOURCE_PATH, "", Set.of(SOURCE), true))
-                                .take(o -> accept(o
-                                        .getName()) && (o.getName().endsWith("Test.java") || o.getName().endsWith("Manual.java")))
-                                .toList();
-
-                        if (!files.isEmpty()) {
-                            DocumentationTask task = tool.getTask(listener, m, listener(), SampleScanner.class, List.of("-package"), files);
-
-                            if (task.call()) {
-                                listener().report(new Message(OTHER, "sample", "Succeed in scanning sample sources."));
-                            } else {
-                                listener().report(new Message(ERROR, "sample", "Fail in scanning sample sources."));
-                                throw new Error("Fail in scanning sample sources.");
-                            }
-                        }
-                    } catch (Throwable e) {
-                        throw I.quiet(e);
-                    }
-                }));
-            }
-
-            // ========================================================
-            // Scan javadoc from main source
-            // ========================================================
+        // ========================================================
+        // Collect sample source
+        // ========================================================
+        if (!samples().isEmpty()) {
             futures.add(I.schedule(() -> {
-                try (ToListener listener = new ToListener("build");
+                try (ToListener listener = new ToListener("sample");
                         StandardJavaFileManager m = tool.getStandardFileManager(listener(), Locale.getDefault(), encoding())) {
-                    m.setLocation(SOURCE_PATH, I.signal(sources()).map(Directory::asJavaFile).toList());
+                    m.setLocation(SOURCE_PATH, I.signal(sources()).startWith(samples()).map(Directory::asJavaFile).toList());
                     m.setLocation(CLASS_PATH, classpath() == null ? null
                             : classpath().stream().map(psychopath.Location::asJavaFile).collect(Collectors.toList()));
-                    m.setLocationFromPaths(DOCUMENTATION_OUTPUT, List
-                            .of(address() == null ? Path.of("") : address().create().asJavaPath()));
 
-                    DocumentationTask task = tool.getTask(listener, m, listener(), SourceScanner.class, List.of("-protected"), m
-                            .list(SOURCE_PATH, "", Set.of(SOURCE), true));
+                    List<JavaFileObject> files = I.signal(m.list(SOURCE_PATH, "", Set.of(SOURCE), true))
+                            .take(o -> accept(o.getName()) && (o.getName().endsWith("Test.java") || o.getName().endsWith("Manual.java")))
+                            .toList();
 
-                    if (task.call()) {
-                        listener().report(new Message(OTHER, "build", "Succeed in building documents."));
-                    } else {
-                        listener().report(new Message(ERROR, "build", "Fail in building documents."));
+                    if (!files.isEmpty()) {
+                        DocumentationTask task = tool.getTask(listener, m, listener(), SampleDoclet.class, List.of("-package"), files);
+
+                        if (task.call()) {
+                            listener().report(new Message(OTHER, "sample", "Succeed in scanning sample sources."));
+                        } else {
+                            listener().report(new Message(ERROR, "sample", "Fail in scanning sample sources."));
+                            throw new Error("Fail in scanning sample sources.");
+                        }
                     }
                 } catch (Throwable e) {
                     throw I.quiet(e);
                 }
             }));
-
-            CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new)).join();
-
-            complete();
-
-            long end = System.currentTimeMillis();
-            System.out.println((end - start));
         }
+
+        // ========================================================
+        // Scan javadoc from main source
+        // ========================================================
+        futures.add(I.schedule(() -> {
+            try (ToListener listener = new ToListener("build");
+                    StandardJavaFileManager m = tool.getStandardFileManager(listener(), Locale.getDefault(), encoding())) {
+                m.setLocation(SOURCE_PATH, I.signal(sources()).map(Directory::asJavaFile).toList());
+                m.setLocation(CLASS_PATH, classpath() == null ? null
+                        : classpath().stream().map(psychopath.Location::asJavaFile).collect(Collectors.toList()));
+                m.setLocationFromPaths(DOCUMENTATION_OUTPUT, List.of(address() == null ? Path.of("") : address().create().asJavaPath()));
+
+                DocumentationTask task = tool.getTask(listener, m, listener(), SourceDoclet.class, List.of("-protected"), m
+                        .list(SOURCE_PATH, "", Set.of(SOURCE), true));
+
+                if (task.call()) {
+                    listener().report(new Message(OTHER, "build", "Succeed in building documents."));
+                } else {
+                    listener().report(new Message(ERROR, "build", "Fail in building documents."));
+                }
+            } catch (Throwable e) {
+                throw I.quiet(e);
+            }
+        }));
+
+        CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new)).join();
+
+        complete();
+
+        long end = System.currentTimeMillis();
+        System.out.println((end - start));
+
         return letter;
     }
 
@@ -444,9 +441,9 @@ public abstract class AutoMemoriesDollModel {
      * @return
      */
     public final Class<? extends Doclet> writeDoclet() {
-        InternalScanner.model = this;
+        Tool.DOLL.set(this);
 
-        return SourceScanner.class;
+        return SourceDoclet.class;
     }
 
     /**
@@ -564,10 +561,9 @@ public abstract class AutoMemoriesDollModel {
      * the specifications of the documentation tool.
      * </p>
      */
-    private static abstract class InternalScanner implements Doclet {
+    private static abstract class BaseDoclet implements Doclet {
 
-        /** The setting model. */
-        static AutoMemoriesDollModel model;
+        protected final AutoMemoriesDollModel doll = Tool.useDoll();
 
         /**
          * {@inheritDoc}
@@ -606,7 +602,6 @@ public abstract class AutoMemoriesDollModel {
         @Override
         public final boolean run(DocletEnvironment env) {
             Tool.ENVIRONMENT.set(env);
-            Tool.DOLL.set((AutoMemoriesDoll) model);
 
             for (Element element : env.getSpecifiedElements()) {
                 switch (element.getKind()) {
@@ -620,7 +615,7 @@ public abstract class AutoMemoriesDollModel {
 
                 default:
                     TypeElement type = (TypeElement) element;
-                    process(new ClassInfo(type, new TypeResolver(model.externals, model.internals, type)));
+                    process(new ClassInfo(type, new TypeResolver(doll.externals, doll.internals, type)));
                     break;
                 }
             }
@@ -669,7 +664,7 @@ public abstract class AutoMemoriesDollModel {
      * the specifications of the documentation tool.
      * </p>
      */
-    public static class SampleScanner extends InternalScanner {
+    public static class SampleDoclet extends BaseDoclet {
 
         /**
          * {@inheritDoc}
@@ -679,14 +674,14 @@ public abstract class AutoMemoriesDollModel {
             Matcher matcher = DocName.matcher(info.outer().map(o -> o.name).or(""));
 
             if (matcher.matches() && info.isPublic()) {
-                model.docs.add(0, info);
+                doll.docs.add(0, info);
             } else {
                 for (MethodInfo method : info.methods()) {
                     if (!method.getSeeTags().isEmpty()) {
                         String code = SourceCode.read(method);
                         for (XML see : method.getSeeTags()) {
                             String[] id = info.identify(see.text());
-                            model.letter.register(new Doodle(id[0], id[1], code, method.contents()));
+                            doll.letter.register(new Doodle(id[0], id[1], code, method.contents()));
                         }
                     }
                 }
@@ -698,7 +693,7 @@ public abstract class AutoMemoriesDollModel {
          */
         @Override
         protected void complete() {
-            model.letter.buildDocumentTree(model.docs);
+            doll.letter.buildDocumentTree(doll.docs);
         }
     }
 
@@ -709,14 +704,14 @@ public abstract class AutoMemoriesDollModel {
      * the specifications of the documentation tool.
      * </p>
      */
-    public static class SourceScanner extends InternalScanner {
+    public static class SourceDoclet extends BaseDoclet {
 
         /**
          * {@inheritDoc}
          */
         @Override
         protected void process(ClassInfo info) {
-            model.letter.register(info);
+            doll.letter.register(info);
         }
 
         /**
@@ -724,7 +719,7 @@ public abstract class AutoMemoriesDollModel {
          */
         @Override
         protected void complete() {
-            model.letter.buildTypeRelationship();
+            doll.letter.buildTypeRelationship();
         }
     }
 
