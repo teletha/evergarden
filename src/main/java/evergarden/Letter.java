@@ -103,7 +103,7 @@ public abstract class Letter {
      *
      * @return the {@link Charset} for the project. Must not be null.
      */
-    public abstract Charset charset();
+    public abstract Charset encoding();
 
     /**
      * Returns the hosting context or origin authority of the documentation.

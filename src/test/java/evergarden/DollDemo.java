@@ -33,16 +33,16 @@ public class DollDemo {
         path.add(repo + "org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar");
         path.add(repo + "com/github/teletha/antibug/1.0.3/antibug-1.0.3.jar");
 
-        Letter epistle = VioletEvergarden.with.sources("../sinobu/src/main/java")
-                .address("docs")
+        Letter letter = Violet.with.address("docs")
                 .title("Sinobu")
+                .sources("../sinobu/src/main/java")
+                .documents("../sinobu/src/test/java")
                 .description("Sinobu is not obsolete framework but utility, which can manipulate objects as a extremely-condensed facade.")
-                .samples("../sinobu/src/test/java")
                 .classpathBy(path)
                 .host("https://github.com/teletha/sinobu")
                 .useExternalJDKDoc()
                 .write();
 
-        Launcher.launch(epistle.address());
+        Launcher.launch(letter.address());
     }
 }

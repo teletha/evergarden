@@ -23,20 +23,22 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import antibug.CleanRoom;
 import evergarden.javadoc.ClassInfo;
 import evergarden.javadoc.MethodInfo;
 import kiss.I;
 import kiss.Variable;
 import kiss.XML;
-import psychopath.Directory;
 
 public class EvergardenTestSupport {
 
-    private static final Letter doc = VioletEvergarden.with.sources("src/test/java").address((Directory) null).title("test").mute().write();
+    private static final CleanRoom room = new CleanRoom(true);
 
-    private static final Letter docEx = VioletEvergarden.with.sources("src/test/java")
-            .address((Directory) null)
+    private static final Letter doc = Violet.with.address(room.locateDirectory("a")).title("test").sources("src/test/java").mute().write();
+
+    private static final Letter docEx = Violet.with.address(room.locateDirectory("b"))
             .title("test")
+            .sources("src/test/java")
             .mute()
             .useExternalJDKDoc()
             .write();

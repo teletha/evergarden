@@ -22,7 +22,6 @@ import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -32,7 +31,6 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
@@ -66,15 +64,13 @@ import kiss.I;
 import kiss.Variable;
 import kiss.XML;
 import psychopath.Directory;
+import psychopath.Location;
 import psychopath.Locator;
 import stylist.StyleDeclarable;
 import stylist.Stylist;
 
-@Icy
-public abstract class VioletEvergardenModel {
-
-    /** The name pattern of document. */
-    private static final Pattern DocName = Pattern.compile("(.*)Manual$");
+@Icy(modelNamePattern = "(.+)Evergarden")
+public abstract class VioletEvergarden {
 
     /** The document repository. */
     private final List<ClassInfo> docs = new ArrayList();
@@ -91,7 +87,7 @@ public abstract class VioletEvergardenModel {
          */
         @Override
         public Directory address() {
-            return VioletEvergardenModel.this.address();
+            return VioletEvergarden.this.address();
         }
 
         /**
@@ -99,7 +95,7 @@ public abstract class VioletEvergardenModel {
          */
         @Override
         public String title() {
-            return VioletEvergardenModel.this.title();
+            return VioletEvergarden.this.title();
         }
 
         /**
@@ -107,15 +103,15 @@ public abstract class VioletEvergardenModel {
          */
         @Override
         public String description() {
-            return VioletEvergardenModel.this.description();
+            return VioletEvergarden.this.description();
         }
 
         /**
          * {@inheritDoc}
          */
         @Override
-        public Charset charset() {
-            return VioletEvergardenModel.this.encoding();
+        public Charset encoding() {
+            return VioletEvergarden.this.encoding();
         }
 
         /**
@@ -123,9 +119,37 @@ public abstract class VioletEvergardenModel {
          */
         @Override
         public Variable<Hosting> authority() {
-            return VioletEvergardenModel.this.host();
+            return VioletEvergarden.this.host();
         }
     };
+
+    /**
+     * Specify the directory where the product is output.
+     * 
+     * @return
+     */
+    @Icy.Property
+    public abstract Directory address();
+
+    /**
+     * Specify the directory where the product is output.
+     * 
+     * @return
+     */
+    @Icy.Overload("address")
+    private Directory address(String path) {
+        return Locator.directory(path);
+    }
+
+    /**
+     * Specify the directory where the product is output.
+     * 
+     * @return
+     */
+    @Icy.Overload("address")
+    private Directory address(Path path) {
+        return Locator.directory(path);
+    }
 
     /**
      * The list of source directories.
@@ -133,7 +157,9 @@ public abstract class VioletEvergardenModel {
      * @return
      */
     @Icy.Property
-    public abstract List<Directory> sources();
+    public List<Directory> sources() {
+        return List.of();
+    }
 
     /**
      * The list of source directories.
@@ -153,6 +179,66 @@ public abstract class VioletEvergardenModel {
     @Icy.Overload("sources")
     private List<Directory> sources(Path... paths) {
         return I.signal(paths).map(Locator::directory).toList();
+    }
+
+    /**
+     * Specify the directory of documents (manual and sample).
+     * 
+     * @return
+     */
+    @Icy.Property
+    public List<Directory> documents() {
+        return List.of();
+    }
+
+    /**
+     * Specify the directory of documents (manual and sample).
+     * 
+     * @return
+     */
+    @Icy.Overload("documents")
+    private List<Directory> documents(String path) {
+        return List.of(Locator.directory(path));
+    }
+
+    /**
+     * Specify the directory of documents (manual and sample).
+     * 
+     * @return
+     */
+    @Icy.Overload("documents")
+    private List<Directory> documents(Path path) {
+        return List.of(Locator.directory(path));
+    }
+
+    /**
+     * Specify the directory of articles.
+     * 
+     * @return
+     */
+    @Icy.Property
+    public List<Directory> articles() {
+        return List.of();
+    }
+
+    /**
+     * Specify the directory of articles.
+     * 
+     * @return
+     */
+    @Icy.Overload("articles")
+    private List<Directory> articles(String path) {
+        return List.of(Locator.directory(path));
+    }
+
+    /**
+     * Specify the directory of articles.
+     * 
+     * @return
+     */
+    @Icy.Overload("articles")
+    private List<Directory> articles(Path path) {
+        return List.of(Locator.directory(path));
     }
 
     /**
@@ -196,34 +282,6 @@ public abstract class VioletEvergardenModel {
     }
 
     /**
-     * Specify the directory where the product is output.
-     * 
-     * @return
-     */
-    @Icy.Property(nullable = true)
-    public abstract Directory address();
-
-    /**
-     * Specify the directory where the product is output.
-     * 
-     * @return
-     */
-    @Icy.Overload("address")
-    private Directory address(String path) {
-        return Locator.directory(path);
-    }
-
-    /**
-     * Specify the directory where the product is output.
-     * 
-     * @return
-     */
-    @Icy.Overload("address")
-    private Directory address(Path path) {
-        return Locator.directory(path);
-    }
-
-    /**
      * The product name.
      * 
      * @return
@@ -239,36 +297,6 @@ public abstract class VioletEvergardenModel {
     @Icy.Property
     public String description() {
         return "";
-    }
-
-    /**
-     * Specify the directory of samples.
-     * 
-     * @return
-     */
-    @Icy.Property
-    public List<Directory> samples() {
-        return List.of();
-    }
-
-    /**
-     * Specify the directory of samples.
-     * 
-     * @return
-     */
-    @Icy.Overload("samples")
-    private List<Directory> samples(String path) {
-        return List.of(Locator.directory(path));
-    }
-
-    /**
-     * Specify the directory of samples.
-     * 
-     * @return
-     */
-    @Icy.Overload("samples")
-    private List<Directory> samples(Path path) {
-        return List.of(Locator.directory(path));
     }
 
     /**
@@ -342,7 +370,7 @@ public abstract class VioletEvergardenModel {
                 }
             }
         }
-        return (VioletEvergarden) this;
+        return this;
     }
 
     /**
@@ -351,33 +379,36 @@ public abstract class VioletEvergardenModel {
     public final Letter write() {
         Tool.DOLL.set(this);
 
-        long start = System.currentTimeMillis();
-
         // Find all package names in the source directory.
         I.signal(sources()).flatMap(Directory::walkDirectoryWithBase).to(sub -> {
             internals.add(sub.ⅰ.relativize(sub.ⅱ).toString().replace(File.separatorChar, '.'));
         });
 
-        List<CompletableFuture> futures = new ArrayList();
+        List<CompletableFuture> tasks = new ArrayList();
         DocumentationTool tool = ToolProvider.getSystemDocumentationTool();
 
         // ========================================================
-        // Collect sample source
+        // Collect sample and document
         // ========================================================
-        if (!samples().isEmpty()) {
-            futures.add(I.schedule(() -> {
-                try (ToListener listener = new ToListener("sample");
+        if (!documents().isEmpty()) {
+            tasks.add(I.schedule(() -> {
+                try (ToListener listener = new ToListener("violet.document");
                         StandardJavaFileManager m = tool.getStandardFileManager(listener(), Locale.getDefault(), encoding())) {
-                    m.setLocation(SOURCE_PATH, I.signal(sources()).startWith(samples()).map(Directory::asJavaFile).toList());
-                    m.setLocation(CLASS_PATH, classpath() == null ? null
-                            : classpath().stream().map(psychopath.Location::asJavaFile).collect(Collectors.toList()));
+                    m.setLocation(SOURCE_PATH, I.signal(sources()).startWith(documents()).map(Directory::asJavaFile).toList());
+                    m.setLocation(CLASS_PATH, I.signal(classpath()).map(Location::asJavaFile).toList());
 
-                    List<JavaFileObject> files = I.signal(m.list(SOURCE_PATH, "", Set.of(SOURCE), true))
-                            .take(o -> accept(o.getName()) && (o.getName().endsWith("Test.java") || o.getName().endsWith("Manual.java")))
-                            .toList();
+                    List<JavaFileObject> files = I.signal(m.list(SOURCE_PATH, "", Set.of(SOURCE), true)).take(o -> {
+                        String name = o.getName();
+                        for (Directory directory : documents()) {
+                            if (name.startsWith(directory.toString())) {
+                                return name.endsWith("Test.java") || name.endsWith("Manual.java");
+                            }
+                        }
+                        return false;
+                    }).toList();
 
                     if (!files.isEmpty()) {
-                        DocumentationTask task = tool.getTask(listener, m, listener(), SampleDoclet.class, List.of("-package"), files);
+                        DocumentationTask task = tool.getTask(listener, m, listener(), DocumentDoclet.class, List.of("-package"), files);
 
                         if (task.call()) {
                             listener().report(new Message(OTHER, "sample", "Succeed in scanning sample sources."));
@@ -395,16 +426,15 @@ public abstract class VioletEvergardenModel {
         // ========================================================
         // Scan javadoc from main source
         // ========================================================
-        futures.add(I.schedule(() -> {
-            try (ToListener listener = new ToListener("build");
+        tasks.add(I.schedule(() -> {
+            try (ToListener listener = new ToListener("violet.api");
                     StandardJavaFileManager m = tool.getStandardFileManager(listener(), Locale.getDefault(), encoding())) {
                 m.setLocation(SOURCE_PATH, I.signal(sources()).map(Directory::asJavaFile).toList());
-                m.setLocation(CLASS_PATH, classpath() == null ? null
-                        : classpath().stream().map(psychopath.Location::asJavaFile).collect(Collectors.toList()));
-                m.setLocationFromPaths(DOCUMENTATION_OUTPUT, List.of(address() == null ? Path.of("") : address().create().asJavaPath()));
+                m.setLocation(CLASS_PATH, I.signal(classpath()).map(Location::asJavaFile).toList());
+                m.setLocationFromPaths(DOCUMENTATION_OUTPUT, List.of(address().create().asJavaPath()));
 
-                DocumentationTask task = tool.getTask(listener, m, listener(), SourceDoclet.class, List.of("-protected"), m
-                        .list(SOURCE_PATH, "", Set.of(SOURCE), true));
+                Iterable<JavaFileObject> files = m.list(SOURCE_PATH, "", Set.of(SOURCE), true);
+                DocumentationTask task = tool.getTask(listener, m, listener(), APIDoclet.class, List.of("-protected"), files);
 
                 if (task.call()) {
                     listener().report(new Message(OTHER, "build", "Succeed in building documents."));
@@ -416,34 +446,59 @@ public abstract class VioletEvergardenModel {
             }
         }));
 
-        CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new)).join();
+        CompletableFuture.allOf(tasks.toArray(CompletableFuture[]::new)).join();
 
-        complete();
-
-        long end = System.currentTimeMillis();
-        System.out.println((end - start));
+        // ========================================================
+        // Write resources for the letter (web site)
+        // ========================================================
+        buildSite(letter);
 
         return letter;
     }
 
-    private boolean accept(String name) {
-        for (Directory directory : samples()) {
-            if (name.startsWith(directory.toString())) {
-                return true;
-            }
+    private void buildSite(Letter letter) {
+        SiteBuilder site = I.make(SiteBuilder.class).root(letter.address()).guard("index.html", "main.css", "mocha.html", "mimic.test.js");
+
+        // build CSS
+        I.load(VioletEvergarden.class);
+        Stylist.pretty()
+                .scheme(EvergardenDesignScheme.class)
+                .styles(I.findAs(StyleDeclarable.class))
+                .formatTo(letter.address().file("main.css").asJavaPath());
+
+        // build JS
+        site.build("main.js", VioletEvergarden.class.getResourceAsStream("main.js"));
+        site.build("mimic.js", VioletEvergarden.class.getResourceAsStream("mimic.js"));
+        site.build("highlight.js", VioletEvergarden.class.getResourceAsStream("highlight.js"), CodeHighlight.build());
+
+        // build SVG
+        site.build("main.svg", VioletEvergarden.class.getResourceAsStream("main.svg"));
+
+        // build HTML
+        for (ClassInfo info : letter.types) {
+            site.buildHTML(new APIPage("api/" + info.id() + ".html", letter, info));
         }
-        return false;
+        for (ClassInfo info : docs) {
+            site.buildHTML(new DocumentPage("doc/" + info.id() + ".html", letter, info));
+        }
+
+        // build change log
+        letter.authority().to(repo -> {
+            I.http(repo.locateChangeLog(), String.class).waitForTerminate().skipError().to(md -> {
+                site.buildHTML(new ActivityPage("doc/changelog.html", letter, repo.getChangeLog(md)));
+            });
+        });
+
+        // create at last for live reload
+        site.buildHTML(new APIPage("index.html", letter, null));
     }
 
-    /**
-     * Build {@link Doclet} to generate documents.
-     * 
-     * @return
-     */
-    public final Class<? extends Doclet> writeDoclet() {
-        Tool.DOLL.set(this);
+    private void log(String message) {
+        log(Kind.NOTE, "violet", message);
+    }
 
-        return SourceDoclet.class;
+    private void log(Diagnostic.Kind kind, String code, String message) {
+        listener().report(new Message(kind, code, message));
     }
 
     /**
@@ -467,7 +522,7 @@ public abstract class VioletEvergardenModel {
         public void write(char[] cbuf, int off, int len) throws IOException {
             String message = new String(cbuf, off, len).trim();
             if (message.length() != 0) {
-                listener().report(new Message(Kind.NOTE, code, message));
+                log(Kind.NOTE, code, message);
             }
         }
 
@@ -563,7 +618,7 @@ public abstract class VioletEvergardenModel {
      */
     private static abstract class BaseDoclet implements Doclet {
 
-        protected final VioletEvergardenModel doll = Tool.useDoll();
+        protected final VioletEvergarden violet = Tool.useDoll();
 
         /**
          * {@inheritDoc}
@@ -615,7 +670,7 @@ public abstract class VioletEvergardenModel {
 
                 default:
                     TypeElement type = (TypeElement) element;
-                    process(new ClassInfo(type, new TypeResolver(doll.externals, doll.internals, type)));
+                    process(new ClassInfo(type, new TypeResolver(violet.externals, violet.internals, type)));
                     break;
                 }
             }
@@ -664,7 +719,10 @@ public abstract class VioletEvergardenModel {
      * the specifications of the documentation tool.
      * </p>
      */
-    public static class SampleDoclet extends BaseDoclet {
+    public static class DocumentDoclet extends BaseDoclet {
+
+        /** The name pattern of document. */
+        private static final Pattern DocName = Pattern.compile("(.*)Manual$");
 
         /**
          * {@inheritDoc}
@@ -674,14 +732,14 @@ public abstract class VioletEvergardenModel {
             Matcher matcher = DocName.matcher(info.outer().map(o -> o.name).or(""));
 
             if (matcher.matches() && info.isPublic()) {
-                doll.docs.add(0, info);
+                violet.docs.add(0, info);
             } else {
                 for (MethodInfo method : info.methods()) {
                     if (!method.getSeeTags().isEmpty()) {
                         String code = SourceCode.read(method);
                         for (XML see : method.getSeeTags()) {
                             String[] id = info.identify(see.text());
-                            doll.letter.register(new Doodle(id[0], id[1], code, method.contents()));
+                            violet.letter.register(new Doodle(id[0], id[1], code, method.contents()));
                         }
                     }
                 }
@@ -693,7 +751,7 @@ public abstract class VioletEvergardenModel {
          */
         @Override
         protected void complete() {
-            doll.letter.buildDocumentTree(doll.docs);
+            violet.letter.buildDocumentTree(violet.docs);
         }
     }
 
@@ -704,14 +762,14 @@ public abstract class VioletEvergardenModel {
      * the specifications of the documentation tool.
      * </p>
      */
-    public static class SourceDoclet extends BaseDoclet {
+    public static class APIDoclet extends BaseDoclet {
 
         /**
          * {@inheritDoc}
          */
         @Override
         protected void process(ClassInfo info) {
-            doll.letter.register(info);
+            violet.letter.register(info);
         }
 
         /**
@@ -719,53 +777,7 @@ public abstract class VioletEvergardenModel {
          */
         @Override
         protected void complete() {
-            doll.letter.buildTypeRelationship();
-        }
-    }
-
-    protected void complete() {
-        // sort data
-        letter.modules.sort(Comparator.naturalOrder());
-        letter.packages.sort(Comparator.naturalOrder());
-        letter.types.sort(Comparator.naturalOrder());
-
-        if (letter.address() != null) {
-            SiteBuilder site = I.make(SiteBuilder.class)
-                    .root(letter.address())
-                    .guard("index.html", "main.css", "mocha.html", "mimic.test.js");
-
-            // build CSS
-            I.load(VioletEvergarden.class);
-            Stylist.pretty()
-                    .scheme(EvergardenDesignScheme.class)
-                    .styles(I.findAs(StyleDeclarable.class))
-                    .formatTo(letter.address().file("main.css").asJavaPath());
-
-            // build JS
-            site.build("main.js", VioletEvergarden.class.getResourceAsStream("main.js"));
-            site.build("mimic.js", VioletEvergarden.class.getResourceAsStream("mimic.js"));
-            site.build("highlight.js", VioletEvergarden.class.getResourceAsStream("highlight.js"), CodeHighlight.build());
-
-            // build SVG
-            site.build("main.svg", VioletEvergarden.class.getResourceAsStream("main.svg"));
-
-            // build HTML
-            for (ClassInfo info : letter.types) {
-                site.buildHTML(new APIPage("api/" + info.id() + ".html", letter, info));
-            }
-            for (ClassInfo info : docs) {
-                site.buildHTML(new DocumentPage("doc/" + info.id() + ".html", letter, info));
-            }
-
-            // build change log
-            letter.authority().to(repo -> {
-                I.http(repo.locateChangeLog(), String.class).waitForTerminate().skipError().to(md -> {
-                    site.buildHTML(new ActivityPage("doc/changelog.html", letter, repo.getChangeLog(md)));
-                });
-            });
-
-            // create at last for live reload
-            site.buildHTML(new APIPage("index.html", letter, null));
+            violet.letter.buildTypeRelationship();
         }
     }
 }

@@ -54,7 +54,7 @@ public abstract class Page<T> extends HTML {
     public void declare() {
         $("html", attr("lang", "en"), () -> {
             $("head", () -> {
-                $("meta", charset(letter.charset().displayName()));
+                $("meta", charset(letter.encoding().displayName()));
                 $("meta", name("viewport"), content("width=device-width, initial-scale=1"));
                 $("meta", name("description"), content("Explains how to use " + letter.title() + " and its API. " + letter
                         .description()));
