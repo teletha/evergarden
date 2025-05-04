@@ -12,7 +12,6 @@ package evergarden;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -33,7 +32,6 @@ import com.sun.source.util.TreePath;
 
 import jdk.javadoc.doclet.DocletEnvironment;
 import kiss.I;
-import psychopath.Directory;
 
 /**
  * Utility class for accessing and operating on elements of the Javadoc model
@@ -43,6 +41,9 @@ public final class Tool {
 
     /** Holds the current {@link DocletEnvironment} per thread. */
     static final InheritableThreadLocal<DocletEnvironment> ENVIRONMENT = new InheritableThreadLocal<>();
+
+    /** Holds the current {@link AutoMemoriesDoll} per thread. */
+    static final InheritableThreadLocal<AutoMemoriesDoll> DOLL = new InheritableThreadLocal();
 
     /** Thread-local {@link JavaParser} instance configured for Java 21. */
     private static final ThreadLocal<JavaParser> PARSER = ThreadLocal.withInitial(() -> {
@@ -86,12 +87,12 @@ public final class Tool {
     }
 
     /**
-     * Returns the list of directories containing sample code.
+     * Returns the {@link AutoMemoriesDoll} from the current environment.
      *
-     * @return the sample directories.
+     * @return the AutoMemoriesDoll instance.
      */
-    public static List<Directory> locateSamples() {
-        return SAMPLE.get();
+    public static AutoMemoriesDoll useDoll() {
+        return DOLL.get();
     }
 
     /**

@@ -44,7 +44,7 @@ public class SourceCode {
      */
     public static String read(String fqcn, String memberDescriptor, boolean bodyOnly) {
         try {
-            for (Directory sample : Tool.locateSamples()) {
+            for (Directory sample : Tool.useDoll().samples) {
                 List<String> split = List.of(fqcn.split("\\."));
                 int max = split.size();
                 int current = max;

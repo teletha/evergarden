@@ -606,6 +606,7 @@ public abstract class AutoMemoriesDollModel {
         @Override
         public final boolean run(DocletEnvironment env) {
             Tool.ENVIRONMENT.set(env);
+            Tool.DOLL.set((AutoMemoriesDoll) model);
 
             for (Element element : env.getSpecifiedElements()) {
                 switch (element.getKind()) {
