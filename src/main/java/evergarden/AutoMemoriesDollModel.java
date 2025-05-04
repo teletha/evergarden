@@ -54,7 +54,6 @@ import evergarden.javadoc.ClassInfo;
 import evergarden.javadoc.MethodInfo;
 import evergarden.javadoc.SourceCode;
 import evergarden.javadoc.TypeResolver;
-import evergarden.javadoc.Util;
 import evergarden.page.APIPage;
 import evergarden.page.ActivityPage;
 import evergarden.page.DocumentPage;
@@ -354,7 +353,7 @@ public abstract class AutoMemoriesDollModel {
             InternalScanner.model = this;
 
             long start = System.currentTimeMillis();
-            
+
             // Find all package names in the source directory.
             I.signal(sources()).flatMap(Directory::walkDirectoryWithBase).to(sub -> {
                 internals.add(sub.ⅰ.relativize(sub.ⅱ).toString().replace(File.separatorChar, '.'));
@@ -423,7 +422,7 @@ public abstract class AutoMemoriesDollModel {
             CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new)).join();
 
             complete();
-            
+
             long end = System.currentTimeMillis();
             System.out.println((end - start));
         }
@@ -606,10 +605,7 @@ public abstract class AutoMemoriesDollModel {
          */
         @Override
         public final boolean run(DocletEnvironment env) {
-            Util.DocUtils.set(env.getDocTrees());
-            Util.ElementUtils.set(env.getElementUtils());
-            Util.TypeUtils.set(env.getTypeUtils());
-            Util.Samples.set(model.samples());
+            Tool.ENVIRONMENT.set(env);
 
             for (Element element : env.getSpecifiedElements()) {
                 switch (element.getKind()) {

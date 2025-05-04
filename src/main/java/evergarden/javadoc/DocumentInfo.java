@@ -70,6 +70,7 @@ import com.sun.source.doctree.ValueTree;
 import com.sun.source.doctree.VersionTree;
 import com.sun.source.util.SimpleDocTreeVisitor;
 
+import evergarden.Tool;
 import evergarden.design.Styles;
 import evergarden.web.CodeHighlight;
 import kiss.I;
@@ -126,13 +127,13 @@ public class DocumentInfo {
         this.resolver = resolver;
         if (parent != null) this.variables.putAll(parent.variables);
 
-        DocCommentTree docs = Util.DocUtils.get().getDocCommentTree(e);
+        DocCommentTree docs = Tool.useDocTrees().getDocCommentTree(e);
         if (docs != null) {
             comment.set(transform(xml(docs.getFullBody())));
             comment.to(x -> x.addClass(Styles.JavadocComment.className()));
             docs.getBlockTags().forEach(tag -> tag.accept(new TagScanner(), this));
 
-            documentLines = Util.getDocumentLineNumbers(e);
+            documentLines = Tool.getDocumentLineNumbers(e);
         }
     }
 
@@ -355,11 +356,11 @@ public class DocumentInfo {
             // type being processed, the FQCN cannot be resolved properly and should be
             // resolved separately.
             if (fqcn.equals(linkLike) && linkLike.indexOf(".") == -1) {
-                fqcn = Util.ElementUtils.get().getPackageOf(Util.getTopLevelTypeElement(e)).getQualifiedName() + "." + linkLike;
+                fqcn = Tool.useElements().getPackageOf(Tool.getTopLevelTypeElement(e)).getQualifiedName() + "." + linkLike;
             }
             return new String[] {fqcn, null};
         } else if (index == 0) {
-            return new String[] {resolver.resolveFQCN(Util.getTopLevelTypeElement(e).toString()), qualify(linkLike.substring(1))};
+            return new String[] {resolver.resolveFQCN(Tool.getTopLevelTypeElement(e).toString()), qualify(linkLike.substring(1))};
         } else {
             String type = linkLike.substring(0, index);
             String member = linkLike.substring(index + 1);
@@ -369,7 +370,7 @@ public class DocumentInfo {
             // type being processed, the FQCN cannot be resolved properly and should be
             // resolved separately.
             if (fqcn.equals(type) && type.indexOf(".") == -1) {
-                fqcn = Util.ElementUtils.get().getPackageOf(Util.getTopLevelTypeElement(e)).getQualifiedName() + "." + type;
+                fqcn = Tool.useElements().getPackageOf(Tool.getTopLevelTypeElement(e)).getQualifiedName() + "." + type;
             }
             return new String[] {fqcn, qualify(member)};
         }

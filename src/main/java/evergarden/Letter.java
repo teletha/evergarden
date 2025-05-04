@@ -20,10 +20,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.type.TypeMirror;
+import javax.lang.model.util.Types;
 
 import evergarden.host.Hosting;
 import evergarden.javadoc.ClassInfo;
-import evergarden.javadoc.Util;
 import kiss.Variable;
 import psychopath.Directory;
 
@@ -183,10 +183,11 @@ public abstract class Letter {
             cache.put(info.e, info);
         }
 
+        Types util = Tool.useTypes();
         for (ClassInfo type : types) {
-            for (Set<TypeMirror> uppers : Util.getAllTypes(type.e)) {
+            for (Set<TypeMirror> uppers : Tool.getAllTypes(type.e)) {
                 for (TypeMirror upper : uppers) {
-                    Element e = Util.TypeUtils.get().asElement(upper);
+                    Element e = util.asElement(upper);
                     ClassInfo parent = cache.get(e);
                     if (parent != null) {
                         parent.addSub(type);

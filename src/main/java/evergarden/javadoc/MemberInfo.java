@@ -16,6 +16,7 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 
+import evergarden.Tool;
 import kiss.I;
 import kiss.XML;
 
@@ -86,7 +87,7 @@ public abstract class MemberInfo extends DocumentInfo {
      * @return Result.
      */
     public final boolean isDeprecated() {
-        return Util.ElementUtils.get().isDeprecated(e);
+        return Tool.useElements().isDeprecated(e);
     }
 
     /**

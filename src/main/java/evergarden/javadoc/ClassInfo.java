@@ -34,6 +34,7 @@ import javax.lang.model.util.SimpleElementVisitor9;
 
 import evergarden.Document;
 import evergarden.Region;
+import evergarden.Tool;
 import kiss.I;
 import kiss.Variable;
 import kiss.XML;
@@ -86,7 +87,7 @@ public class ClassInfo extends ParameterizableInfo implements Document, Comparab
     public ClassInfo(TypeElement root, TypeResolver resolver) {
         super(root, resolver, null);
         this.resolver = resolver;
-        this.packageName = Util.ElementUtils.get().getPackageOf(root).toString();
+        this.packageName = Tool.useElements().getPackageOf(root).toString();
         this.name = root.asType().toString().replaceAll("<.+>", "").substring(packageName.length() + 1);
         this.type = detectType(root);
 
@@ -97,7 +98,7 @@ public class ClassInfo extends ParameterizableInfo implements Document, Comparab
         }
         infos.put(root, this);
 
-        Set<TypeMirror>[] types = Util.getAllTypes(root);
+        Set<TypeMirror>[] types = Tool.getAllTypes(root);
         for (TypeMirror type : types[0]) {
             this.supers.add(parseTypeAsXML(type));
         }
@@ -114,7 +115,7 @@ public class ClassInfo extends ParameterizableInfo implements Document, Comparab
     private static String detectType(TypeElement root) {
         switch (root.getKind()) {
         case INTERFACE:
-            if (Util.ElementUtils.get().isFunctionalInterface(root)) {
+            if (Tool.useElements().isFunctionalInterface(root)) {
                 return "Functional";
             } else {
                 return "Interface";

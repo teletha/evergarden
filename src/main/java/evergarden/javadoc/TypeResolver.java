@@ -31,6 +31,7 @@ import javax.lang.model.type.DeclaredType;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.tree.Tree.Kind;
 
+import evergarden.Tool;
 import kiss.I;
 
 public class TypeResolver {
@@ -95,7 +96,7 @@ public class TypeResolver {
      * @param clazz
      */
     private void collectImportedTypes(Element clazz) {
-        I.signal(Util.DocUtils.get().getPath(clazz))
+        I.signal(Tool.useDocTrees().getPath(clazz))
                 .take(tree -> tree.getKind() == Kind.COMPILATION_UNIT)
                 .as(CompilationUnitTree.class)
                 .flatIterable(CompilationUnitTree::getImports)
@@ -249,7 +250,7 @@ public class TypeResolver {
             typeName = resolveFQCN(typeName);
         }
 
-        TypeElement type = Util.ElementUtils.get().getTypeElement(typeName);
+        TypeElement type = Tool.useElements().getTypeElement(typeName);
 
         if (type == null) {
             int index = typeName.lastIndexOf('.');

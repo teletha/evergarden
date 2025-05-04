@@ -19,8 +19,6 @@ import java.util.stream.Collectors;
 
 import javax.lang.model.element.Element;
 
-import com.github.javaparser.JavaParser;
-import com.github.javaparser.ParserConfiguration;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
@@ -31,24 +29,22 @@ import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.util.DocSourcePositions;
+import com.sun.source.util.DocTrees;
 import com.sun.source.util.TreePath;
 
+import evergarden.Tool;
 import kiss.I;
 import psychopath.Directory;
 import psychopath.File;
 
 public class SourceCode {
 
-    private static final ThreadLocal<JavaParser> threadLocalParser = ThreadLocal.withInitial(() -> {
-        return new JavaParser(new ParserConfiguration().setLanguageLevel(ParserConfiguration.LanguageLevel.JAVA_21));
-    });
-
     /**
      * Get the source code of the specified class.
      */
     public static String read(String fqcn, String memberDescriptor, boolean bodyOnly) {
         try {
-            for (Directory sample : Util.Samples.get()) {
+            for (Directory sample : Tool.locateSamples()) {
                 List<String> split = List.of(fqcn.split("\\."));
                 int max = split.size();
                 int current = max;
@@ -59,7 +55,7 @@ public class SourceCode {
                         if (current + 1 != max) split.subList(current + 1, max).forEach(members::add);
                         if (memberDescriptor != null) members.add(memberDescriptor);
 
-                        Node node = threadLocalParser.get()
+                        Node node = Tool.useJavaParser()
                                 .parse(new FileInputStream(file.asJavaFile()))
                                 .getResult()
                                 .orElseThrow()
@@ -158,9 +154,10 @@ public class SourceCode {
      */
     public static String read(DocumentInfo doc) {
         try {
-            DocSourcePositions positions = Util.DocUtils.get().getSourcePositions();
+            DocTrees trees = Tool.useDocTrees();
+            DocSourcePositions positions = trees.getSourcePositions();
 
-            TreePath path = Util.DocUtils.get().getPath(doc.e);
+            TreePath path = trees.getPath(doc.e);
             CompilationUnitTree cut = path.getCompilationUnit();
 
             int start = (int) positions.getStartPosition(cut, path.getLeaf());
