@@ -9,6 +9,8 @@
  */
 package evergarden.page;
 
+import java.util.List;
+
 import evergarden.Document;
 import evergarden.Letter;
 import evergarden.design.EvergardenDSL;
@@ -18,14 +20,14 @@ import kiss.XML;
 import stylist.Style;
 import stylist.value.Numeric;
 
-public class DocumentPage extends Page<Document> {
+public class DocumentPage<D extends Document> extends Page<List<D>> {
 
-    /**
-     * @param letter
-     * @param content
-     */
-    public DocumentPage(String path, Letter letter, Document content) {
-        super(path, letter, content);
+    public DocumentPage(String path, Letter letter, D contents) {
+        this(path, letter, List.of(contents));
+    }
+
+    public DocumentPage(String path, Letter letter, List<D> contents) {
+        super(path, letter, contents);
     }
 
     /**
@@ -42,27 +44,29 @@ public class DocumentPage extends Page<Document> {
     @Override
     protected void declareContents() {
         try {
-            if (contents.hasContents()) {
-                $("section", Styles.Section, Styles.JavadocComment, () -> {
-                    write(2, contents, CSS.SectionLevel2, true);
-                });
-            }
-
-            for (Document child : contents.children()) {
-                if (child.hasContents()) {
-                    $("div", Styles.Section, () -> {
-                        $("section", id(child.id()), Styles.JavadocComment, () -> {
-                            write(2, child, CSS.SectionLevel2, true);
-                        });
-
-                        for (Document foot : child.children()) {
-                            if (foot.hasContents()) {
-                                $("section", id(foot.id()), Styles.JavadocComment, CSS.foot, () -> {
-                                    write(3, foot, CSS.SectionLevel3, false);
-                                });
-                            }
-                        }
+            for (Document content : contents) {
+                if (content.hasContents()) {
+                    $("section", Styles.Section, Styles.JavadocComment, () -> {
+                        write(2, content, CSS.SectionLevel2, true);
                     });
+                }
+
+                for (Document child : content.children()) {
+                    if (child.hasContents()) {
+                        $("div", Styles.Section, () -> {
+                            $("section", id(child.id()), Styles.JavadocComment, () -> {
+                                write(2, child, CSS.SectionLevel2, true);
+                            });
+
+                            for (Document foot : child.children()) {
+                                if (foot.hasContents()) {
+                                    $("section", id(foot.id()), Styles.JavadocComment, CSS.foot, () -> {
+                                        write(3, foot, CSS.SectionLevel3, false);
+                                    });
+                                }
+                            }
+                        });
+                    }
                 }
             }
         } catch (Throwable e) {

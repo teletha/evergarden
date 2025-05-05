@@ -97,6 +97,8 @@ public class SiteBuilder {
                 node.to(output, "\t", characterType);
             }
         });
+
+        System.out.println("write " + path);
     }
 
     /**

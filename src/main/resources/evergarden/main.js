@@ -33,9 +33,9 @@ const navi = new IntersectionObserver(e => {
 	e.forEach(i => {
 		var x = $(`:is(nav,aside) a[href$='#${i.target.id}']`);
 		if (i.isIntersecting) {
-			x.add("now").each(n => n.scrollIntoView({block: "nearest"}))
+			x.add("now").each(n => n.scrollIntoView({block: "nearest"})).parent().each(n => n.style.height = n.scrollHeight + "px")
 		} else {
-			x.remove("now")
+			x.remove("now").parent().none(".now").each(n => n.style.height = 0)
 		}
 	})
 }, {rootMargin: "-15% 0px -20% 0px", threshold: 0.1})
@@ -134,16 +134,6 @@ FlashMan({
 	paged: () => {
 		$("#APINavi").each(e => e.dataset.hide = !location.pathname.startsWith(prefix + "api/"));
 		$("#DocNavi").each(e => e.dataset.hide = !location.pathname.startsWith(prefix + "doc/"));
-		$("#DocNavi>div").each(e => {
-			const sub = e.lastElementChild;
-
-			if (location.pathname.endsWith(e.id)) {
-				sub.style.height = sub.scrollHeight + "px";
-			} else {
-				sub.style.height = 0;
-			}
-		});
-
 		$("#Article section").each(e => navi.observe(e));
 	},
 
@@ -332,6 +322,7 @@ $("body>nav")
 				})
 			})
 	})
+	.parent().make("a").href("doc/onepager.html").text("Onepager Version")
 
 // =====================================================
 // Live Reload

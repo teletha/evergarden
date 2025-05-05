@@ -15,7 +15,7 @@ import evergarden.design.EvergardenDSL;
 import kiss.XML;
 import stylist.Style;
 
-public class ActivityPage extends DocumentPage {
+public class ActivityPage extends DocumentPage<Document> {
 
     public ActivityPage(String path, Letter letter, Document content) {
         super(path, letter, content);
@@ -26,7 +26,7 @@ public class ActivityPage extends DocumentPage {
      */
     @Override
     protected void declareSubNavigation() {
-        $("div", APIPage.css.outline, foŕ(contents.children(), sec -> {
+        $("div", APIPage.css.outline, foŕ(contents.getFirst().children(), sec -> {
             $("div", css.member, () -> {
                 $("a", href("doc/changelog.html#" + sec.id()), text(sec.title()));
             });

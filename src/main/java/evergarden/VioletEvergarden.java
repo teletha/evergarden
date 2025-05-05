@@ -497,6 +497,7 @@ public abstract class VioletEvergarden {
         for (ClassInfo info : docs) {
             site.buildHTML(new DocumentPage("doc/" + info.id() + ".html", letter, info));
         }
+        site.buildHTML(new DocumentPage("doc/onepager.html", letter, docs));
 
         // build change log
         letter.authority().to(repo -> {
