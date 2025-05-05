@@ -27,83 +27,6 @@ const root = {
 		{
 			"modifiers": {
 				"#": "java.util.Collections$UnmodifiableSet",},
-			"name": "AutoMemoriesDoll",
-			"packageName": "evergarden",
-			"type": "Class"
-		},
-		{
-			"modifiers": {
-				"#": "java.util.Collections$UnmodifiableSet",},
-			"name": "AutoMemoriesDoll.ÅssignableAll",
-			"packageName": "evergarden",
-			"type": "Interface"
-		},
-		{
-			"modifiers": {
-				"#": "java.util.Collections$UnmodifiableSet",},
-			"name": "AutoMemoriesDoll.ÅssignableOutput",
-			"packageName": "evergarden",
-			"type": "Interface"
-		},
-		{
-			"modifiers": {
-				"#": "java.util.Collections$UnmodifiableSet",},
-			"name": "AutoMemoriesDoll.ÅssignableProduct",
-			"packageName": "evergarden",
-			"type": "Interface"
-		},
-		{
-			"modifiers": {
-				"#": "java.util.Collections$UnmodifiableSet",},
-			"name": "AutoMemoriesDoll.ÅssignableProject",
-			"packageName": "evergarden",
-			"type": "Interface"
-		},
-		{
-			"modifiers": {
-				"#": "java.util.Collections$UnmodifiableSet",},
-			"name": "AutoMemoriesDoll.ÅssignableSources",
-			"packageName": "evergarden",
-			"type": "Interface"
-		},
-		{
-			"modifiers": {
-				"#": "java.util.Collections$UnmodifiableSet",},
-			"name": "AutoMemoriesDoll.ÅssignableVersion",
-			"packageName": "evergarden",
-			"type": "Interface"
-		},
-		{
-			"modifiers": {
-				"#": "java.util.Collections$UnmodifiableSet",},
-			"name": "AutoMemoriesDoll.ÅssignableÅrbitrary",
-			"packageName": "evergarden",
-			"type": "Interface"
-		},
-		{
-			"modifiers": {
-				"#": "java.util.Collections$UnmodifiableSet",},
-			"name": "AutoMemoriesDoll.Ìnstantiator",
-			"packageName": "evergarden",
-			"type": "Class"
-		},
-		{
-			"modifiers": {
-				"#": "java.util.Collections$UnmodifiableSet",},
-			"name": "AutoMemoriesDollModel",
-			"packageName": "evergarden",
-			"type": "AbstractClass"
-		},
-		{
-			"modifiers": {
-				"#": "java.util.Collections$UnmodifiableSet",},
-			"name": "AutoMemoriesDollModel.Internal",
-			"packageName": "evergarden",
-			"type": "Class"
-		},
-		{
-			"modifiers": {
-				"#": "java.util.Collections$UnmodifiableSet",},
 			"name": "ClassInfo",
 			"packageName": "evergarden.javadoc",
 			"type": "Class"
@@ -135,6 +58,13 @@ const root = {
 			"name": "DocumentPage",
 			"packageName": "evergarden.page",
 			"type": "Class"
+		},
+		{
+			"modifiers": {
+				"#": "java.util.Collections$UnmodifiableSet",},
+			"name": "Doodle",
+			"packageName": "evergarden",
+			"type": "Record"
 		},
 		{
 			"modifiers": {
@@ -181,14 +111,14 @@ const root = {
 		{
 			"modifiers": {
 				"#": "java.util.Collections$UnmodifiableSet",},
-			"name": "Index",
+			"name": "Letter",
 			"packageName": "evergarden",
-			"type": "Class"
+			"type": "AbstractClass"
 		},
 		{
 			"modifiers": {
 				"#": "java.util.Collections$UnmodifiableSet",},
-			"name": "Index.Doc",
+			"name": "Letter.Doc",
 			"packageName": "evergarden",
 			"type": "Record"
 		},
@@ -230,13 +160,6 @@ const root = {
 		{
 			"modifiers": {
 				"#": "java.util.Collections$UnmodifiableSet",},
-			"name": "SampleInfo",
-			"packageName": "evergarden.javadoc",
-			"type": "Class"
-		},
-		{
-			"modifiers": {
-				"#": "java.util.Collections$UnmodifiableSet",},
 			"name": "SiteBuilder",
 			"packageName": "evergarden",
 			"type": "Class"
@@ -258,8 +181,8 @@ const root = {
 		{
 			"modifiers": {
 				"#": "java.util.Collections$UnmodifiableSet",},
-			"name": "TemplateStore",
-			"packageName": "evergarden.javadoc",
+			"name": "Tool",
+			"packageName": "evergarden",
 			"type": "Class"
 		},
 		{
@@ -272,8 +195,64 @@ const root = {
 		{
 			"modifiers": {
 				"#": "java.util.Collections$UnmodifiableSet",},
-			"name": "Util",
-			"packageName": "evergarden.javadoc",
+			"name": "Violet",
+			"packageName": "evergarden",
+			"type": "Class"
+		},
+		{
+			"modifiers": {
+				"#": "java.util.Collections$UnmodifiableSet",},
+			"name": "Violet.ÅssignableAddress",
+			"packageName": "evergarden",
+			"type": "Interface"
+		},
+		{
+			"modifiers": {
+				"#": "java.util.Collections$UnmodifiableSet",},
+			"name": "Violet.ÅssignableAll",
+			"packageName": "evergarden",
+			"type": "Interface"
+		},
+		{
+			"modifiers": {
+				"#": "java.util.Collections$UnmodifiableSet",},
+			"name": "Violet.ÅssignableTitle",
+			"packageName": "evergarden",
+			"type": "Interface"
+		},
+		{
+			"modifiers": {
+				"#": "java.util.Collections$UnmodifiableSet",},
+			"name": "Violet.ÅssignableÅrbitrary",
+			"packageName": "evergarden",
+			"type": "Interface"
+		},
+		{
+			"modifiers": {
+				"#": "java.util.Collections$UnmodifiableSet",},
+			"name": "Violet.Ìnstantiator",
+			"packageName": "evergarden",
+			"type": "Class"
+		},
+		{
+			"modifiers": {
+				"#": "java.util.Collections$UnmodifiableSet",},
+			"name": "VioletEvergarden",
+			"packageName": "evergarden",
+			"type": "AbstractClass"
+		},
+		{
+			"modifiers": {
+				"#": "java.util.Collections$UnmodifiableSet",},
+			"name": "VioletEvergarden.APIDoclet",
+			"packageName": "evergarden",
+			"type": "Class"
+		},
+		{
+			"modifiers": {
+				"#": "java.util.Collections$UnmodifiableSet",},
+			"name": "VioletEvergarden.DocumentDoclet",
+			"packageName": "evergarden",
 			"type": "Class"
 		}
 	]
