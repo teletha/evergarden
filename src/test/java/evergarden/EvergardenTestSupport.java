@@ -34,9 +34,13 @@ public class EvergardenTestSupport {
 
     private static final CleanRoom room = new CleanRoom(true);
 
-    private static final Letter doc = Violet.with.address(room.locateDirectory("a")).title("test").sources("src/test/java").mute().write();
+    private static final Letter doc = Violet.with.address(room.locateDirectory("normal"))
+            .title("test")
+            .sources("src/test/java")
+            .mute()
+            .write();
 
-    private static final Letter docEx = Violet.with.address(room.locateDirectory("b"))
+    private static final Letter docEx = Violet.with.address(room.locateDirectory("external"))
             .title("test")
             .sources("src/test/java")
             .mute()
@@ -190,8 +194,8 @@ public class EvergardenTestSupport {
      * 
      * @param className
      */
-    final Variable<ClassInfo> findByClassName(Letter epistle, String className) {
-        for (ClassInfo info : epistle.types) {
+    final Variable<ClassInfo> findByClassName(Letter letter, String className) {
+        for (ClassInfo info : letter.types) {
             if (info.id().equals(className)) {
                 return Variable.of(info);
             }

@@ -233,9 +233,10 @@ public class Violet extends VioletEvergarden {
     }
 
     /**
-     * Specify the directory where the product is output.
-     *  
-     *  @return
+     * Specifies the root directory where the generated documentation website will be outputted.
+     *  This is a required property.
+     * 
+     *  @return The output {@link Directory}.
      */
     @Override
     public final Directory address() {
@@ -270,9 +271,11 @@ public class Violet extends VioletEvergarden {
     }
 
     /**
-     * The product name.
-     *  
-     *  @return
+     * Specifies the title of the project/product being documented.
+     *  This is used in the generated website's title and headers.
+     *  This is a required property.
+     * 
+     *  @return The project title string.
      */
     @Override
     public final String title() {
@@ -307,9 +310,10 @@ public class Violet extends VioletEvergarden {
     }
 
     /**
-     * The list of source directories.
-     *  
-     *  @return
+     * Specifies the list of directories containing the main API source code to be documented.
+     *  Defaults to an empty list if not specified.
+     * 
+     *  @return A list of source code {@link Directory directories}.
      */
     @Override
     public final List<Directory> sources() {
@@ -344,9 +348,11 @@ public class Violet extends VioletEvergarden {
     }
 
     /**
-     * Specify the directory of documents (manual and sample).
-     *  
-     *  @return
+     * Specifies the list of directories containing supplementary documents, such as
+     *  manuals ("*Manual.java") and test sources ("*Test.java") used for examples.
+     *  Defaults to an empty list if not specified.
+     * 
+     *  @return A list of document {@link Directory directories}.
      */
     @Override
     public final List<Directory> documents() {
@@ -381,9 +387,11 @@ public class Violet extends VioletEvergarden {
     }
 
     /**
-     * Specify the directory of articles.
-     *  
-     *  @return
+     * Specifies the list of directories containing articles (e.g., blog posts, tutorials).
+     *  Note: The current implementation doesn't seem to explicitly use this property in scanning or
+     *  building. Defaults to an empty list if not specified.
+     * 
+     *  @return A list of article {@link Directory directories}.
      */
     @Override
     public final List<Directory> articles() {
@@ -418,9 +426,11 @@ public class Violet extends VioletEvergarden {
     }
 
     /**
-     * The list of source directories.
-     *  
-     *  @return
+     * Specifies the classpath required for compiling and analyzing the source code.
+     *  This should include all necessary libraries and dependencies.
+     *  Defaults to null if not specified.
+     * 
+     *  @return A list of classpath {@link Location locations} (directories or JARs).
      */
     @Override
     public final List<Location> classpath() {
@@ -455,9 +465,11 @@ public class Violet extends VioletEvergarden {
     }
 
     /**
-     * The product version.
-     *  
-     *  @return
+     * Provides a short description or tagline for the project.
+     *  Used in the generated website metadata or headers.
+     *  Defaults to an empty string if not specified.
+     * 
+     *  @return The project description string.
      */
     @Override
     public final String description() {
@@ -492,9 +504,11 @@ public class Violet extends VioletEvergarden {
     }
 
     /**
-     * Specify the source encoding.
-     *  
-     *  @return
+     * Specifies the character encoding of the source files.
+     *  Defaults to the system's default charset. It's recommended to explicitly set this
+     *  (e.g., to {@code StandardCharsets.UTF_8}).
+     * 
+     *  @return The source file {@link Charset}.
      */
     @Override
     public final Charset encoding() {
@@ -529,9 +543,10 @@ public class Violet extends VioletEvergarden {
     }
 
     /**
-     * Specify the task execution listener.
-     *  
-     *  @return
+     * Specifies a listener to receive diagnostic messages (errors, warnings, notes)
+     *  generated during the documentation process.
+     * 
+     *  @return The {@link DiagnosticListener}.
      */
     @Override
     public final DiagnosticListener<? super JavaFileObject> listener() {
@@ -678,9 +693,9 @@ public class Violet extends VioletEvergarden {
         }
 
         /**
-         * Specify the directory where the product is output.
-         *  
-         *  @return
+         * Create new {@link Violet} with the specified address property.
+         * 
+         * @return The next assignable model.
          */
         public ÅssignableTitle<Self> address(String path) {
             Åssignable o = new Åssignable();
@@ -689,9 +704,9 @@ public class Violet extends VioletEvergarden {
         }
 
         /**
-         * Specify the directory where the product is output.
-         *  
-         *  @return
+         * Create new {@link Violet} with the specified address property.
+         * 
+         * @return The next assignable model.
          */
         public ÅssignableTitle<Self> address(Path path) {
             Åssignable o = new Åssignable();
@@ -717,9 +732,9 @@ public class Violet extends VioletEvergarden {
         }
 
         /**
-         * Specify the directory where the product is output.
-         *  
-         *  @return
+         * Assign address property.
+         * 
+         * @return The next assignable model.
          */
         default Next address(String path) {
             try {
@@ -730,9 +745,9 @@ public class Violet extends VioletEvergarden {
         }
 
         /**
-         * Specify the directory where the product is output.
-         *  
-         *  @return
+         * Assign address property.
+         * 
+         * @return The next assignable model.
          */
         default Next address(Path path) {
             try {
@@ -786,9 +801,9 @@ public class Violet extends VioletEvergarden {
         }
 
         /**
-         * The list of source directories.
-         *  
-         *  @return
+         * Assign sources property.
+         * 
+         * @return The next assignable model.
          */
         default Next sources(String... paths) {
             try {
@@ -799,9 +814,9 @@ public class Violet extends VioletEvergarden {
         }
 
         /**
-         * The list of source directories.
-         *  
-         *  @return
+         * Assign sources property.
+         * 
+         * @return The next assignable model.
          */
         default Next sources(Path... paths) {
             try {
@@ -832,9 +847,9 @@ public class Violet extends VioletEvergarden {
         }
 
         /**
-         * Specify the directory of documents (manual and sample).
-         *  
-         *  @return
+         * Assign documents property.
+         * 
+         * @return The next assignable model.
          */
         default Next documents(String path) {
             try {
@@ -845,9 +860,9 @@ public class Violet extends VioletEvergarden {
         }
 
         /**
-         * Specify the directory of documents (manual and sample).
-         *  
-         *  @return
+         * Assign documents property.
+         * 
+         * @return The next assignable model.
          */
         default Next documents(Path path) {
             try {
@@ -878,9 +893,9 @@ public class Violet extends VioletEvergarden {
         }
 
         /**
-         * Specify the directory of articles.
-         *  
-         *  @return
+         * Assign articles property.
+         * 
+         * @return The next assignable model.
          */
         default Next articles(String path) {
             try {
@@ -891,9 +906,9 @@ public class Violet extends VioletEvergarden {
         }
 
         /**
-         * Specify the directory of articles.
-         *  
-         *  @return
+         * Assign articles property.
+         * 
+         * @return The next assignable model.
          */
         default Next articles(Path path) {
             try {
@@ -924,9 +939,9 @@ public class Violet extends VioletEvergarden {
         }
 
         /**
-         * The list of source directories.
-         *  
-         *  @return
+         * Assign classpath property.
+         * 
+         * @return The next assignable model.
          */
         default Next classpath(String... paths) {
             try {
@@ -937,9 +952,9 @@ public class Violet extends VioletEvergarden {
         }
 
         /**
-         * The list of source directories.
-         *  
-         *  @return
+         * Assign classpath property.
+         * 
+         * @return The next assignable model.
          */
         default Next classpath(Path... paths) {
             try {
@@ -950,9 +965,9 @@ public class Violet extends VioletEvergarden {
         }
 
         /**
-         * The list of source directories.
-         *  
-         *  @return
+         * Assign classpath property.
+         * 
+         * @return The next assignable model.
          */
         default Next classpathBy(List<String> paths) {
             try {

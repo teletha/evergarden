@@ -56,8 +56,7 @@ public abstract class Page<T> extends HTML {
             $("head", () -> {
                 $("meta", charset(letter.encoding().displayName()));
                 $("meta", name("viewport"), content("width=device-width, initial-scale=1"));
-                $("meta", name("description"), content("Explains how to use " + letter.title() + " and its API. " + letter
-                        .description()));
+                $("meta", name("description"), content("Explains how to use " + letter.title() + " and its API. " + letter.description()));
                 $("link", rel("preconnect"), href("https://cdn.jsdelivr.net"));
                 $("link", rel("preconnect"), href("https://fonts.googleapis.com"));
                 $("link", rel("preconnect"), href("https://fonts.gstatic.com"), attr("crossorigin"));
@@ -120,7 +119,7 @@ public abstract class Page<T> extends HTML {
                 });
             });
 
-            script("root.js", letter);
+            script("root.js");
             module("main.js");
         });
 

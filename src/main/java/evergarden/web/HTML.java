@@ -11,9 +11,7 @@ package evergarden.web;
 
 import java.util.function.Consumer;
 
-import evergarden.SiteBuilder;
 import evergarden.design.Styles;
-import kiss.I;
 import kiss.XML;
 import stylist.Style;
 
@@ -32,14 +30,5 @@ public abstract class HTML extends lycoris.HTML {
 
     protected final Consumer<XML> togglable(Style style) {
         return attr("onClick", "this.classList.toggle('" + style.className()[0] + "')");
-    }
-
-    /**
-     * Build JSONP file and return the path of the generated file.
-     * 
-     * @param model A style definition class to write.
-     */
-    protected final void script(String path, Object model) {
-        $("script", attr("src", I.make(SiteBuilder.class).buildJSONP(path, model)));
     }
 }
