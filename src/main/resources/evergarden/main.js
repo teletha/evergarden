@@ -31,11 +31,13 @@ $("#theme").click(e => save($("html").reset(user.theme = user.theme == "light" ?
 // =====================================================
 const navi = new IntersectionObserver(e => {
 	e.forEach(i => {
-		var x = $(`:is(nav,aside) a[href$='#${i.target.id}']`);
+		var x = $(`:is(nav,aside) a[href$='#${i.target.id}']`), p = x.parent().is(".sub");
 		if (i.isIntersecting) {
-			x.add("now").each(n => n.scrollIntoView({block: "nearest"})).parent().each(n => n.style.height = n.scrollHeight + "px")
+			x.add("now").each(n => n.scrollIntoView({block: "nearest"}))
+			p.each(n => n.style.height = n.scrollHeight + "px")
 		} else {
-			x.remove("now").parent().none(".now").each(n => n.style.height = 0)
+			x.remove("now")
+			p.none(".now").each(n => n.style.height = 0)
 		}
 	})
 }, {rootMargin: "-15% 0px -20% 0px", threshold: 0.1})
