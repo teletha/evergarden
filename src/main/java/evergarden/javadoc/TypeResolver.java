@@ -313,7 +313,11 @@ public class TypeResolver {
             }
 
             if (!enclosingName.isEmpty() && clazz.getQualifiedName().toString().startsWith(packageName)) {
-                return "doc/" + packageName + "." + enclosingName + ".html#" + packageName + "." + enclosingName + "." + typeName;
+                if (enclosingName.contains(".")) {
+                    return "doc/" + packageName + "." + enclosingName + ".html#" + packageName + "." + enclosingName + "." + typeName;
+                } else {
+                    return "doc/" + packageName + "." + enclosingName + "." + typeName + ".html";
+                }
             }
             return null;
         }
