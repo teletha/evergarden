@@ -77,7 +77,7 @@ public abstract class Page<T> extends HTML {
                     $("h1", css.title, code(letter.title()));
                     $("nav", css.links, () -> {
                         letter.doc().to(doc -> link("Manual", doc.path(), "text"));
-                        letter.api().to(api -> link("API", "api/", "package"));
+                        letter.api().to(api -> link("API", "api/main.html", "package"));
                         letter.authority().to(repo -> {
                             link("Activity", "doc/changelog.html", "activity");
                             link("Community", repo.locateCommunity(), "user");

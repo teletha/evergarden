@@ -54,6 +54,7 @@ import evergarden.javadoc.ClassInfo;
 import evergarden.javadoc.MethodInfo;
 import evergarden.javadoc.SourceCode;
 import evergarden.javadoc.TypeResolver;
+import evergarden.page.APIMainPage;
 import evergarden.page.APIPage;
 import evergarden.page.ActivityPage;
 import evergarden.page.DocumentPage;
@@ -494,6 +495,7 @@ public abstract class VioletEvergarden {
         for (ClassInfo info : letter.types) {
             site.buildHTML(new APIPage("api/" + info.id() + ".html", letter, info));
         }
+        site.buildHTML(new APIMainPage("api/main.html", letter, this));
         for (ClassInfo info : docs) {
             site.buildHTML(new DocumentPage("doc/" + info.id() + ".html", letter, info));
         }
