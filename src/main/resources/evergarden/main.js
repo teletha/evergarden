@@ -113,8 +113,13 @@ function FlashMan({ paged, cacheSize = 20, preload = "mouseover", preview = "sec
 		let e = v.target.closest("a");
 		if (e != null && location.origin == e.origin) {
 			if (location.href != e.href) {
-				history.pushState(null, null, e.href)
-				changed()
+				if (location.pathname.endsWith("onepager.html") && e.pathname.includes("/doc/")) {
+					location.hash = e.hash || e.nextSibling.firstChild.hash
+					hashed()
+				} else {
+					history.pushState(null, null, e.href)
+					changed()
+				}
 			}
 			v.preventDefault()
 		}
