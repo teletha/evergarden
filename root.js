@@ -13,6 +13,13 @@ const root = {
 		{
 			"modifiers": {
 				"#": "java.util.Collections$UnmodifiableSet",},
+			"name": "APIMainPage",
+			"packageName": "evergarden.page",
+			"type": "Class"
+		},
+		{
+			"modifiers": {
+				"#": "java.util.Collections$UnmodifiableSet",},
 			"name": "APIPage",
 			"packageName": "evergarden.page",
 			"type": "Class"
