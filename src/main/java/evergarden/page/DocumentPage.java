@@ -9,24 +9,16 @@
  */
 package evergarden.page;
 
-import java.util.List;
+import static stylist.value.Numeric.*;
 
 import evergarden.Document;
 import evergarden.Letter;
 import evergarden.design.EvergardenDSL;
-import evergarden.design.Styles;
-import kiss.I;
-import kiss.XML;
 import stylist.Style;
-import stylist.value.Numeric;
 
-public class DocumentPage<D extends Document> extends Page<List<D>> {
+public class DocumentPage<D extends Document> extends AbstractDocumentPage<D> {
 
     public DocumentPage(String path, Letter letter, D contents) {
-        this(path, letter, List.of(contents));
-    }
-
-    public DocumentPage(String path, Letter letter, List<D> contents) {
         super(path, letter, contents);
     }
 
@@ -34,76 +26,18 @@ public class DocumentPage<D extends Document> extends Page<List<D>> {
      * {@inheritDoc}
      */
     @Override
-    protected void transform(XML xml) {
-        xml.find("h3").attr("icon", "📄");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected void declareContents() {
-        try {
-            for (Document content : contents) {
-                if (content.hasContents()) {
-                    $("section", Styles.Section, Styles.JavadocComment, () -> {
-                        write(2, content, CSS.SectionLevel2, true);
-                    });
-                }
+        write(contents);
 
-                for (Document child : content.children()) {
-                    if (child.hasContents()) {
-                        $("div", Styles.Section, () -> {
-                            $("section", id(child.id()), Styles.JavadocComment, () -> {
-                                write(2, child, CSS.SectionLevel2, true);
-                            });
-
-                            for (Document foot : child.children()) {
-                                if (foot.hasContents()) {
-                                    $("section", id(foot.id()), Styles.JavadocComment, CSS.foot, () -> {
-                                        write(3, foot, CSS.SectionLevel3, false);
-                                    });
-                                }
-                            }
-                        });
-                    }
-                }
-            }
-        } catch (Throwable e) {
-            throw I.quiet(e);
-        }
-    }
-
-    private void write(int level, Document document, Style additionalStyle, boolean useIcons) {
-        XML doc = document.contents();
-        XML heading = doc.find("h,h1,h2,h3").first().remove();
-
-        $("header", Styles.JavadocComment, additionalStyle, () -> {
-            $(xml(heading.size() != 0 ? heading : I.xml("h" + level).text(document.title())));
-            if (useIcons) {
-                $("div", CSS.meta, () -> {
-                    $("span", clazz("perp"), CSS.icon, () -> {
-                        $(svg("copy"));
-                    });
-
-                    $("a", clazz("tweet"), CSS.icon, () -> {
-                        $(svg("twitter"));
-                    });
-
-                    letter.authority().to(repo -> {
-                        document.region().ifPresent(area -> {
-                            String editor = repo.locateEditor(area);
-                            if (editor != null) {
-                                $("a", href(editor), clazz("edit"), CSS.icon, () -> {
-                                    $(svg("edit"));
-                                });
-                            }
-                        });
-                    });
-                });
-            }
+        $("div", css.footer, () -> {
+            contents.prev().to(doc -> {
+                $("a", css.box, css.prev, href("doc/" + doc.id() + ".html"), text(doc.title()));
+            });
+            contents.next().to(doc -> {
+                $("a", css.box, css.next, href("doc/" + doc.id() + ".html"), text(doc.title()));
+            });
         });
-        $(xml(doc));
+
     }
 
     /**
@@ -111,33 +45,42 @@ public class DocumentPage<D extends Document> extends Page<List<D>> {
      */
     @Override
     protected void declareSubNavigation() {
+        $("a", href("doc/onepager.html"), text("Onepager Version"));
     }
 
-    interface CSS extends EvergardenDSL {
+    interface css extends EvergardenDSL {
 
-        Numeric IconSize = Numeric.num(16, px);
+        Style box = () -> {
+            border.radius(Theme.radius);
+            background.color(Theme.surface);
+            padding.vertical(1, rem).horizontal(1.5, rem);
+            text.decoration.none().verticalAlign.middle();
 
-        Style SectionLevel2 = () -> {
-            position.relative();
+            $.hover(() -> {
+                background.color(Theme.accent.opacify(-0.7));
+            });
         };
 
-        Style SectionLevel3 = () -> {
-            position.relative();
+        Style prev = () -> {
+            $.before(() -> {
+                font.family(Theme.icon);
+                content.text("\\e5e0");
+                padding.right(1, rem);
+            });
         };
 
-        Style meta = () -> {
-            position.absolute().top(Numeric.num(50, percent).subtract(IconSize.divide(2)).subtract(3, px)).right(IconSize.divide(2));
+        Style next = () -> {
+            text.align.right();
+
+            $.after(() -> {
+                font.family(Theme.icon);
+                content.text("\\e5e1");
+                padding.left(1, rem);
+            });
         };
 
-        Style icon = () -> {
-            display.inlineBlock().width(IconSize).height(IconSize);
-            font.lineHeight(1);
-            margin.left(IconSize);
-            cursor.pointer();
-        };
-
-        Style foot = () -> {
-            margin.top(2.5, rem).bottom(1, rem);
+        Style footer = () -> {
+            display.grid().area(prev, next).column(num(1, fr), num(1, fr)).columnGap(2, rem);
         };
     }
 }

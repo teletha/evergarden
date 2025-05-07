@@ -57,6 +57,7 @@ import evergarden.javadoc.TypeResolver;
 import evergarden.page.APIMainPage;
 import evergarden.page.APIPage;
 import evergarden.page.ActivityPage;
+import evergarden.page.DocumentOnePage;
 import evergarden.page.DocumentPage;
 import evergarden.web.CodeHighlight;
 import icy.manipulator.Icy;
@@ -499,7 +500,7 @@ public abstract class VioletEvergarden {
         for (ClassInfo info : docs) {
             site.buildHTML(new DocumentPage("doc/" + info.id() + ".html", letter, info));
         }
-        site.buildHTML(new DocumentPage("doc/onepager.html", letter, docs));
+        site.buildHTML(new DocumentOnePage("doc/onepager.html", letter, docs));
 
         // build change log
         letter.authority().to(repo -> {

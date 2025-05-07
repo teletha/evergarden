@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import kiss.Variable;
 import kiss.XML;
 
 /**
@@ -65,6 +66,17 @@ public interface Document {
     }
 
     /**
+     * Whispers of ancestry — reveals the document from which this one descends.
+     * 
+     * If no such origin is known, an empty {@link Variable} is returned.
+     *
+     * @return a {@link Variable} containing the parent {@link Document}, or empty if this is root
+     */
+    default Variable<Document> parent() {
+        return Variable.empty();
+    }
+
+    /**
      * Lists the hidden pages nested beneath this document.
      * 
      * Returns an empty list if no sub-documents are found.
@@ -73,5 +85,39 @@ public interface Document {
      */
     default List<Document> children() {
         return Collections.EMPTY_LIST;
+    }
+
+    /**
+     * Retrieves the sibling who walked this path just before —
+     * the document that preceded this one in the parent's memory.
+     *
+     * If no parent is present, or this document stands at the very beginning,
+     * an empty {@link Variable} is returned.
+     *
+     * @return a {@link Variable} containing the previous {@link Document}, or empty if none exists
+     */
+    default Variable<Document> prev() {
+        return parent().flatMap(parent -> {
+            List<Document> children = parent.children();
+            int index = children.indexOf(this) - 1;
+            return index < 0 ? Variable.empty() : Variable.of(children.get(index));
+        });
+    }
+
+    /**
+     * Retrieves the sibling who follows this one —
+     * the document that continues the thread in the parent's collection.
+     *
+     * If no parent is present, or this document marks the end,
+     * an empty {@link Variable} is returned.
+     *
+     * @return a {@link Variable} containing the next {@link Document}, or empty if none exists
+     */
+    default Variable<Document> next() {
+        return parent().flatMap(parent -> {
+            List<Document> children = parent.children();
+            int index = children.indexOf(this) + 1;
+            return index == children.size() ? Variable.empty() : Variable.of(children.get(index));
+        });
     }
 }

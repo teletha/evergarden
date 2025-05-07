@@ -15,10 +15,18 @@ import evergarden.design.EvergardenDSL;
 import kiss.XML;
 import stylist.Style;
 
-public class ActivityPage extends DocumentPage<Document> {
+public class ActivityPage extends AbstractDocumentPage<Document> {
 
-    public ActivityPage(String path, Letter letter, Document content) {
-        super(path, letter, content);
+    public ActivityPage(String path, Letter letter, Document contents) {
+        super(path, letter, contents);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void declareContents() {
+        write(contents);
     }
 
     /**
@@ -26,7 +34,7 @@ public class ActivityPage extends DocumentPage<Document> {
      */
     @Override
     protected void declareSubNavigation() {
-        $("div", APIPage.css.outline, foŕ(contents.getFirst().children(), sec -> {
+        $("div", APIPage.css.outline, foŕ(contents.children(), sec -> {
             $("div", css.member, () -> {
                 $("a", href("doc/changelog.html#" + sec.id()), text(sec.title()));
             });

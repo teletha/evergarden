@@ -223,6 +223,14 @@ public class ClassInfo extends ParameterizableInfo implements Document, Comparab
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Variable<Document> parent() {
+        return Variable.of(outer);
+    }
+
+    /**
      * List up all inner types with the specified modifiers.
      * 
      * @return
