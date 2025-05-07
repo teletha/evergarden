@@ -116,6 +116,7 @@ public abstract class Page<T> extends HTML {
                 });
 
                 $("footer", css.footer, () -> {
+                    declareFooter();
                 });
             });
 
@@ -146,6 +147,12 @@ public abstract class Page<T> extends HTML {
     protected abstract void declareContents();
 
     protected abstract void declareSubNavigation();
+
+    protected void declareFooter() {
+        $("p", text("Powered by "), () -> {
+            $("a", href("https://github.com/teletha/evergarden"), text("Evergarden"));
+        });
+    }
 
     private interface css extends EvergardenDSL {
 
@@ -358,6 +365,9 @@ public abstract class Page<T> extends HTML {
         };
 
         Style footer = () -> {
+            font.size(0.8, rem);
+            text.align.center();
+            padding.vertical(1, rem);
         };
 
         Style body = () -> {
@@ -366,7 +376,7 @@ public abstract class Page<T> extends HTML {
             margin.horizontal(Numeric.max(20, px, 5, dvw));
 
             $.when(BASE, () -> {
-                display.grid().area(header).area(article).area(nav);
+                display.grid().area(header).area(article).area(footer).area(nav);
                 margin.size(0, px);
             });
 
@@ -378,7 +388,8 @@ public abstract class Page<T> extends HTML {
                         .column(x -> x.minmax(30, ch, 1, fr).autoMax(91, ch))
                         .row($.num(80, px), $.num(1, fr))
                         .area(header, header)
-                        .area(nav, article);
+                        .area(nav, article)
+                        .area(null, footer);
             });
 
             $.when(LARGE, () -> {
@@ -389,7 +400,8 @@ public abstract class Page<T> extends HTML {
                         .column(x -> x.minmax(30, ch, 1, fr).autoMax(91, ch).autoMax(1, fr))
                         .row($.num(80, px), $.num(1, fr))
                         .area(header, header, header)
-                        .area(nav, article, aside);
+                        .area(nav, article, aside)
+                        .area(null, footer, null);
             });
         };
     }

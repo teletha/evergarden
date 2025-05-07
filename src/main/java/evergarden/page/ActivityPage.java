@@ -26,7 +26,7 @@ public class ActivityPage extends AbstractDocumentPage<Document> {
      */
     @Override
     protected void declareContents() {
-        write(contents);
+        writeDocument(contents);
     }
 
     /**

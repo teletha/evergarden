@@ -114,7 +114,7 @@ public class DocumentInfo {
     /** The type resolver. */
     protected final TypeResolver resolver;
 
-    protected int[] documentLines = {-1, -1};
+    protected int[] documentLines = null;
 
     private final Parser markParser = Parser.builder().extensions(List.of(TablesExtension.create())).build();
 

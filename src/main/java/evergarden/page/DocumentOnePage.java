@@ -26,7 +26,7 @@ public class DocumentOnePage<D extends Document> extends AbstractDocumentPage<Li
     @Override
     protected void declareContents() {
         for (Document content : contents) {
-            write(content);
+            writeDocument(content);
         }
     }
 
@@ -35,6 +35,8 @@ public class DocumentOnePage<D extends Document> extends AbstractDocumentPage<Li
      */
     @Override
     protected void declareSubNavigation() {
-        writeContribution(contents.getFirst());
+        if (!contents.isEmpty()) {
+            writeContribution(contents.getFirst().parent().exact());
+        }
     }
 }

@@ -44,8 +44,8 @@ public interface Document {
      * @return an {@link Optional} containing the document's {@link Region},
      *         or an empty {@link Optional} if no origin is recorded
      */
-    default Optional<Region> region() {
-        return Optional.empty();
+    default Variable<Region> region() {
+        return Variable.empty();
     }
 
     /**

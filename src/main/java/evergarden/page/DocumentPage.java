@@ -27,9 +27,9 @@ public class DocumentPage<D extends Document> extends AbstractDocumentPage<D> {
      */
     @Override
     protected void declareContents() {
-        write(contents);
+        writeDocument(contents);
 
-        $("div", css.footer, () -> {
+        $("div", css.navi, () -> {
             contents.prev().to(doc -> {
                 $("a", css.box, css.prev, href("doc/" + doc.id() + ".html"), text(doc.title()));
             });
@@ -37,7 +37,6 @@ public class DocumentPage<D extends Document> extends AbstractDocumentPage<D> {
                 $("a", css.box, css.next, href("doc/" + doc.id() + ".html"), text(doc.title()));
             });
         });
-
     }
 
     /**
@@ -45,27 +44,11 @@ public class DocumentPage<D extends Document> extends AbstractDocumentPage<D> {
      */
     @Override
     protected void declareSubNavigation() {
-        $("div", css.detail, () -> {
-            $("h5", css.title, text(contents.title()));
-            $("p", text("Author: "));
-            $("p", text("Publish: "));
-            contents.prev().to(doc -> {
-                $("p", text("Prev: "), () -> {
-                    $("a", href("doc/" + doc.id() + ".html"), text(doc.title()));
-                });
-            });
-            contents.next().to(doc -> {
-                $("p", text("Next: "), () -> {
-                    $("a", href("doc/" + doc.id() + ".html"), text(doc.title()));
-                });
-            });
-
-            $("p", text("View in "), () -> {
-                $("a", href("doc/one.html#" + contents.children().getFirst().id()), text("onepager"));
-            });
-        });
-
         writeContribution(contents);
+
+        $("p", CSS.sidebox, text("View in "), () -> {
+            $("a", href("doc/one.html#" + contents.children().getFirst().id()), text("onepager"));
+        });
     }
 
     interface css extends EvergardenDSL {
@@ -99,18 +82,8 @@ public class DocumentPage<D extends Document> extends AbstractDocumentPage<D> {
             });
         };
 
-        Style footer = () -> {
+        Style navi = () -> {
             display.grid().area(prev, next).column(num(1, fr), num(1, fr)).columnGap(2, rem);
-        };
-
-        Style detail = () -> {
-            font.size(0.8, rem);
-            margin.bottom(1, rem);
-        };
-
-        Style title = () -> {
-            font.size(0.9, rem);
-            margin.bottom(0.1, rem);
         };
     }
 }

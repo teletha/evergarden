@@ -14,7 +14,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -337,9 +336,18 @@ public class ClassInfo extends ParameterizableInfo implements Document, Comparab
      * {@inheritDoc}
      */
     @Override
-    public Optional<Region> region() {
+    public Variable<Region> region() {
+        int[] lines = documentLines;
+        if (lines == null) {
+            if (children().isEmpty()) {
+                lines = new int[] {1, 1};
+            } else {
+                lines = new int[] {children().getFirst().region().v.startLine(), children().getLast().region().v.endLine()};
+            }
+        }
+
         ClassInfo root = outermost();
-        return Optional.of(new Region(root.packageName.replace('.', '/') + "/" + root.name + ".java", documentLines[0], documentLines[1]));
+        return Variable.of(new Region(root.packageName.replace('.', '/') + "/" + root.name + ".java", lines[0], lines[1]));
     }
 
     /**

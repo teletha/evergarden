@@ -13,7 +13,6 @@ import evergarden.Document;
 import evergarden.Letter;
 import evergarden.design.EvergardenDSL;
 import evergarden.design.Styles;
-import evergarden.page.DocumentPage.css;
 import kiss.I;
 import kiss.XML;
 import stylist.Style;
@@ -33,7 +32,7 @@ public abstract class AbstractDocumentPage<C> extends Page<C> {
         xml.find("h3").attr("icon", "📄");
     }
 
-    protected void write(Document document) {
+    protected void writeDocument(Document document) {
         if (document.hasContents()) {
             $("section", Styles.Section, Styles.JavadocComment, () -> {
                 write(2, document, CSS.SectionLevel2, true);
@@ -76,7 +75,7 @@ public abstract class AbstractDocumentPage<C> extends Page<C> {
                     });
 
                     letter.authority().to(repo -> {
-                        document.region().ifPresent(area -> {
+                        document.region().to(area -> {
                             String editor = repo.locateEditor(area);
                             if (editor != null) {
                                 $("a", href(editor), clazz("edit"), CSS.icon, () -> {
@@ -92,11 +91,11 @@ public abstract class AbstractDocumentPage<C> extends Page<C> {
     }
 
     protected void writeContribution(Document document) {
-        $("div", css.detail, () -> {
+        $("div", CSS.sidebox, () -> {
             letter.authority().to(host -> {
-                $("h5", css.title, text("Help improve document"));
+                $("h5", text("Help improve document"));
 
-                document.region().ifPresent(region -> {
+                document.region().to(region -> {
                     $("p", text("View this page on "), () -> {
                         $("a", href(host.locateReader(region)), text(host.name()));
                     });
@@ -143,6 +142,16 @@ public abstract class AbstractDocumentPage<C> extends Page<C> {
 
         Style foot = () -> {
             margin.top(2.5, rem).bottom(1, rem);
+        };
+
+        Style sidebox = () -> {
+            font.size(0.8, rem);
+            margin.bottom(1, rem);
+
+            $.select("h3,h4,h5,h6", () -> {
+                font.size(0.9, rem);
+                margin.bottom(0.2, rem);
+            });
         };
     }
 }
