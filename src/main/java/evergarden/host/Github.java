@@ -10,6 +10,8 @@
 package evergarden.host;
 
 import java.net.URI;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -51,6 +53,14 @@ class Github implements Hosting {
      * {@inheritDoc}
      */
     @Override
+    public String name() {
+        return "GitHub";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String locate() {
         return "https://github.com/" + owner + "/" + name;
     }
@@ -77,6 +87,22 @@ class Github implements Hosting {
     @Override
     public String locateIssues() {
         return locate() + "/issues";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String locateNewIssue(String title, String label, String body) {
+        return locate() + "/issues/new?title=" + title + "&labels=" + label + "&body=" + URLEncoder.encode(body, StandardCharsets.UTF_8);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String locateReader(Region region) {
+        return locate() + "/blob/" + branch + "/src/test/java/" + region.location() + "#L" + region.startLine();
     }
 
     /**

@@ -45,7 +45,27 @@ public class DocumentPage<D extends Document> extends AbstractDocumentPage<D> {
      */
     @Override
     protected void declareSubNavigation() {
-        $("a", href("doc/onepager.html"), text("Onepager Version"));
+        $("div", css.detail, () -> {
+            $("h5", css.title, text(contents.title()));
+            $("p", text("Author: "));
+            $("p", text("Publish: "));
+            contents.prev().to(doc -> {
+                $("p", text("Prev: "), () -> {
+                    $("a", href("doc/" + doc.id() + ".html"), text(doc.title()));
+                });
+            });
+            contents.next().to(doc -> {
+                $("p", text("Next: "), () -> {
+                    $("a", href("doc/" + doc.id() + ".html"), text(doc.title()));
+                });
+            });
+
+            $("p", text("View in "), () -> {
+                $("a", href("doc/one.html#" + contents.children().getFirst().id()), text("onepager"));
+            });
+        });
+
+        writeContribution(contents);
     }
 
     interface css extends EvergardenDSL {
@@ -81,6 +101,16 @@ public class DocumentPage<D extends Document> extends AbstractDocumentPage<D> {
 
         Style footer = () -> {
             display.grid().area(prev, next).column(num(1, fr), num(1, fr)).columnGap(2, rem);
+        };
+
+        Style detail = () -> {
+            font.size(0.8, rem);
+            margin.bottom(1, rem);
+        };
+
+        Style title = () -> {
+            font.size(0.9, rem);
+            margin.bottom(0.1, rem);
         };
     }
 }

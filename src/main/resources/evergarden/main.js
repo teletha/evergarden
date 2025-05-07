@@ -115,7 +115,7 @@ function FlashMan({ paged, cacheSize = 20, preload = "mouseover", preview = "sec
 		let e = v.target.closest("a");
 		if (e != null && location.origin == e.origin) {
 			if (location.href != e.href) {
-				if (location.pathname.endsWith("onepager.html") && e.pathname.includes("/doc/")) {
+				if (location.pathname.endsWith("doc/one.html") && e.pathname.includes("/doc/")) {
 					location.hash = e.hash || e.nextSibling.firstChild.hash
 					hashed()
 				} else {
@@ -329,7 +329,6 @@ $("body>nav")
 				})
 			})
 	})
-	.parent().make("a").href("doc/onepager.html").text("Onepager Version")
 
 // =====================================================
 // Live Reload

@@ -241,15 +241,6 @@ public abstract class Page<T> extends HTML {
                 text.decoration.none().whiteSpace.pre();
                 padding.bottom(0.1, rem);
             });
-
-            $.select(">*>a", () -> {
-                font.size(0.8, em);
-                margin.top(2, rem);
-
-                $.hover(() -> {
-                    font.color(Theme.accent);
-                });
-            });
         };
 
         Style controls = () -> {

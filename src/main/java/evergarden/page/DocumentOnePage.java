@@ -35,5 +35,6 @@ public class DocumentOnePage<D extends Document> extends AbstractDocumentPage<Li
      */
     @Override
     protected void declareSubNavigation() {
+        writeContribution(contents.getFirst());
     }
 }

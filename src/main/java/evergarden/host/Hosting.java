@@ -27,6 +27,13 @@ import kiss.Variable;
 public interface Hosting {
 
     /**
+     * Returns the name of hosting service.
+     * 
+     * @return
+     */
+    String name();
+
+    /**
      * Returns the URL of the repository's main page.
      * 
      * @return The repository URL.
@@ -53,6 +60,21 @@ public interface Hosting {
      * @return The issue tracker page URL.
      */
     String locateIssues();
+
+    /**
+     * Returns the URL of the issue tracker page.
+     * 
+     * @return The issue tracker page URL.
+     */
+    String locateNewIssue(String title, String label, String body);
+
+    /**
+     * Returns the URL to read a specific code or documentation.
+     * 
+     * @param region The region to locate the read for.
+     * @return The reader page URL.
+     */
+    String locateReader(Region region);
 
     /**
      * Returns the URL to edit a specific region of code or documentation.

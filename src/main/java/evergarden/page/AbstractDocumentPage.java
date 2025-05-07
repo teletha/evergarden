@@ -13,6 +13,7 @@ import evergarden.Document;
 import evergarden.Letter;
 import evergarden.design.EvergardenDSL;
 import evergarden.design.Styles;
+import evergarden.page.DocumentPage.css;
 import kiss.I;
 import kiss.XML;
 import stylist.Style;
@@ -88,6 +89,33 @@ public abstract class AbstractDocumentPage<C> extends Page<C> {
             }
         });
         $(xml(doc));
+    }
+
+    protected void writeContribution(Document document) {
+        $("div", css.detail, () -> {
+            letter.authority().to(host -> {
+                $("h5", css.title, text("Help improve document"));
+
+                document.region().ifPresent(region -> {
+                    $("p", text("View this page on "), () -> {
+                        $("a", href(host.locateReader(region)), text(host.name()));
+                    });
+                });
+                $("p", text("Report a problem "), () -> {
+                    $("a", href(host.locateNewIssue("Improve document on " + document.id(), "documentation,enhancement", """
+                            ## What specific section or headline is this issue about?
+
+
+
+                            ## What information was incorrect, unhelpful, or incomplete?
+
+
+
+                            ## What did you expect to see?
+                            """)), text("with this page"));
+                });
+            });
+        });
     }
 
     interface CSS extends EvergardenDSL {

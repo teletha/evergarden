@@ -500,7 +500,7 @@ public abstract class VioletEvergarden {
         for (ClassInfo info : docs) {
             site.buildHTML(new DocumentPage("doc/" + info.id() + ".html", letter, info));
         }
-        site.buildHTML(new DocumentOnePage("doc/onepager.html", letter, docs));
+        site.buildHTML(new DocumentOnePage("doc/one.html", letter, docs));
 
         // build change log
         letter.authority().to(repo -> {
