@@ -33,7 +33,7 @@ public class ActivityPage extends AbstractDocumentPage<Document> {
      * {@inheritDoc}
      */
     @Override
-    protected void declareSubNavigation() {
+    protected void declareAside() {
         $("div", APIPage.css.outline, foŕ(contents.children(), sec -> {
             $("div", css.member, () -> {
                 $("a", href("doc/changelog.html#" + sec.id()), text(sec.title()));

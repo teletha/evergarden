@@ -43,7 +43,7 @@ public class DocumentPage<D extends Document> extends AbstractDocumentPage<D> {
      * {@inheritDoc}
      */
     @Override
-    protected void declareSubNavigation() {
+    protected void declareAside() {
         writeContribution(contents);
 
         $("p", CSS.sidebox, text("View in "), () -> {

@@ -45,7 +45,7 @@ public class Styles implements EvergardenDSL {
     public static Style HEADING3 = Style.named("h3", () -> {
         font.size(1.4, rem).color(Theme.front);
         margin.bottom(-0.6, rem);
-    
+
         $.before(() -> {
             content.attr("icon");
             display.inline();

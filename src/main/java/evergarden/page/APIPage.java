@@ -190,7 +190,7 @@ public class APIPage extends Page<ClassInfo> {
      * {@inheritDoc}
      */
     @Override
-    protected void declareSubNavigation() {
+    protected void declareAside() {
         $("div", css.outline, () -> {
             members("Constructors", contents.constructors());
             members("Static Fields", contents.staticFields());

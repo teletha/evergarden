@@ -28,6 +28,14 @@ public abstract class HTML extends lycoris.HTML {
         };
     }
 
+    protected final Consumer<XML> svg(String type, Style style) {
+        return parent -> {
+            $("svg", attr("viewBox", "0 0 24 24"), attr("class", type), style, () -> {
+                $("use", attr("href", "main.svg#" + type));
+            });
+        };
+    }
+
     protected final Consumer<XML> togglable(Style style) {
         return attr("onClick", "this.classList.toggle('" + style.className()[0] + "')");
     }

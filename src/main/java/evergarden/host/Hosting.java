@@ -31,14 +31,18 @@ public interface Hosting {
      * 
      * @return
      */
+    String service();
+
     String name();
+
+    String owner();
 
     /**
      * Returns the URL of the repository's main page.
      * 
      * @return The repository URL.
      */
-    String locate();
+    String location();
 
     /**
      * Returns the URL of the community discussion page.
@@ -53,6 +57,8 @@ public interface Hosting {
      * @return The changelog page URL.
      */
     String locateChangeLog();
+
+    String locateReadme();
 
     /**
      * Returns the URL of the issue tracker page.
@@ -98,6 +104,20 @@ public interface Hosting {
      * @return The latest published date as a string.
      */
     LocalDate getLatestPublishedDate();
+
+    String language();
+
+    int countFork();
+
+    int countStar();
+
+    String icon();
+
+    String id();
+
+    String description();
+
+    String license();
 
     /**
      * Infers and constructs a {@link Hosting} instance from the given URI string.

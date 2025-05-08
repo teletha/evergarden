@@ -59,6 +59,7 @@ import evergarden.page.APIPage;
 import evergarden.page.ActivityPage;
 import evergarden.page.DocumentOnePage;
 import evergarden.page.DocumentPage;
+import evergarden.page.LandingPage;
 import evergarden.web.CodeHighlight;
 import icy.manipulator.Icy;
 import jdk.javadoc.doclet.Doclet;
@@ -503,14 +504,14 @@ public abstract class VioletEvergarden {
         site.buildHTML(new DocumentOnePage("doc/one.html", letter, docs));
 
         // build change log
-        letter.authority().to(repo -> {
-            I.http(repo.locateChangeLog(), String.class).waitForTerminate().skipError().to(md -> {
-                site.buildHTML(new ActivityPage("doc/changelog.html", letter, repo.getChangeLog(md)));
+        letter.authority().to(host -> {
+            I.http(host.locateChangeLog(), String.class).waitForTerminate().skipError().to(md -> {
+                site.buildHTML(new ActivityPage("doc/changelog.html", letter, host.getChangeLog(md)));
             });
         });
 
         // create at last for live reload
-        site.buildHTML(new APIPage("index.html", letter, null));
+        site.buildHTML(new LandingPage("index.html", letter));
     }
 
     /**

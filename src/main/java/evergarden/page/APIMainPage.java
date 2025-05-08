@@ -68,7 +68,7 @@ public class APIMainPage extends Page<VioletEvergarden> {
      * {@inheritDoc}
      */
     @Override
-    protected void declareSubNavigation() {
+    protected void declareAside() {
     }
 
     /**

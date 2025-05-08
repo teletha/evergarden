@@ -81,7 +81,7 @@ public abstract class Page<T> extends HTML {
                         letter.authority().to(repo -> {
                             link("Activity", "doc/changelog.html", "activity");
                             link("Community", repo.locateCommunity(), "user");
-                            link("Repository", repo.locate(), "github");
+                            link("Repository", repo.location(), "github");
                         });
                     });
                     $("div", css.controls, () -> {
@@ -93,7 +93,7 @@ public abstract class Page<T> extends HTML {
                 });
 
                 // =============================
-                // Left Side Navigation
+                // Navigation
                 // =============================
                 $("nav", css.nav);
 
@@ -107,11 +107,11 @@ public abstract class Page<T> extends HTML {
                 });
 
                 // =============================
-                // Right Side Navigation
+                // Aside
                 // =============================
                 $("aside", css.aside, () -> {
                     if (contents != null) {
-                        declareSubNavigation();
+                        declareAside();
                     }
                 });
 
@@ -146,11 +146,11 @@ public abstract class Page<T> extends HTML {
 
     protected abstract void declareContents();
 
-    protected abstract void declareSubNavigation();
+    protected abstract void declareAside();
 
     protected void declareFooter() {
         $("p", text("Powered by "), () -> {
-            $("a", href("https://github.com/teletha/evergarden"), text("Evergarden"));
+            $("a", href("https://github.com/teletha/evergarden"), attr("target", "_"), text("Evergarden"));
         });
     }
 

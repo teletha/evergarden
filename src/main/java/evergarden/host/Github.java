@@ -39,6 +39,8 @@ class Github implements Hosting {
 
     private LocalDate published;
 
+    private JSON metadata;
+
     Github(URI uri) {
         String path = uri.getPath();
         int index = path.indexOf('/', 1);
@@ -49,11 +51,90 @@ class Github implements Hosting {
         this.branch = json.get(String.class, "default_branch");
     }
 
+    private synchronized JSON metadata() {
+        if (metadata == null) {
+            metadata = I.json("https://api.github.com/repos/" + owner + "/" + name);
+        }
+        return metadata;
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public String name() {
+        return name;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String owner() {
+        return owner;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String language() {
+        return metadata().text("language");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int countFork() {
+        return metadata().get(int.class, "forks_count");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int countStar() {
+        return metadata().get(int.class, "stargazers_count");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String icon() {
+        return metadata().get("owner").text("avatar_url");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String id() {
+        return owner + "/" + name;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String description() {
+        return metadata().text("description");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String license() {
+        return metadata().get("license").text("spdx_id");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String service() {
         return "GitHub";
     }
 
@@ -61,7 +142,7 @@ class Github implements Hosting {
      * {@inheritDoc}
      */
     @Override
-    public String locate() {
+    public String location() {
         return "https://github.com/" + owner + "/" + name;
     }
 
@@ -70,7 +151,7 @@ class Github implements Hosting {
      */
     @Override
     public String locateCommunity() {
-        return locate() + "/discussions";
+        return location() + "/discussions";
     }
 
     /**
@@ -85,8 +166,16 @@ class Github implements Hosting {
      * {@inheritDoc}
      */
     @Override
+    public String locateReadme() {
+        return "https://raw.githubusercontent.com/" + owner + "/" + name + "/" + branch + "/README.md";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String locateIssues() {
-        return locate() + "/issues";
+        return location() + "/issues";
     }
 
     /**
@@ -94,7 +183,7 @@ class Github implements Hosting {
      */
     @Override
     public String locateNewIssue(String title, String label, String body) {
-        return locate() + "/issues/new?title=" + title + "&labels=" + label + "&body=" + URLEncoder.encode(body, StandardCharsets.UTF_8);
+        return location() + "/issues/new?title=" + title + "&labels=" + label + "&body=" + URLEncoder.encode(body, StandardCharsets.UTF_8);
     }
 
     /**
@@ -102,7 +191,7 @@ class Github implements Hosting {
      */
     @Override
     public String locateReader(Region region) {
-        return locate() + "/blob/" + branch + "/src/test/java/" + region.location() + "#L" + region.startLine();
+        return location() + "/blob/" + branch + "/src/test/java/" + region.location() + "#L" + region.startLine();
     }
 
     /**
@@ -110,7 +199,7 @@ class Github implements Hosting {
      */
     @Override
     public String locateEditor(Region region) {
-        return locate() + "/edit/" + branch + "/src/test/java/" + region.location() + "#L" + region.startLine() + "-L" + region.endLine();
+        return location() + "/edit/" + branch + "/src/test/java/" + region.location() + "#L" + region.startLine() + "-L" + region.endLine();
     }
 
     /**

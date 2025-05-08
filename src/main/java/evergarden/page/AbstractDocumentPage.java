@@ -97,7 +97,7 @@ public abstract class AbstractDocumentPage<C> extends Page<C> {
 
                 document.region().to(region -> {
                     $("p", text("View this page on "), () -> {
-                        $("a", href(host.locateReader(region)), text(host.name()));
+                        $("a", href(host.locateReader(region)), text(host.service()));
                     });
                 });
                 $("p", text("Report a problem "), () -> {

@@ -34,7 +34,7 @@ public class DocumentOnePage<D extends Document> extends AbstractDocumentPage<Li
      * {@inheritDoc}
      */
     @Override
-    protected void declareSubNavigation() {
+    protected void declareAside() {
         if (!contents.isEmpty()) {
             writeContribution(contents.getFirst().parent().exact());
         }
