@@ -45,19 +45,22 @@
 		<nav class="T"></nav>
 		<article class="I" id="Article">
 			<section class="s"><code class="k">evergarden.page</code>
-				<h2 class="Class M"><code class="l">ActivityPage</code></h2>
+				<h2 class="Class M"><code class="l">DocumentOnePage</code><code class="q">&lt;<code>D</code>&gt;</code></h2>
 				<div class="n">
+					<ul class="C D">
+						<li><code>D</code><code class="extends"><code><a aria-label="evergarden.Document" href="api/evergarden.Document.html">Document</a></code></code></li>
+					</ul>
 					<ul class="C E">
-						<li><code><a aria-label="evergarden.page.AbstractDocumentPage" href="api/evergarden.page.AbstractDocumentPage.html">AbstractDocumentPage</a><code class="parameters"><code><a aria-label="evergarden.Document" href="api/evergarden.Document.html">Document</a></code></code></code></li>
-						<li><code><a aria-label="evergarden.page.Page" href="api/evergarden.page.Page.html">Page</a><code class="parameters"><code><a aria-label="evergarden.Document" href="api/evergarden.Document.html">Document</a></code></code></code></li>
+						<li><code><a aria-label="evergarden.page.AbstractDocumentPage" href="api/evergarden.page.AbstractDocumentPage.html">AbstractDocumentPage</a><code class="parameters"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>D</code></code></code></code></code></li>
+						<li><code><a aria-label="evergarden.page.Page" href="api/evergarden.page.Page.html">Page</a><code class="parameters"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>D</code></code></code></code></code></li>
 						<li><code><a aria-label="evergarden.web.HTML" href="api/evergarden.web.HTML.html">HTML</a></code></li>
 						<li><code>lycoris.HTML</code></li>
 						<li><code>lycoris.Tree<code class="parameters"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code>, <code>kiss.XML</code></code></code></li>
 					</ul>
 				</div>
 			</section>
-			<section class="s" id="ActivityPage(java.lang.String,evergarden.Letter,evergarden.Document)">
-				<h2 class="j"><i class="PUBLIC"></i><code class="l">ActivityPage</code><code class="q">(<code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">path</code>, <code><a aria-label="evergarden.Letter" href="api/evergarden.Letter.html">Letter</a></code><code class="parameterName">letter</code>, <code><a aria-label="evergarden.Document" href="api/evergarden.Document.html">Document</a></code><code class="parameterName">contents</code>)</code></h2>
+			<section class="s" id="DocumentOnePage(java.lang.String,evergarden.Letter,java.util.List)">
+				<h2 class="j"><i class="PUBLIC"></i><code class="l">DocumentOnePage</code><code class="q">(<code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">path</code>, <code><a aria-label="evergarden.Letter" href="api/evergarden.Letter.html">Letter</a></code><code class="parameterName">letter</code>, <code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>D</code></code></code><code class="parameterName">contents</code>)</code></h2>
 				<table class="Y">
 					<tr class="r">
 						<td><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">path</code></td>
@@ -68,7 +71,7 @@
 						<td></td>
 					</tr>
 					<tr class="r">
-						<td><code><a aria-label="evergarden.Document" href="api/evergarden.Document.html">Document</a></code><code class="parameterName">contents</code></td>
+						<td><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>D</code></code></code><code class="parameterName">contents</code></td>
 						<td></td>
 					</tr>
 				</table>
@@ -79,27 +82,17 @@
 			<section class="s" id="declareAside()">
 				<h2 class="j"><i class="OVERRIDE PROTECTED"></i><code class="l">declareAside</code><code class="q">()</code><i class="m"><code>void</code></i></h2>
 			</section>
-			<section class="s" id="transform(kiss.XML)">
-				<h2 class="j"><i class="OVERRIDE PROTECTED"></i><code class="l">transform</code><code class="q">(<code>kiss.XML</code><code class="parameterName">xml</code>)</code><i class="m"><code>void</code></i></h2>
-				<table class="Y">
-					<tr class="r">
-						<td><code>kiss.XML</code><code class="parameterName">xml</code></td>
-						<td></td>
-					</tr>
-				</table>
-			</section>
 		</article>
 		<aside class="U">
 			<div class="W">
 				<h5 class="J">Constructors</h5>
 				<ul>
-					<li class="V"><i class="PUBLIC"></i><code><a href="api/evergarden.page.ActivityPage.html#ActivityPage(java.lang.String,evergarden.Letter,evergarden.Document)">ActivityPage</a></code><code class="q">(<code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">path</code>, <code><a aria-label="evergarden.Letter" href="api/evergarden.Letter.html">Letter</a></code><code class="parameterName">letter</code>, <code><a aria-label="evergarden.Document" href="api/evergarden.Document.html">Document</a></code><code class="parameterName">contents</code>)</code></li>
+					<li class="V"><i class="PUBLIC"></i><code><a href="api/evergarden.page.DocumentOnePage.html#DocumentOnePage(java.lang.String,evergarden.Letter,java.util.List)">DocumentOnePage</a></code><code class="q">(<code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">path</code>, <code><a aria-label="evergarden.Letter" href="api/evergarden.Letter.html">Letter</a></code><code class="parameterName">letter</code>, <code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>D</code></code></code><code class="parameterName">contents</code>)</code></li>
 				</ul>
 				<h5 class="J">Methods</h5>
 				<ul>
-					<li class="V"><i class="OVERRIDE PROTECTED"></i><code><a href="api/evergarden.page.ActivityPage.html#declareContents()">declareContents</a></code><code class="q">()</code><i class="Q"><code>void</code></i></li>
-					<li class="V"><i class="OVERRIDE PROTECTED"></i><code><a href="api/evergarden.page.ActivityPage.html#declareAside()">declareAside</a></code><code class="q">()</code><i class="Q"><code>void</code></i></li>
-					<li class="V"><i class="OVERRIDE PROTECTED"></i><code><a href="api/evergarden.page.ActivityPage.html#transform(kiss.XML)">transform</a></code><code class="q">(<code>kiss.XML</code><code class="parameterName">xml</code>)</code><i class="Q"><code>void</code></i></li>
+					<li class="V"><i class="OVERRIDE PROTECTED"></i><code><a href="api/evergarden.page.DocumentOnePage.html#declareContents()">declareContents</a></code><code class="q">()</code><i class="Q"><code>void</code></i></li>
+					<li class="V"><i class="OVERRIDE PROTECTED"></i><code><a href="api/evergarden.page.DocumentOnePage.html#declareAside()">declareAside</a></code><code class="q">()</code><i class="Q"><code>void</code></i></li>
 				</ul>
 			</div>
 		</aside>

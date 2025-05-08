@@ -27,6 +27,13 @@ const root = {
 		{
 			"modifiers": {
 				"#": "java.util.Collections$UnmodifiableSet",},
+			"name": "AbstractDocumentPage",
+			"packageName": "evergarden.page",
+			"type": "AbstractClass"
+		},
+		{
+			"modifiers": {
+				"#": "java.util.Collections$UnmodifiableSet",},
 			"name": "ActivityPage",
 			"packageName": "evergarden.page",
 			"type": "Class"
@@ -57,6 +64,13 @@ const root = {
 				"#": "java.util.Collections$UnmodifiableSet",},
 			"name": "DocumentInfo",
 			"packageName": "evergarden.javadoc",
+			"type": "Class"
+		},
+		{
+			"modifiers": {
+				"#": "java.util.Collections$UnmodifiableSet",},
+			"name": "DocumentOnePage",
+			"packageName": "evergarden.page",
 			"type": "Class"
 		},
 		{
@@ -114,6 +128,13 @@ const root = {
 			"name": "Hosting",
 			"packageName": "evergarden.host",
 			"type": "Interface"
+		},
+		{
+			"modifiers": {
+				"#": "java.util.Collections$UnmodifiableSet",},
+			"name": "LandingPage",
+			"packageName": "evergarden.page",
+			"type": "Class"
 		},
 		{
 			"modifiers": {
