@@ -28,18 +28,44 @@ public class LandingPage extends Page {
      */
     @Override
     protected void declareContents() {
-        letter.authority().to(host -> {
-            $("a", css.card, href(host.location()), () -> {
-                $("div", () -> {
-                    $("img", css.icon, src(host.icon()));
-                    $("span", text(host.owner() + "  /  " + host.name()));
-                });
-                $("div", text(host.description()));
-                $("div", () -> {
-                    $(svg("star", css.star));
-                    $("span", text(host.countStar()));
-                    $("span", css.fork, text(host.countFork()));
-                    $("span", css.license, text(host.license()));
+        $("div", css.root, () -> {
+            $("h1", css.title, () -> $("code", text(letter.title())));
+            $("p", css.description, text(letter.description()));
+
+            $("div", css.box, () -> {
+                $("a", href(""), css.button, text("Getting started"));
+                $("a", href(""), css.button, text("Download " + letter.title()));
+            });
+
+            $("div", css.overflowbox, () -> {
+                $("p", text("inline text"));
+            });
+            $("div", css.overflowbox, () -> {
+                $("p", text("inline text"));
+            });
+            $("div", css.overflowbox, () -> {
+                $("p", text("inline text"));
+            });
+
+            letter.authority().to(host -> {
+                $("div", css.overflowbox, () -> {
+                    $("a", css.card, href(host.location()), () -> {
+                        $("div", css.name, () -> {
+                            $("img", css.icon, src(host.icon()));
+                            $("span", text(host.owner() + "  /  " + host.name()));
+                        });
+                        $("div", text(host.description()));
+                        $("div", () -> {
+                            $(svg("star"));
+                            $("span", css.value, text(host.countStar()));
+                            $(svg("fork"));
+                            $("span", css.value, text(host.countFork()));
+                            $(svg("license"));
+                            $("span", css.value, text(host.license()));
+                            $(svg("language"));
+                            $("span", css.value, text(host.language()));
+                        });
+                    });
                 });
             });
         });
@@ -54,44 +80,89 @@ public class LandingPage extends Page {
 
     interface css extends EvergardenDSL {
 
+        Style root = () -> {
+            display.width(70, percent);
+            margin.auto();
+        };
+
+        Style title = () -> {
+            font.size(4.5, rem).family(Theme.title);
+            text.align.center();
+            margin.top(3, rem);
+        };
+
+        Style description = () -> {
+            font.size(1.3, rem);
+            margin.vertical(3, rem);
+            text.align.center().wrap.balance();
+        };
+
+        Style box = () -> {
+            margin.bottom(2, rem);
+            text.align.center();
+        };
+
+        Style overflowbox = () -> {
+            display.block().minBlock(300, px);
+
+            padding.vertical(4, rem);
+
+            $.nthChild("odd", () -> {
+                background.viewportInline(Theme.surface.lighten(-10).opacify(-0.7));
+            });
+
+            $.nthChild("even", () -> {
+                background.viewportInline(Theme.surface.lighten(10).opacify(-0.7));
+            });
+        };
+
+        Style button = () -> {
+            display.inlineBlock().width(200, px);
+            border.radius(Theme.radius).color(Theme.border).solid().width(2, px);
+            padding.horizontal(1.5, rem).vertical(1, rem);
+            font.size(1.2, rem);
+            text.align.center().decoration.none();
+
+            $.hover(() -> {
+                border.color(Theme.link);
+            });
+
+            $.firstChild(() -> {
+                margin.right(1, rem);
+            });
+        };
+
         Style card = () -> {
             display.block();
             border.radius(Theme.radius).width(1, px).solid().color(Theme.surface.lighten(Theme.front, 6));
             padding.left(1.6, em).vertical(1.2, em);
             background.color(Theme.surface.lighten(Theme.front, 3));
             text.decoration.none();
+
+            $.transit().easeIn().duration(0.15, s).when().hover(() -> {
+                background.color(Theme.accent.opacify(-0.7));
+            });
+
+            $.select("svg", () -> {
+                display.size(16, px);
+                fill.current();
+                transform.translateY(2, px);
+            });
         };
 
         Style icon = () -> {
-            display.size(1.5, rem);
+            display.size(2.3, rem);
             border.radius(50, percent);
             text.verticalAlign.middle();
             margin.right(1, rem);
         };
 
-        Style star = () -> {
-            display.size(24, px);
-            fill.color(Theme.front);
+        Style name = () -> {
+            font.size(1.3, em);
         };
 
-        Style fork = () -> {
-            margin.right(2, em);
-
-            $.before(() -> {
-                font.family(Theme.icon);
-                content.text("\\e80d");
-                margin.right(0.5, rem);
-            });
-        };
-
-        Style license = () -> {
-            margin.right(2, em);
-
-            $.before(() -> {
-                font.family(Theme.icon);
-                content.text("\\e90c");
-                margin.right(0.5, rem);
-            });
+        Style value = () -> {
+            margin.right(2, rem).left(0.5, rem);
         };
     }
 }

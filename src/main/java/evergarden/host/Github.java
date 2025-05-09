@@ -102,6 +102,22 @@ class Github implements Hosting {
      * {@inheritDoc}
      */
     @Override
+    public int countWatch() {
+        return metadata().get(int.class, "watchers_count");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int countIssue() {
+        return metadata().get(int.class, "open_issues_count");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String icon() {
         return metadata().get("owner").text("avatar_url");
     }

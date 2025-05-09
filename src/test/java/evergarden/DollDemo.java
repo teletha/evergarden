@@ -37,7 +37,7 @@ public class DollDemo {
                 .title("Sinobu")
                 .sources("../sinobu/src/main/java")
                 .documents("../sinobu/src/test/java")
-                .description("Sinobu is not obsolete framework but utility, which can manipulate objects as a extremely-condensed facade.")
+                .description("Sinobu is not obsolete framework but utility, which can manipulate objects as a extremely-condensed facade. This is extremely lightweight at approximately 120KB without relying on other libraries.")
                 .classpathBy(path)
                 .host("https://github.com/teletha/sinobu")
                 .useExternalJDKDoc()

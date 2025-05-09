@@ -66,13 +66,8 @@ public abstract class AbstractDocumentPage<C> extends Page<C> {
             $(xml(heading.size() != 0 ? heading : I.xml("h" + level).text(document.title())));
             if (useIcons) {
                 $("div", CSS.meta, () -> {
-                    $("span", clazz("perp"), CSS.icon, () -> {
-                        $(svg("copy"));
-                    });
-
-                    $("a", clazz("tweet"), CSS.icon, () -> {
-                        $(svg("twitter"));
-                    });
+                    $("span", clazz("perp"), CSS.icon, svg("copy"));
+                    $("a", clazz("tweet"), CSS.icon, svg("twitter"));
 
                     letter.authority().to(repo -> {
                         document.region().to(area -> {
@@ -87,6 +82,7 @@ public abstract class AbstractDocumentPage<C> extends Page<C> {
                 });
             }
         });
+
         $(xml(doc));
     }
 
@@ -138,6 +134,12 @@ public abstract class AbstractDocumentPage<C> extends Page<C> {
             font.lineHeight(1);
             margin.left(IconSize);
             cursor.pointer();
+
+            $.select("svg", Styles.SVGButtonEffect.with(() -> {
+                display.size(IconSize);
+                fill.none();
+                stroke.current().width(2.1, px).linecap.round().linejoin.round();
+            }));
         };
 
         Style foot = () -> {
@@ -148,7 +150,7 @@ public abstract class AbstractDocumentPage<C> extends Page<C> {
             font.size(0.8, rem);
             margin.bottom(1, rem);
 
-            $.select("h3,h4,h5,h6", () -> {
+            $.select(":is(h3,h4,h5,h6)", () -> {
                 font.size(0.9, rem);
                 margin.bottom(0.2, rem);
             });

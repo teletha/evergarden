@@ -13,6 +13,7 @@ import java.time.LocalDate;
 
 import evergarden.Letter;
 import evergarden.design.EvergardenDSL;
+import evergarden.design.Styles;
 import evergarden.host.Hosting;
 import evergarden.web.HTML;
 import kiss.XML;
@@ -257,9 +258,11 @@ public abstract class Page<T> extends HTML {
                 margin.right(1, em);
             });
 
-            $.select("svg", () -> {
-                display.width(20, px).height(20, px);
-            });
+            $.select("svg", Styles.SVGButtonEffect.with(() -> {
+                display.size(20, px);
+                stroke.current().width(2.1, px);
+                fill.none();
+            }));
 
             $.when(EvergardenDSL.Small, () -> {
                 display.none();
@@ -301,6 +304,7 @@ public abstract class Page<T> extends HTML {
                 $.select("svg", () -> {
                     display.size(iconSize);
                     stroke.color(Theme.front.lighten(Theme.back, -15)).width(1.2, px);
+                    fill.none();
                     transition.duration(0.2, s).whenever();
                 });
 

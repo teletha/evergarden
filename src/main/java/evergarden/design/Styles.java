@@ -79,15 +79,7 @@ public class Styles implements EvergardenDSL {
 
     public static Style TOOLTIP = Browsers.tooltip("aria-label", true, Theme.front, Theme.back);
 
-    public static Style SVG = Style.named(".svg", () -> {
-        display.width(16, px);
-        stroke.current().linejoin.round().linecap.round().width(1.5, px);
-        fill.none();
-    });
-
-    public static Style AnimatedSVG = SVG.with(() -> {
-        stroke.width(2.5, px).color(Theme.front);
-
+    public static Style SVGButtonEffect = () -> {
         $.transit().duration(0.5, s).when().hover(() -> {
             stroke.color(Theme.accent);
         });
@@ -95,7 +87,7 @@ public class Styles implements EvergardenDSL {
         $.transit().duration(0.05, s).ease().when().active(() -> {
             transform.translateY(3, px);
         });
-    });
+    };
 
     public static Style PRE = Style.named("pre", () -> {
         text.whiteSpace.preWrap().wordBreak.breakAll();
@@ -117,9 +109,10 @@ public class Styles implements EvergardenDSL {
         $.select("a", () -> {
             position.absolute().right(8, px).top(6, px);
 
-            $.select("svg", AnimatedSVG.with(() -> {
+            $.select("svg", SVGButtonEffect.with(() -> {
                 display.width(14, px);
                 stroke.current().width(2, px);
+                fill.none();
             }));
         });
 

@@ -11,7 +11,6 @@ package evergarden.web;
 
 import java.util.function.Consumer;
 
-import evergarden.design.Styles;
 import kiss.XML;
 import stylist.Style;
 
@@ -22,15 +21,7 @@ public abstract class HTML extends lycoris.HTML {
 
     protected final Consumer<XML> svg(String type) {
         return parent -> {
-            $("svg", attr("viewBox", "0 0 24 24"), attr("class", type), Styles.AnimatedSVG, () -> {
-                $("use", attr("href", "main.svg#" + type));
-            });
-        };
-    }
-
-    protected final Consumer<XML> svg(String type, Style style) {
-        return parent -> {
-            $("svg", attr("viewBox", "0 0 24 24"), attr("class", type), style, () -> {
+            $("svg", clazz(type), () -> {
                 $("use", attr("href", "main.svg#" + type));
             });
         };

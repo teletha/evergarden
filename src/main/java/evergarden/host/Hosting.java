@@ -111,6 +111,10 @@ public interface Hosting {
 
     int countStar();
 
+    int countWatch();
+
+    int countIssue();
+
     String icon();
 
     String id();
