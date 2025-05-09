@@ -511,7 +511,7 @@ public abstract class VioletEvergarden {
         });
 
         // create at last for live reload
-        site.buildHTML(new LandingPage("index.html", letter));
+        site.buildHTML(new LandingPage("index.html", letter, docs));
     }
 
     /**

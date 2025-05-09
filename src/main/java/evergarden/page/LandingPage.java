@@ -9,18 +9,23 @@
  */
 package evergarden.page;
 
+import java.util.List;
+
+import evergarden.Document;
 import evergarden.Letter;
 import evergarden.design.EvergardenDSL;
+import evergarden.javadoc.ClassInfo;
+import kiss.I;
 import stylist.Style;
 
-public class LandingPage extends Page {
+public class LandingPage extends Page<List<ClassInfo>> {
 
     /**
      * @param path
      * @param letter
      */
-    public LandingPage(String path, Letter letter) {
-        super(path, letter, new Object());
+    public LandingPage(String path, Letter letter, List<ClassInfo> docs) {
+        super(path, letter, docs);
     }
 
     /**
@@ -36,6 +41,16 @@ public class LandingPage extends Page {
                 $("a", href(""), css.button, text("Getting started"));
                 $("a", href(""), css.button, text("Download " + letter.title()));
             });
+
+            I.signal(contents)
+                    .as(Document.class)
+                    .recurseMap(x -> x.flatIterable(Document::children))
+                    .take(doc -> doc.title().toLowerCase().equals("futures"))
+                    .first()
+                    .flatIterable(doc -> doc.contents().find("h2,h3,h4"))
+                    .to(x -> {
+                        System.out.println(x);
+                    });
 
             $("div", css.overflowbox, () -> {
                 $("p", text("inline text"));
