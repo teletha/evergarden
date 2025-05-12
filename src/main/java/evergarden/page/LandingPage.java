@@ -17,6 +17,7 @@ import evergarden.design.EvergardenDSL;
 import evergarden.javadoc.ClassInfo;
 import kiss.I;
 import stylist.Style;
+import stylist.value.Numeric;
 
 public class LandingPage extends Page<List<ClassInfo>> {
 
@@ -42,28 +43,23 @@ public class LandingPage extends Page<List<ClassInfo>> {
                 $("a", href(""), css.button, text("Download " + letter.title()));
             });
 
-            I.signal(contents)
-                    .as(Document.class)
-                    .recurseMap(x -> x.flatIterable(Document::children))
-                    .take(doc -> doc.title().toLowerCase().equals("futures"))
-                    .first()
-                    .flatIterable(doc -> doc.contents().find("h2,h3,h4"))
-                    .to(x -> {
-                        System.out.println(x);
-                    });
-
-            $("div", css.overflowbox, () -> {
-                $("p", text("inline text"));
-            });
-            $("div", css.overflowbox, () -> {
-                $("p", text("inline text"));
-            });
-            $("div", css.overflowbox, () -> {
-                $("p", text("inline text"));
+            $("section", css.overflowbox, () -> {
+                I.signal(contents)
+                        .as(Document.class)
+                        .recurseMap(x -> x.flatIterable(Document::children))
+                        .take(doc -> doc.title().toLowerCase().equals("futures"))
+                        .first()
+                        .flatIterable(doc -> doc.contents().find("h2,h3,h4"))
+                        .to(x -> {
+                            $("div", css.fuature, () -> {
+                                $("h3", css.featureTitle, text(x.text()));
+                                $(x.nextUntil("h4").clone());
+                            });
+                        });
             });
 
             letter.authority().to(host -> {
-                $("div", css.overflowbox, () -> {
+                $("section", css.overflowbox, () -> {
                     $("a", css.card, href(host.location()), () -> {
                         $("div", css.name, () -> {
                             $("img", css.icon, src(host.icon()));
@@ -118,9 +114,9 @@ public class LandingPage extends Page<List<ClassInfo>> {
         };
 
         Style overflowbox = () -> {
-            display.block().minBlock(300, px);
-
+            display.minBlock(300, px).grid().column(Numeric.num(1, fr), Numeric.num(1, fr)).gap(6, rem);
             padding.vertical(4, rem);
+            margin.horizontal(-12, dvw);
 
             $.nthChild("odd", () -> {
                 background.viewportInline(Theme.surface.lighten(-10).opacify(-0.7));
@@ -129,6 +125,14 @@ public class LandingPage extends Page<List<ClassInfo>> {
             $.nthChild("even", () -> {
                 background.viewportInline(Theme.surface.lighten(10).opacify(-0.7));
             });
+        };
+
+        Style featureTitle = () -> {
+            font.weight.normal();
+            margin.bottom(1, em);
+        };
+
+        Style fuature = () -> {
         };
 
         Style button = () -> {
@@ -150,7 +154,7 @@ public class LandingPage extends Page<List<ClassInfo>> {
         Style card = () -> {
             display.block();
             border.radius(Theme.radius).width(1, px).solid().color(Theme.surface.lighten(Theme.front, 6));
-            padding.left(1.6, em).vertical(1.2, em);
+            padding.horizontal(1.6, em).vertical(1.2, em);
             background.color(Theme.surface.lighten(Theme.front, 3));
             text.decoration.none();
 

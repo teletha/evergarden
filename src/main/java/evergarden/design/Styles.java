@@ -606,7 +606,8 @@ public class Styles implements EvergardenDSL {
 
         $.select(".svg", () -> {
             display.inlineBlock().width(iconSize);
-            stroke.width(2, px);
+            stroke.width(2, px).current();
+            fill.none();
             transform.rotate(90, deg);
             transition.duration(0.2, s).easeInOut().whenever();
             position.absolute().top(Numeric.num(50, percent).subtract(iconSize.divide(2)));

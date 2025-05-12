@@ -75,7 +75,9 @@ public abstract class Page<T> extends HTML {
                 // Top Navigation
                 // =============================
                 $("header", css.header, attr("date", letter.authority().map(Hosting::getLatestPublishedDate).or(LocalDate.now())), () -> {
-                    $("h1", css.title, code(letter.title()));
+                    $("h1", css.title, () -> {
+                        $("a", href("index.html"), code(letter.title()));
+                    });
                     $("nav", css.links, () -> {
                         letter.doc().to(doc -> link("Manual", doc.path(), "text"));
                         letter.api().to(api -> link("API", "api/main.html", "package"));
@@ -278,6 +280,10 @@ public abstract class Page<T> extends HTML {
 
             $.when(BASE, () -> {
                 padding.inlineStart(2, rem);
+            });
+
+            $.select("a", () -> {
+                text.decoration.none();
             });
         };
 
