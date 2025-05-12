@@ -13,9 +13,11 @@ import java.util.List;
 
 import evergarden.Document;
 import evergarden.Letter;
+import evergarden.Letter.Doc;
 import evergarden.design.EvergardenDSL;
 import evergarden.javadoc.ClassInfo;
 import kiss.I;
+import kiss.XML;
 import stylist.Style;
 import stylist.value.Numeric;
 
@@ -39,24 +41,27 @@ public class LandingPage extends Page<List<ClassInfo>> {
             $("p", css.description, text(letter.description()));
 
             $("div", css.box, () -> {
-                $("a", href(""), css.button, text("Getting started"));
+                $("a", href(letter.doc().map(Doc::path).or("")), css.button, text("Getting started"));
                 $("a", href(""), css.button, text("Download " + letter.title()));
             });
 
-            $("section", css.overflowbox, () -> {
-                I.signal(contents)
-                        .as(Document.class)
-                        .recurseMap(x -> x.flatIterable(Document::children))
-                        .take(doc -> doc.title().toLowerCase().equals("futures"))
-                        .first()
-                        .flatIterable(doc -> doc.contents().find("h2,h3,h4"))
-                        .to(x -> {
-                            $("div", css.fuature, () -> {
-                                $("h3", css.featureTitle, text(x.text()));
-                                $(x.nextUntil("h4").clone());
-                            });
+            I.signal(contents)
+                    .as(Document.class)
+                    .recurseMap(x -> x.flatIterable(Document::children))
+                    .take(doc -> doc.title().toLowerCase().equals("futures"))
+                    .first()
+                    .flatIterable(doc -> doc.contents().find("h4"))
+                    .buffer(2)
+                    .to(list -> {
+                        $("section", css.overflowbox, () -> {
+                            for (XML x : list) {
+                                $("div", css.fuature, () -> {
+                                    $("h3", css.featureTitle, text(x.text()));
+                                    $(x.nextUntil("h4").clone());
+                                });
+                            }
                         });
-            });
+                    });
 
             letter.authority().to(host -> {
                 $("section", css.overflowbox, () -> {
@@ -133,6 +138,10 @@ public class LandingPage extends Page<List<ClassInfo>> {
         };
 
         Style fuature = () -> {
+
+            $.select("p", () -> {
+                text.wrap.balance();
+            });
         };
 
         Style button = () -> {
