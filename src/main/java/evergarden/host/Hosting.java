@@ -11,6 +11,7 @@ package evergarden.host;
 
 import java.net.URI;
 import java.time.LocalDate;
+import java.util.List;
 
 import evergarden.Document;
 import evergarden.Region;
@@ -122,6 +123,10 @@ public interface Hosting {
     String description();
 
     String license();
+
+    List<Contributor> contributors();
+
+    List<Release> releases();
 
     /**
      * Infers and constructs a {@link Hosting} instance from the given URI string.

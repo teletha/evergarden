@@ -12,7 +12,9 @@ package evergarden.host;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,8 @@ import kiss.XML;
 
 class Github implements Hosting {
 
+    private final REST rest = I.make(REST.class);
+
     private final String owner;
 
     private final String name;
@@ -39,7 +43,9 @@ class Github implements Hosting {
 
     private LocalDate published;
 
-    private JSON metadata;
+    private List<Contributor> contributors;
+
+    private List<Release> releases;
 
     Github(URI uri) {
         String path = uri.getPath();
@@ -52,10 +58,7 @@ class Github implements Hosting {
     }
 
     private synchronized JSON metadata() {
-        if (metadata == null) {
-            metadata = I.json("https://api.github.com/repos/" + owner + "/" + name);
-        }
-        return metadata;
+        return rest.data("https://api.github.com/repos/" + owner + "/" + name);
     }
 
     /**
@@ -144,6 +147,39 @@ class Github implements Hosting {
     @Override
     public String license() {
         return metadata().get("license").text("spdx_id");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public synchronized List<Contributor> contributors() {
+        if (contributors == null) {
+            contributors = new ArrayList();
+
+            rest.data(metadata().text("contributors_url")).find("*").forEach(json -> {
+                contributors.add(new Contributor(json.text("login"), json.text("avatar_url"), json.text("html_url")));
+            });
+        }
+        return contributors;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Release> releases() {
+        if (releases == null) {
+            releases = new ArrayList();
+
+            rest.data("https://api.github.com/repos/" + owner + "/" + name + "/releases").find("*").stream().limit(5).forEach(json -> {
+                System.out.println(json);
+                releases.add(new Release(json.text("tag_name"), Instant.parse(json.text("published_at"))
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate(), json.text("body"), json.text("html_url")));
+            });
+        }
+        return releases;
     }
 
     /**

@@ -15,6 +15,8 @@ import evergarden.Document;
 import evergarden.Letter;
 import evergarden.Letter.Doc;
 import evergarden.design.EvergardenDSL;
+import evergarden.host.Contributor;
+import evergarden.host.Release;
 import evergarden.javadoc.ClassInfo;
 import kiss.I;
 import kiss.XML;
@@ -55,8 +57,8 @@ public class LandingPage extends Page<List<ClassInfo>> {
                     .to(list -> {
                         $("section", css.overflowbox, () -> {
                             for (XML x : list) {
-                                $("div", css.fuature, () -> {
-                                    $("h3", css.featureTitle, text(x.text()));
+                                $("div", css.feature, () -> {
+                                    $("h3", css.heading, text(x.text()));
                                     $(x.nextUntil("h4").clone());
                                 });
                             }
@@ -68,7 +70,7 @@ public class LandingPage extends Page<List<ClassInfo>> {
                     $("a", css.card, href(host.location()), () -> {
                         $("div", css.name, () -> {
                             $("img", css.icon, src(host.icon()));
-                            $("span", text(host.owner() + "  /  " + host.name()));
+                            $("span", css.project, text(host.owner() + "  /  " + host.name()));
                         });
                         $("div", text(host.description()));
                         $("div", () -> {
@@ -81,6 +83,27 @@ public class LandingPage extends Page<List<ClassInfo>> {
                             $(svg("language"));
                             $("span", css.value, text(host.language()));
                         });
+                    });
+
+                    $("div", () -> {
+                        $("h3", css.heading, text("🧑‍🔧 Contributors"));
+                        for (Contributor contributor : host.contributors()) {
+                            $("a", href(contributor.url()), attr("aria-label", contributor.name()), () -> {
+                                $("img", css.icon, src(contributor.icon()));
+                            });
+                        }
+                    });
+                });
+
+                $("section", css.overflowbox, () -> {
+                    $("div", () -> {
+                        $("h3", css.heading, text("‍🔧 Latest Release"));
+                        for (Release release : host.releases()) {
+                            $("a", href(release.url()), () -> {
+                                $("span", text(release.version()));
+                            });
+                            $("div", text(release.note()));
+                        }
                     });
                 });
             });
@@ -132,15 +155,15 @@ public class LandingPage extends Page<List<ClassInfo>> {
             });
         };
 
-        Style featureTitle = () -> {
+        Style heading = () -> {
             font.weight.normal();
             margin.bottom(1, em);
         };
 
-        Style fuature = () -> {
-
+        Style feature = () -> {
             $.select("p", () -> {
-                text.wrap.balance();
+                margin.bottom(1, em);
+                text.align.justify().wordSpacing(-1, px);
             });
         };
 
@@ -182,7 +205,16 @@ public class LandingPage extends Page<List<ClassInfo>> {
             display.size(2.3, rem);
             border.radius(50, percent);
             text.verticalAlign.middle();
-            margin.right(1, rem);
+            margin.size(0.2, rem);
+            transition.duration(0.15, s).easeIn().whenever();
+
+            $.hover(() -> {
+                transform.scale(1.3);
+            });
+        };
+
+        Style project = () -> {
+            margin.left(1, rem);
         };
 
         Style name = () -> {
