@@ -172,7 +172,7 @@ class Github implements Hosting {
         if (releases == null) {
             releases = new ArrayList();
 
-            rest.data("https://api.github.com/repos/" + owner + "/" + name + "/releases").find("*").stream().limit(5).forEach(json -> {
+            rest.data("https://api.github.com/repos/" + owner + "/" + name + "/releases").find("*").forEach(json -> {
                 System.out.println(json);
                 releases.add(new Release(json.text("tag_name"), Instant.parse(json.text("published_at"))
                         .atZone(ZoneId.systemDefault())
