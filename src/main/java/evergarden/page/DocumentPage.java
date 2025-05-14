@@ -54,13 +54,14 @@ public class DocumentPage<D extends Document> extends AbstractDocumentPage<D> {
     interface css extends EvergardenDSL {
 
         Style box = () -> {
-            border.radius(Theme.radius);
+            border.radius(Theme.radius).color(Theme.surface.lighten(Theme.front, 6)).width(1, px).solid();
             background.color(Theme.surface);
             padding.vertical(1, rem).horizontal(1.5, rem);
             text.decoration.none().verticalAlign.middle();
 
-            $.hover(() -> {
-                background.color(Theme.accent.opacify(-0.7));
+            $.transit().easeIn().duration(0.15, s).when().hover(() -> {
+                border.color(Theme.secondary);
+                background.color(Theme.secondary.opacify(-0.8));
             });
         };
 

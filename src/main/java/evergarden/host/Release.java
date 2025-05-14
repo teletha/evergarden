@@ -11,6 +11,8 @@ package evergarden.host;
 
 import java.time.LocalDate;
 
-public record Release(String version, LocalDate date, String note, String url) {
+import kiss.XML;
+
+public record Release(String version, LocalDate date, XML note, String url) {
 
 }

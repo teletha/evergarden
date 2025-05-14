@@ -348,20 +348,12 @@ public abstract class Page<T> extends HTML {
         };
 
         Style article = () -> {
-            display.width(99.9, percent);
+            display.opacity(1);
             font.letterSpacing(-0.025, rem);
-            position.relative();
+            transition.duration(0.15, s).ease().whenever();
 
-            $.after(() -> {
-                content.text("");
-                position.absolute().top(EvergardenDSL.BlockVerticalGap).left(0, px);
-                display.width(100, percent).height(100, percent).zIndex(5).opacity(0).block();
-                background.color(Theme.surface);
-                pointerEvents.none();
-
-                $.transit().ease().duration(0.15, s).when().with(".fadeout", () -> {
-                    display.opacity(1);
-                });
+            $.with(".fadeout", () -> {
+                display.opacity(0);
             });
         };
 

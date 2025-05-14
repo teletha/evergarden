@@ -233,6 +233,18 @@ public class Styles implements EvergardenDSL {
         });
     });
 
+    public static Style ACTIVATABLE_BOX = () -> {
+        display.block();
+        transition.easeIn().duration(0.15, s).whenever();
+        background.color(Theme.surface.lighten(Theme.front, 3));
+        border.radius(Theme.radius).width(Theme.border).solid().color(Theme.surface.lighten(Theme.front, 6));
+
+        $.hover(() -> {
+            background.color(Theme.secondary.opacify(-0.8));
+            border.color(Theme.secondary);
+        });
+    };
+
     public static Style JavadocComment = () -> {
         $.select("p", () -> {
             block();

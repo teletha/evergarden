@@ -15,7 +15,9 @@ import evergarden.Document;
 import evergarden.Letter;
 import evergarden.Letter.Doc;
 import evergarden.design.EvergardenDSL;
+import evergarden.design.Styles;
 import evergarden.host.Contributor;
+import evergarden.host.Hosting;
 import evergarden.host.Release;
 import evergarden.javadoc.ClassInfo;
 import kiss.I;
@@ -44,7 +46,11 @@ public class LandingPage extends Page<List<ClassInfo>> {
 
             $("div", css.box, () -> {
                 $("a", href(letter.doc().map(Doc::path).or("")), css.button, text("Getting started"));
-                $("a", href(""), css.button, text("Download " + letter.title()));
+                $("a", href(letter.authority()
+                        .map(Hosting::releases)
+                        .map(List::getFirst)
+                        .map(Release::url)
+                        .or("")), css.button, text("Download " + letter.title()));
             });
 
             I.signal(contents)
@@ -91,18 +97,6 @@ public class LandingPage extends Page<List<ClassInfo>> {
                             $("a", href(contributor.url()), attr("aria-label", contributor.name()), () -> {
                                 $("img", css.icon, src(contributor.icon()));
                             });
-                        }
-                    });
-                });
-
-                $("section", css.overflowbox, () -> {
-                    $("div", () -> {
-                        $("h3", css.heading, text("‍🔧 Latest Release"));
-                        for (Release release : host.releases()) {
-                            $("a", href(release.url()), () -> {
-                                $("span", text(release.version()));
-                            });
-                            $("div", text(release.note()));
                         }
                     });
                 });
@@ -167,39 +161,27 @@ public class LandingPage extends Page<List<ClassInfo>> {
             });
         };
 
-        Style button = () -> {
+        Style button = Styles.ACTIVATABLE_BOX.with(() -> {
             display.inlineBlock().width(200, px);
-            border.radius(Theme.radius).color(Theme.border).solid().width(2, px);
             padding.horizontal(1.5, rem).vertical(1, rem);
             font.size(1.2, rem);
             text.align.center().decoration.none();
 
-            $.hover(() -> {
-                border.color(Theme.link);
-            });
-
             $.firstChild(() -> {
                 margin.right(1, rem);
             });
-        };
+        });
 
-        Style card = () -> {
-            display.block();
-            border.radius(Theme.radius).width(1, px).solid().color(Theme.surface.lighten(Theme.front, 6));
+        Style card = Styles.ACTIVATABLE_BOX.with(() -> {
             padding.horizontal(1.6, em).vertical(1.2, em);
-            background.color(Theme.surface.lighten(Theme.front, 3));
             text.decoration.none();
-
-            $.transit().easeIn().duration(0.15, s).when().hover(() -> {
-                background.color(Theme.accent.opacify(-0.7));
-            });
 
             $.select("svg", () -> {
                 display.size(16, px);
                 fill.current();
                 transform.translateY(2, px);
             });
-        };
+        });
 
         Style icon = () -> {
             display.size(2.3, rem);

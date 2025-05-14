@@ -57,9 +57,6 @@ public class REST implements Storable<REST> {
             cache.put(url, item);
             store();
         }
-
-        System.out.println(new String(Base64.getDecoder().decode(item.data)));
-        System.out.println(I.json(new String(Base64.getDecoder().decode(item.data))));
         return I.json(new String(Base64.getDecoder().decode(item.data)));
     }
 

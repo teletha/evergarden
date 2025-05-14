@@ -27,6 +27,7 @@ import org.commonmark.renderer.html.HtmlRenderer;
 
 import evergarden.Document;
 import evergarden.Region;
+import evergarden.javadoc.Markdown;
 import kiss.I;
 import kiss.JSON;
 import kiss.XML;
@@ -173,10 +174,9 @@ class Github implements Hosting {
             releases = new ArrayList();
 
             rest.data("https://api.github.com/repos/" + owner + "/" + name + "/releases").find("*").forEach(json -> {
-                System.out.println(json);
                 releases.add(new Release(json.text("tag_name"), Instant.parse(json.text("published_at"))
                         .atZone(ZoneId.systemDefault())
-                        .toLocalDate(), json.text("body"), json.text("html_url")));
+                        .toLocalDate(), Markdown.parse(json.text("body")), json.text("html_url")));
             });
         }
         return releases;
