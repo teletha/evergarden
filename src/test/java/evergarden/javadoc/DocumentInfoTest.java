@@ -31,7 +31,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void text() {
         ExecutableInfo info = currentMethod();
-        assert sameXML(info.comment, "<span class='B'><p>Text</p></span>");
+        assert sameXML(info.comment, "<span class='A'><p>Text</p></span>");
     }
 
     /**
@@ -42,7 +42,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void element() {
         ExecutableInfo info = currentMethod();
-        assert sameXML(info.comment, "<span class='B'><p>Text</p></span>");
+        assert sameXML(info.comment, "<span class='A'><p>Text</p></span>");
     }
 
     /**
@@ -51,7 +51,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void attribute() {
         ExecutableInfo info = currentMethod();
-        assert sameXML(info.comment, "<span class='B'><a href=\"test.css\" type=\"stylesheet\"/></span>");
+        assert sameXML(info.comment, "<span class='A'><a href=\"test.css\" type=\"stylesheet\"/></span>");
     }
 
     /***
@@ -60,7 +60,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void markdown() {
         ExecutableInfo info = currentMethod();
-        assert sameXML(info.comment, "<span class='B'><p>This text is written by markdown.</p></span>");
+        assert sameXML(info.comment, "<span class='A'><p>This text is written by markdown.</p></span>");
     }
 
     /**
@@ -71,7 +71,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void markdownTitle() {
         ExecutableInfo info = currentMethod();
-        assert sameXML(info.comment, "<span class='B'><h2>Title</h2><p>This text is written by markdown.</p></span>");
+        assert sameXML(info.comment, "<span class='A'><h2>Title</h2><p>This text is written by markdown.</p></span>");
     }
 
     /**
@@ -84,7 +84,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void markdownList() {
         ExecutableInfo info = currentMethod();
-        assert sameXML(info.comment, "<span class='B'><p>This text is written by markdown.</p><ul><li>item1</li><li>item2</li><li>item3</li></ul></span>");
+        assert sameXML(info.comment, "<span class='A'><p>This text is written by markdown.</p><ul><li>item1</li><li>item2</li><li>item3</li></ul></span>");
     }
 
     @Test
@@ -161,7 +161,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void literalTag() {
         ExecutableInfo info = currentMethod();
-        assert sameXML(info.comment, "<span class='B'><code>0 &amp;lt; i</code></span>");
+        assert sameXML(info.comment, "<span class='A'><code>0 &amp;lt; i</code></span>");
     }
 
     /**
@@ -170,7 +170,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void linkTagInternalType() {
         ExecutableInfo info = currentMethod();
-        assert sameXML(info.comment, "<span class='B'><code><a href='" + BASE + "' aria-label='evergarden.javadoc.DocumentInfoTest'>DocumentInfoTest</a></code></span>");
+        assert sameXML(info.comment, "<span class='A'><code><a href='" + BASE + "' aria-label='evergarden.javadoc.DocumentInfoTest'>DocumentInfoTest</a></code></span>");
     }
 
     /**
@@ -179,7 +179,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void linkTagInternalMethod() {
         ExecutableInfo info = currentMethod();
-        assert sameXML(info.comment, "<span class='B'><code><a href='" + BASE + "#linkTagInternalMethod()' aria-label='evergarden.javadoc.DocumentInfoTest'>#linkTagInternalMethod()</a></code></span>");
+        assert sameXML(info.comment, "<span class='A'><code><a href='" + BASE + "#linkTagInternalMethod()' aria-label='evergarden.javadoc.DocumentInfoTest'>#linkTagInternalMethod()</a></code></span>");
     }
 
     /**
@@ -188,7 +188,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void linkTagInternalTypeAndMethod() {
         ExecutableInfo info = currentMethod();
-        assert sameXML(info.comment, "<span class='B'><code><a href='" + BASE + "#linkTagInternalTypeAndMethod()' aria-label='evergarden.javadoc.DocumentInfoTest'>DocumentInfoTest#linkTagInternalTypeAndMethod()</a></code></span>");
+        assert sameXML(info.comment, "<span class='A'><code><a href='" + BASE + "#linkTagInternalTypeAndMethod()' aria-label='evergarden.javadoc.DocumentInfoTest'>DocumentInfoTest#linkTagInternalTypeAndMethod()</a></code></span>");
     }
 
     /**
@@ -196,7 +196,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
      */
     public void linkTagInternalSiblingType() {
         ExecutableInfo info = currentMethod();
-        assert sameXML(info.comment, "<span class='B'><code><a href='" + BASE + "#linkTagInternalTypeAndMethod()' aria-label='evergarden.javadoc.DocumentInfoTest'>DocumentInfoTest#linkTagInternalTypeAndMethod()</a></code></span>");
+        assert sameXML(info.comment, "<span class='A'><code><a href='" + BASE + "#linkTagInternalTypeAndMethod()' aria-label='evergarden.javadoc.DocumentInfoTest'>DocumentInfoTest#linkTagInternalTypeAndMethod()</a></code></span>");
     }
 
     static class SiblingType {
@@ -208,7 +208,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void linkTagUnregisteredExternalType() {
         ExecutableInfo info = currentMethod();
-        assert sameXML(info.comment, "<span class='B'><p>String</p></span>");
+        assert sameXML(info.comment, "<span class='A'><p>String</p></span>");
     }
 
     /**
@@ -217,7 +217,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void linkTagUnregisteredExternalTypeAndMethod() {
         ExecutableInfo info = currentMethod();
-        assert sameXML(info.comment, "<span class='B'><p>String#chars()</p></span>");
+        assert sameXML(info.comment, "<span class='A'><p>String#chars()</p></span>");
     }
 
     /**
@@ -226,7 +226,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void linkTagRegisteredExternalType() {
         ExecutableInfo info = currentMethodEx();
-        assert sameXML(info.comment, "<span class='B'><code><a href='https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html' aria-label='java.lang.String 🚀'>String</a></code></span>");
+        assert sameXML(info.comment, "<span class='A'><code><a href='https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html' aria-label='java.lang.String 🚀'>String</a></code></span>");
     }
 
     /**
@@ -235,7 +235,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void linkTagRegisteredExternalTypeAndMethod() {
         ExecutableInfo info = currentMethodEx();
-        assert sameXML(info.comment, "<span class='B'><code><a href='https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html#chars()' aria-label='java.lang.String 🚀'>String#chars()</a></code></span>");
+        assert sameXML(info.comment, "<span class='A'><code><a href='https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html#chars()' aria-label='java.lang.String 🚀'>String#chars()</a></code></span>");
     }
 
     /**
@@ -244,7 +244,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void linkplainTagInternalType() {
         ExecutableInfo info = currentMethod();
-        assert sameXML(info.comment, "<span class='B'><code><a href='" + BASE + "' aria-label='evergarden.javadoc.DocumentInfoTest'>DocumentInfoTest</a></code></span>");
+        assert sameXML(info.comment, "<span class='A'><code><a href='" + BASE + "' aria-label='evergarden.javadoc.DocumentInfoTest'>DocumentInfoTest</a></code></span>");
     }
 
     /**
@@ -253,7 +253,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void linkplainTagInternalMethod() {
         ExecutableInfo info = currentMethod();
-        assert sameXML(info.comment, "<span class='B'><code><a href='" + BASE + "#linkplainTagInternalMethod()' aria-label='evergarden.javadoc.DocumentInfoTest'>#linkplainTagInternalMethod()</a></code></span>");
+        assert sameXML(info.comment, "<span class='A'><code><a href='" + BASE + "#linkplainTagInternalMethod()' aria-label='evergarden.javadoc.DocumentInfoTest'>#linkplainTagInternalMethod()</a></code></span>");
     }
 
     /**
@@ -262,7 +262,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void linkplainTagInternalTypeAndMethod() {
         ExecutableInfo info = currentMethod();
-        assert sameXML(info.comment, "<span class='B'><code><a href='" + BASE + "#linkplainTagInternalTypeAndMethod()' aria-label='evergarden.javadoc.DocumentInfoTest'>DocumentInfoTest#linkplainTagInternalTypeAndMethod()</a></code></span>");
+        assert sameXML(info.comment, "<span class='A'><code><a href='" + BASE + "#linkplainTagInternalTypeAndMethod()' aria-label='evergarden.javadoc.DocumentInfoTest'>DocumentInfoTest#linkplainTagInternalTypeAndMethod()</a></code></span>");
     }
 
     /**
@@ -271,7 +271,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void linkplainTagUnregisteredExternalType() {
         ExecutableInfo info = currentMethod();
-        assert sameXML(info.comment, "<span class='B'><p>String</p></span>");
+        assert sameXML(info.comment, "<span class='A'><p>String</p></span>");
     }
 
     /**
@@ -280,7 +280,7 @@ public class DocumentInfoTest extends EvergardenTestSupport {
     @Test
     public void linkplainTagUnregisteredExternalTypeAndMethod() {
         ExecutableInfo info = currentMethod();
-        assert sameXML(info.comment, "<span class='B'><p>String#chars()</p></span>");
+        assert sameXML(info.comment, "<span class='A'><p>String#chars()</p></span>");
     }
 
     /**
