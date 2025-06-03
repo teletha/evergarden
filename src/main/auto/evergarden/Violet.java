@@ -64,6 +64,9 @@ public class Violet extends VioletEvergarden {
     private static final MethodHandle address$478361692= invoker("address", Path.class);
 
     /** The overload or intercept method invoker. */
+    private static final MethodHandle upper$927011984= invoker("upper", String.class);
+
+    /** The overload or intercept method invoker. */
     private static final MethodHandle sources$640847889= invoker("sources", String[].class);
 
     /** The overload or intercept method invoker. */
@@ -302,7 +305,7 @@ public class Violet extends VioletEvergarden {
             throw new IllegalArgumentException("The title property requires non-null value.");
         }
         try {
-            titleUpdater.invoke(this, value);
+            titleUpdater.invoke(this, upper$927011984.invoke(this, value));
         } catch (UnsupportedOperationException e) {
         } catch (Throwable e) {
             throw quiet(e);

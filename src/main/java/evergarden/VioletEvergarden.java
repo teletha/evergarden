@@ -267,6 +267,11 @@ public abstract class VioletEvergarden {
     @Icy.Property
     public abstract String title();
 
+    @Icy.Intercept("title")
+    private String upper(String title) {
+        return Character.toUpperCase(title.charAt(0)) + title.substring(1);
+    }
+
     /**
      * Provides a short description or tagline for the project.
      * Used in the generated website metadata or headers.
