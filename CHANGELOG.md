@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.2](https://github.com/teletha/evergarden/compare/1.0.1...1.0.2) (2025-06-03)
+
+
+### Bug Fixes
+
+* capitalize title ([3a4c49c](https://github.com/teletha/evergarden/commit/3a4c49cb37e9fc7e42b27512e65c790e6211bd29))
+* css selector in activity page ([7643f7b](https://github.com/teletha/evergarden/commit/7643f7be4b0cc07d79a76d9c2c25353332fe6006))
+
 ## [1.0.1](https://github.com/teletha/evergarden/compare/1.0.0...1.0.1) (2025-06-03)
 
 
