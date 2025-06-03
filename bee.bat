@@ -18,4 +18,4 @@ if not exist !bee! (
         curl -#L -o !bee! --create-dirs https://jitpack.io/com/github/teletha/bee/%version%/bee-%version%.jar
     )
 )
-java -javaagent:%bee% -cp %bee% bee.Bee %*
+java -XX:+TieredCompilation -XX:TieredStopAtLevel=1 -XX:AOTCache=bee.aot -XX:+IgnoreUnrecognizedVMOptions -cp %bee% bee.Bee %*
