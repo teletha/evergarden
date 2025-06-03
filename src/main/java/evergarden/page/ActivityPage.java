@@ -46,10 +46,10 @@ public class ActivityPage extends AbstractDocumentPage<Document> {
      */
     @Override
     protected void transform(XML xml) {
-        xml.find("h3:contains(Features)").attr("icon", "🚀");
-        xml.find("h3:contains(Bug Fixes)").attr("icon", "🛠️");
-        xml.find("h3:contains(Assets)").attr("icon", "💾");
-        xml.find("h3:contains(⚠ BREAKING CHANGES)").attr("icon", "☢️").text("Breaking Changes");
+        xml.find("h3:contains('Features')").attr("icon", "🚀");
+        xml.find("h3:contains('Bug Fixes')").attr("icon", "🛠️");
+        xml.find("h3:contains('Assets')").attr("icon", "💾");
+        xml.find("h3:contains('⚠ BREAKING CHANGES')").attr("icon", "☢️").text("Breaking Changes");
         xml.find("section").removeClass(DocumentPage.CSS.foot.className()).addClass(css.foot.className());
     }
 
