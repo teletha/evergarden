@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8"/>
 		<meta content="width=device-width, initial-scale=1" name="viewport"/>
-		<meta content="Explains how to use Evergarden and its API. " name="description"/>
+		<meta content="Explains how to use evergarden and its API. " name="description"/>
 		<link href="https://cdn.jsdelivr.net" rel="preconnect"/>
 		<link href="https://fonts.googleapis.com" rel="preconnect"/>
 		<link crossorigin="null" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -13,44 +13,44 @@
 		<link href="https://fonts.googleapis.com/css2?display=swap&amp;family=Material+Icons" media="print" onload="this.media=&apos;all&apos;" rel="stylesheet"/>
 		<link as="style" fetchpriority="high" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Vollkorn" rel="preload"/>
 		<link href="https://fonts.googleapis.com/css2?display=swap&amp;family=Vollkorn" media="print" onload="this.media=&apos;all&apos;" rel="stylesheet"/>
-		<title>Evergarden API</title>
+		<title>evergarden API</title>
 		<base href="../"/>
 		<script src="mimic.js" type="module"></script>
 		<link href="https://cdn.jsdelivr.net/npm/ress@4.0.0/dist/ress.min.css" rel="stylesheet"/>
 		<link href="main.css" rel="stylesheet"/>
 	</head>
-	<body class="T">
-		<header class="U" date="2025-05-08" ver="1.0.1">
-			<h1 class="S"><code>Evergarden</code></h1>
-			<nav class="i"><a href="api/" id="API"><svg class="package A svg" viewBox="0 0 24 24">
+	<body class="JB">
+		<header class="e" date="2025-06-03">
+			<h1 class="f"><a href="index.html"><code>evergarden</code></a></h1>
+			<nav class="g"><a href="api/main.html" id="API"><svg class="package">
 						<use href="main.svg#package"/>
 					</svg>
-				</a><a href="https://github.com/teletha/evergarden/discussions" id="Community" target="_blank"><svg class="user A svg" viewBox="0 0 24 24">
-						<use href="main.svg#user"/>
-					</svg>
-				</a><a href="doc/changelog.html" id="Activity"><svg class="activity A svg" viewBox="0 0 24 24">
+				</a><a href="doc/changelog.html" id="Activity"><svg class="activity">
 						<use href="main.svg#activity"/>
 					</svg>
-				</a><a href="https://github.com/teletha/evergarden" id="Repository" target="_blank"><svg class="github A svg" viewBox="0 0 24 24">
+				</a><a href="https://github.com/teletha/evergarden/discussions" id="Community" target="_blank"><svg class="user">
+						<use href="main.svg#user"/>
+					</svg>
+				</a><a href="https://github.com/teletha/evergarden" id="Repository" target="_blank"><svg class="github">
 						<use href="main.svg#github"/>
 					</svg>
 				</a></nav>
-			<div class="g"><a aria-label="Change color scheme" id="theme"><svg class="sun A svg" viewBox="0 0 24 24">
+			<div class="b"><a aria-label="Change color scheme" id="theme"><svg class="sun">
 						<use href="main.svg#sun"/>
-					</svg><svg class="moon A svg" viewBox="0 0 24 24">
+					</svg><svg class="moon">
 						<use href="main.svg#moon"/>
 					</svg>
 				</a></div>
 		</header>
-		<nav class="W"></nav>
-		<article class="V" id="Article">
-			<section class="I"><code class="h">evergarden</code>
-				<h2 class="AbstractClass Z"><code class="k">VioletEvergarden</code></h2>
-				<div class="n">
-					<ul class="C G">
+		<nav class="v"></nav>
+		<article class="FB" id="Article">
+			<section class="h"><code class="w">evergarden</code>
+				<h2 class="AbstractClass KB"><code class="HB">VioletEvergarden</code></h2>
+				<div class="t">
+					<ul class="E I">
 						<li><code><a aria-label="evergarden.Violet" href="api/evergarden.Violet.html">Violet</a></code></li>
 					</ul>
-				</div><span class="B"><p>Abstract base class for configuring and executing the Evergarden Javadoc generation process.
+				</div><span class="A"><p>Abstract base class for configuring and executing the Evergarden Javadoc generation process.
 This class provides a fluent API (using Icy annotation for implementation generation)
 to set up source directories, output location, classpath, project metadata, external
 documentation links, and finally trigger the documentation build process.</p><p>
@@ -59,162 +59,164 @@ documentation links, and finally trigger the documentation build process.</p><p>
  the final static website (HTML, CSS, JS).
 </p>
 				</span></section>
-			<section class="I" id="VioletEvergarden()">
-				<h2 class="d"><i class="PUBLIC"></i><code class="k">VioletEvergarden</code><code class="m">()</code></h2>
+			<section class="h" id="VioletEvergarden()">
+				<h2 class="j"><i class="PUBLIC"></i><code class="HB">VioletEvergarden</code><code class="LB">()</code></h2>
 			</section>
-			<section class="I" id="address()">
-				<h2 class="d"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code class="k">address</code><code class="m">()</code><i class="l"><code>psychopath.Directory</code></i></h2>
-				<table class="H">
-					<tr class="f">
+			<section class="h" id="address()">
+				<h2 class="j"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code class="HB">address</code><code class="LB">()</code><i class="DB"><code>psychopath.Directory</code></i></h2>
+				<table class="k">
+					<tr class="Q">
 						<td><code>psychopath.Directory</code></td>
 						<td><span><p>The output Directory.</p></span></td>
 					</tr>
-				</table><span class="B"><p>Specifies the root directory where the generated documentation website will be outputted.
+				</table><span class="A"><p>Specifies the root directory where the generated documentation website will be outputted.
 This is a required property.</p></span></section>
-			<section class="I" id="sources()">
-				<h2 class="d"><i class="PUBLIC"></i><code class="k">sources</code><code class="m">()</code><i class="l"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Directory</code></code></code></i></h2>
-				<table class="H">
-					<tr class="f">
-						<td><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Directory</code></code></code></td>
+			<section class="h" id="sources()">
+				<h2 class="j"><i class="PUBLIC"></i><code class="HB">sources</code><code class="LB">()</code><i class="DB"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Directory</code></code></code></i></h2>
+				<table class="k">
+					<tr class="Q">
+						<td><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Directory</code></code></code></td>
 						<td><span><p>A list of source code Directory.</p></span></td>
 					</tr>
-				</table><span class="B"><p>Specifies the list of directories containing the main API source code to be documented.
+				</table><span class="A"><p>Specifies the list of directories containing the main API source code to be documented.
 Defaults to an empty list if not specified.</p></span></section>
-			<section class="I" id="documents()">
-				<h2 class="d"><i class="PUBLIC"></i><code class="k">documents</code><code class="m">()</code><i class="l"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Directory</code></code></code></i></h2>
-				<table class="H">
-					<tr class="f">
-						<td><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Directory</code></code></code></td>
+			<section class="h" id="documents()">
+				<h2 class="j"><i class="PUBLIC"></i><code class="HB">documents</code><code class="LB">()</code><i class="DB"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Directory</code></code></code></i></h2>
+				<table class="k">
+					<tr class="Q">
+						<td><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Directory</code></code></code></td>
 						<td><span><p>A list of document Directory.</p></span></td>
 					</tr>
-				</table><span class="B"><p>Specifies the list of directories containing supplementary documents, such as
+				</table><span class="A"><p>Specifies the list of directories containing supplementary documents, such as
 manuals (<code>*Manual.java</code>) and test sources (<code>*Test.java</code>) used for examples.
 Defaults to an empty list if not specified.</p></span></section>
-			<section class="I" id="articles()">
-				<h2 class="d"><i class="PUBLIC"></i><code class="k">articles</code><code class="m">()</code><i class="l"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Directory</code></code></code></i></h2>
-				<table class="H">
-					<tr class="f">
-						<td><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Directory</code></code></code></td>
+			<section class="h" id="articles()">
+				<h2 class="j"><i class="PUBLIC"></i><code class="HB">articles</code><code class="LB">()</code><i class="DB"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Directory</code></code></code></i></h2>
+				<table class="k">
+					<tr class="Q">
+						<td><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Directory</code></code></code></td>
 						<td><span><p>A list of article Directory.</p></span></td>
 					</tr>
-				</table><span class="B"><p>Specifies the list of directories containing articles (e.g., blog posts, tutorials).
+				</table><span class="A"><p>Specifies the list of directories containing articles (e.g., blog posts, tutorials).
 Note: The current implementation doesn&apos;t seem to explicitly use this property in scanning or
 building. Defaults to an empty list if not specified.</p></span></section>
-			<section class="I" id="classpath()">
-				<h2 class="d"><i class="PUBLIC"></i><code class="k">classpath</code><code class="m">()</code><i class="l"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Location</code></code></code></i></h2>
-				<table class="H">
-					<tr class="f">
-						<td><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Location</code></code></code></td>
+			<section class="h" id="classpath()">
+				<h2 class="j"><i class="PUBLIC"></i><code class="HB">classpath</code><code class="LB">()</code><i class="DB"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Location</code></code></code></i></h2>
+				<table class="k">
+					<tr class="Q">
+						<td><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Location</code></code></code></td>
 						<td><span><p>A list of classpath Location (directories or JARs).</p></span></td>
 					</tr>
-				</table><span class="B"><p>Specifies the classpath required for compiling and analyzing the source code.
+				</table><span class="A"><p>Specifies the classpath required for compiling and analyzing the source code.
 This should include all necessary libraries and dependencies.
 Defaults to null if not specified.</p></span></section>
-			<section class="I" id="title()">
-				<h2 class="d"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code class="k">title</code><code class="m">()</code><i class="l"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></i></h2>
-				<table class="H">
-					<tr class="f">
-						<td><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></td>
+			<section class="h" id="title()">
+				<h2 class="j"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code class="HB">title</code><code class="LB">()</code><i class="DB"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></i></h2>
+				<table class="k">
+					<tr class="Q">
+						<td><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></td>
 						<td><span><p>The project title string.</p></span></td>
 					</tr>
-				</table><span class="B"><p>Specifies the title of the project/product being documented.
+				</table><span class="A"><p>Specifies the title of the project/product being documented.
 This is used in the generated website&apos;s title and headers.
 This is a required property.</p></span></section>
-			<section class="I" id="description()">
-				<h2 class="d"><i class="PUBLIC"></i><code class="k">description</code><code class="m">()</code><i class="l"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></i></h2>
-				<table class="H">
-					<tr class="f">
-						<td><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></td>
+			<section class="h" id="description()">
+				<h2 class="j"><i class="PUBLIC"></i><code class="HB">description</code><code class="LB">()</code><i class="DB"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></i></h2>
+				<table class="k">
+					<tr class="Q">
+						<td><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></td>
 						<td><span><p>The project description string.</p></span></td>
 					</tr>
-				</table><span class="B"><p>Provides a short description or tagline for the project.
+				</table><span class="A"><p>Provides a short description or tagline for the project.
 Used in the generated website metadata or headers.
 Defaults to an empty string if not specified.</p></span></section>
-			<section class="I" id="encoding()">
-				<h2 class="d"><i class="PUBLIC"></i><code class="k">encoding</code><code class="m">()</code><i class="l"><code><a aria-label="java.nio.charset.Charset 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/nio/charset/Charset.html">Charset</a></code></i></h2>
-				<table class="H">
-					<tr class="f">
-						<td><code><a aria-label="java.nio.charset.Charset 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/nio/charset/Charset.html">Charset</a></code></td>
-						<td><span><p>The source file <code><a aria-label="java.nio.charset.Charset 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/nio/charset/Charset.html">Charset</a></code>.</p></span></td>
+			<section class="h" id="encoding()">
+				<h2 class="j"><i class="PUBLIC"></i><code class="HB">encoding</code><code class="LB">()</code><i class="DB"><code><a aria-label="java.nio.charset.Charset 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/nio/charset/Charset.html">Charset</a></code></i></h2>
+				<table class="k">
+					<tr class="Q">
+						<td><code><a aria-label="java.nio.charset.Charset 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/nio/charset/Charset.html">Charset</a></code></td>
+						<td><span><p>The source file <code><a aria-label="java.nio.charset.Charset 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/nio/charset/Charset.html">Charset</a></code>.</p></span></td>
 					</tr>
-				</table><span class="B"><p>Specifies the character encoding of the source files.
+				</table><span class="A"><p>Specifies the character encoding of the source files.
 Defaults to the system&apos;s default charset. It&apos;s recommended to explicitly set this
 (e.g., to <code>StandardCharsets.UTF_8</code>).</p></span></section>
-			<section class="I" id="listener()">
-				<h2 class="d"><i class="PUBLIC"></i><code class="k">listener</code><code class="m">()</code><i class="l"><code><a aria-label="javax.tools.DiagnosticListener 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.compiler/javax/tools/DiagnosticListener.html">DiagnosticListener</a><code class="parameters"><code>?</code><code class="super"><code><a aria-label="javax.tools.JavaFileObject 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.compiler/javax/tools/JavaFileObject.html">JavaFileObject</a></code></code></code></code></i></h2>
-				<table class="H">
-					<tr class="f">
-						<td><code><a aria-label="javax.tools.DiagnosticListener 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.compiler/javax/tools/DiagnosticListener.html">DiagnosticListener</a><code class="parameters"><code>?</code><code class="super"><code><a aria-label="javax.tools.JavaFileObject 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.compiler/javax/tools/JavaFileObject.html">JavaFileObject</a></code></code></code></code></td>
-						<td><span><p>The <code><a aria-label="javax.tools.DiagnosticListener 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.compiler/javax/tools/DiagnosticListener.html">DiagnosticListener</a></code>.</p></span></td>
+			<section class="h" id="listener()">
+				<h2 class="j"><i class="PUBLIC"></i><code class="HB">listener</code><code class="LB">()</code><i class="DB"><code><a aria-label="javax.tools.DiagnosticListener 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.compiler/javax/tools/DiagnosticListener.html">DiagnosticListener</a><code class="parameters"><code>?</code><code class="super"><code><a aria-label="javax.tools.JavaFileObject 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.compiler/javax/tools/JavaFileObject.html">JavaFileObject</a></code></code></code></code></i></h2>
+				<table class="k">
+					<tr class="Q">
+						<td><code><a aria-label="javax.tools.DiagnosticListener 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.compiler/javax/tools/DiagnosticListener.html">DiagnosticListener</a><code class="parameters"><code>?</code><code class="super"><code><a aria-label="javax.tools.JavaFileObject 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.compiler/javax/tools/JavaFileObject.html">JavaFileObject</a></code></code></code></code></td>
+						<td><span><p>The <code><a aria-label="javax.tools.DiagnosticListener 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.compiler/javax/tools/DiagnosticListener.html">DiagnosticListener</a></code>.</p></span></td>
 					</tr>
-				</table><span class="B"><p>Specifies a listener to receive diagnostic messages (errors, warnings, notes)
+				</table><span class="A"><p>Specifies a listener to receive diagnostic messages (errors, warnings, notes)
 generated during the documentation process.</p></span></section>
-			<section class="I" id="host()">
-				<h2 class="d"><i class="PUBLIC"></i><code class="k">host</code><code class="m">()</code><i class="l"><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.host.Hosting" href="api/evergarden.host.Hosting.html">Hosting</a></code></code></code></i></h2>
-				<table class="H">
-					<tr class="f">
+			<section class="h" id="host()">
+				<h2 class="j"><i class="PUBLIC"></i><code class="HB">host</code><code class="LB">()</code><i class="DB"><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.host.Hosting" href="api/evergarden.host.Hosting.html">Hosting</a></code></code></code></i></h2>
+				<table class="k">
+					<tr class="Q">
 						<td><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.host.Hosting" href="api/evergarden.host.Hosting.html">Hosting</a></code></code></code></td>
 						<td></td>
 					</tr>
-				</table><span class="B"><p>Specify the code repository.</p></span></section>
-			<section class="I" id="useExternalJDKDoc()">
-				<h2 class="d"><i class="FINAL"><i class="PUBLIC"></i></i><code class="k">useExternalJDKDoc</code><code class="m">()</code><i class="l"><code><a aria-label="evergarden.VioletEvergarden" href="api/evergarden.VioletEvergarden.html">VioletEvergarden</a></code></i></h2>
-				<table class="H">
-					<tr class="f">
+				</table><span class="A"><p>Specify the code repository.</p></span></section>
+			<section class="h" id="useExternalJDKDoc()">
+				<h2 class="j"><i class="FINAL"><i class="PUBLIC"></i></i><code class="HB">useExternalJDKDoc</code><code class="LB">()</code><i class="DB"><code><a aria-label="evergarden.VioletEvergarden" href="api/evergarden.VioletEvergarden.html">VioletEvergarden</a></code></i></h2>
+				<table class="k">
+					<tr class="Q">
 						<td><code><a aria-label="evergarden.VioletEvergarden" href="api/evergarden.VioletEvergarden.html">VioletEvergarden</a></code></td>
 						<td><span><p>This <code><a aria-label="evergarden.VioletEvergarden" href="api/evergarden.VioletEvergarden.html">VioletEvergarden</a></code> instance for chaining.</p></span></td>
 					</tr>
-				</table><span class="B"><p>Configures the documentation build to link against the standard JDK Javadoc API.</p></span></section>
-			<section class="I" id="useExternalDoc(java.lang.String...)">
-				<h2 class="d"><i class="FINAL"><i class="PUBLIC"></i></i><code class="k">useExternalDoc</code><code class="m">(<code array="var"><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">urls</code>)</code><i class="l"><code><a aria-label="evergarden.VioletEvergarden" href="api/evergarden.VioletEvergarden.html">VioletEvergarden</a></code></i></h2>
-				<table class="H">
-					<tr class="Y">
-						<td><code array="var"><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">urls</code></td>
+				</table><span class="A"><p>Configures the documentation build to link against the standard JDK Javadoc API.</p></span></section>
+			<section class="h" id="useExternalDoc(java.lang.String...)">
+				<h2 class="j"><i class="FINAL"><i class="PUBLIC"></i></i><code class="HB">useExternalDoc</code><code class="LB">(<code array="var"><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">urls</code>)</code><i class="DB"><code><a aria-label="evergarden.VioletEvergarden" href="api/evergarden.VioletEvergarden.html">VioletEvergarden</a></code></i></h2>
+				<table class="k">
+					<tr class="y">
+						<td><code array="var"><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">urls</code></td>
 						<td><span><p>A list of base URLs for external Javadoc APIs (e.g.,
 &quot;https://some.library/version/api/&quot;).</p></span></td>
 					</tr>
-					<tr class="f">
+					<tr class="Q">
 						<td><code><a aria-label="evergarden.VioletEvergarden" href="api/evergarden.VioletEvergarden.html">VioletEvergarden</a></code></td>
 						<td><span><p>This <code><a aria-label="evergarden.VioletEvergarden" href="api/evergarden.VioletEvergarden.html">VioletEvergarden</a></code> instance for chaining.</p></span></td>
 					</tr>
-				</table><span class="B"><p>Configures external Javadoc URLs to resolve types not found in the current project sources.
+				</table><span class="A"><p>Configures external Javadoc URLs to resolve types not found in the current project sources.
 For each valid URL (must start with http and end with &quot;/api/&quot;), it attempts to fetch
 the &quot;overview-tree.html&quot; to extract package names and associate them with the URL.</p></span></section>
-			<section class="I" id="write()">
-				<h2 class="d"><i class="FINAL"><i class="PUBLIC"></i></i><code class="k">write</code><code class="m">()</code><i class="l"><code><a aria-label="evergarden.Letter" href="api/evergarden.Letter.html">Letter</a></code></i></h2>
-				<table class="H">
-					<tr class="f">
+			<section class="h" id="write()">
+				<h2 class="j"><i class="FINAL"><i class="PUBLIC"></i></i><code class="HB">write</code><code class="LB">()</code><i class="DB"><code><a aria-label="evergarden.Letter" href="api/evergarden.Letter.html">Letter</a></code></i></h2>
+				<table class="k">
+					<tr class="Q">
 						<td><code><a aria-label="evergarden.Letter" href="api/evergarden.Letter.html">Letter</a></code></td>
 						<td><span><p>The <code><a aria-label="evergarden.Letter" href="api/evergarden.Letter.html">Letter</a></code> object containing the generated documentation model and site
 configuration.</p></span></td>
 					</tr>
-				</table><span class="B"><p>Executes the entire documentation generation process based on the current configuration.</p></span></section>
+				</table><span class="A"><p>Executes the entire documentation generation process based on the current configuration.</p></span></section>
 		</article>
-		<aside class="X">
-			<div class="c">
-				<h5 class="o">Constructors</h5>
+		<aside class="m">
+			<div class="BB">
+				<h5 class="CB">Constructors</h5>
 				<ul>
-					<li class="M"><i class="PUBLIC"></i><code><a href="api/evergarden.VioletEvergarden.html#VioletEvergarden()">VioletEvergarden</a></code><code class="m">()</code></li>
+					<li class="S"><i class="PUBLIC"></i><code><a href="api/evergarden.VioletEvergarden.html#VioletEvergarden()">VioletEvergarden</a></code><code class="LB">()</code></li>
 				</ul>
-				<h5 class="o">Methods</h5>
+				<h5 class="CB">Methods</h5>
 				<ul>
-					<li class="M"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code><a href="api/evergarden.VioletEvergarden.html#address()">address</a></code><code class="m">()</code><i class="b"><code>psychopath.Directory</code></i></li>
-					<li class="M"><i class="PUBLIC"></i><code><a href="api/evergarden.VioletEvergarden.html#sources()">sources</a></code><code class="m">()</code><i class="b"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Directory</code></code></code></i></li>
-					<li class="M"><i class="PUBLIC"></i><code><a href="api/evergarden.VioletEvergarden.html#documents()">documents</a></code><code class="m">()</code><i class="b"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Directory</code></code></code></i></li>
-					<li class="M"><i class="PUBLIC"></i><code><a href="api/evergarden.VioletEvergarden.html#articles()">articles</a></code><code class="m">()</code><i class="b"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Directory</code></code></code></i></li>
-					<li class="M"><i class="PUBLIC"></i><code><a href="api/evergarden.VioletEvergarden.html#classpath()">classpath</a></code><code class="m">()</code><i class="b"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Location</code></code></code></i></li>
-					<li class="M"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code><a href="api/evergarden.VioletEvergarden.html#title()">title</a></code><code class="m">()</code><i class="b"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></i></li>
-					<li class="M"><i class="PUBLIC"></i><code><a href="api/evergarden.VioletEvergarden.html#description()">description</a></code><code class="m">()</code><i class="b"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code></i></li>
-					<li class="M"><i class="PUBLIC"></i><code><a href="api/evergarden.VioletEvergarden.html#encoding()">encoding</a></code><code class="m">()</code><i class="b"><code><a aria-label="java.nio.charset.Charset 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/nio/charset/Charset.html">Charset</a></code></i></li>
-					<li class="M"><i class="PUBLIC"></i><code><a href="api/evergarden.VioletEvergarden.html#listener()">listener</a></code><code class="m">()</code><i class="b"><code><a aria-label="javax.tools.DiagnosticListener 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.compiler/javax/tools/DiagnosticListener.html">DiagnosticListener</a><code class="parameters"><code>?</code><code class="super"><code><a aria-label="javax.tools.JavaFileObject 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.compiler/javax/tools/JavaFileObject.html">JavaFileObject</a></code></code></code></code></i></li>
-					<li class="M"><i class="PUBLIC"></i><code><a href="api/evergarden.VioletEvergarden.html#host()">host</a></code><code class="m">()</code><i class="b"><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.host.Hosting" href="api/evergarden.host.Hosting.html">Hosting</a></code></code></code></i></li>
-					<li class="M"><i class="FINAL"><i class="PUBLIC"></i></i><code><a href="api/evergarden.VioletEvergarden.html#useExternalJDKDoc()">useExternalJDKDoc</a></code><code class="m">()</code><i class="b"><code><a aria-label="evergarden.VioletEvergarden" href="api/evergarden.VioletEvergarden.html">VioletEvergarden</a></code></i></li>
-					<li class="M"><i class="FINAL"><i class="PUBLIC"></i></i><code><a href="api/evergarden.VioletEvergarden.html#useExternalDoc(java.lang.String...)">useExternalDoc</a></code><code class="m">(<code array="var"><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">urls</code>)</code><i class="b"><code><a aria-label="evergarden.VioletEvergarden" href="api/evergarden.VioletEvergarden.html">VioletEvergarden</a></code></i></li>
-					<li class="M"><i class="FINAL"><i class="PUBLIC"></i></i><code><a href="api/evergarden.VioletEvergarden.html#write()">write</a></code><code class="m">()</code><i class="b"><code><a aria-label="evergarden.Letter" href="api/evergarden.Letter.html">Letter</a></code></i></li>
+					<li class="S"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code><a href="api/evergarden.VioletEvergarden.html#address()">address</a></code><code class="LB">()</code><i class="J"><code>psychopath.Directory</code></i></li>
+					<li class="S"><i class="PUBLIC"></i><code><a href="api/evergarden.VioletEvergarden.html#sources()">sources</a></code><code class="LB">()</code><i class="J"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Directory</code></code></code></i></li>
+					<li class="S"><i class="PUBLIC"></i><code><a href="api/evergarden.VioletEvergarden.html#documents()">documents</a></code><code class="LB">()</code><i class="J"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Directory</code></code></code></i></li>
+					<li class="S"><i class="PUBLIC"></i><code><a href="api/evergarden.VioletEvergarden.html#articles()">articles</a></code><code class="LB">()</code><i class="J"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Directory</code></code></code></i></li>
+					<li class="S"><i class="PUBLIC"></i><code><a href="api/evergarden.VioletEvergarden.html#classpath()">classpath</a></code><code class="LB">()</code><i class="J"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code>psychopath.Location</code></code></code></i></li>
+					<li class="S"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code><a href="api/evergarden.VioletEvergarden.html#title()">title</a></code><code class="LB">()</code><i class="J"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></i></li>
+					<li class="S"><i class="PUBLIC"></i><code><a href="api/evergarden.VioletEvergarden.html#description()">description</a></code><code class="LB">()</code><i class="J"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></i></li>
+					<li class="S"><i class="PUBLIC"></i><code><a href="api/evergarden.VioletEvergarden.html#encoding()">encoding</a></code><code class="LB">()</code><i class="J"><code><a aria-label="java.nio.charset.Charset 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/nio/charset/Charset.html">Charset</a></code></i></li>
+					<li class="S"><i class="PUBLIC"></i><code><a href="api/evergarden.VioletEvergarden.html#listener()">listener</a></code><code class="LB">()</code><i class="J"><code><a aria-label="javax.tools.DiagnosticListener 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.compiler/javax/tools/DiagnosticListener.html">DiagnosticListener</a><code class="parameters"><code>?</code><code class="super"><code><a aria-label="javax.tools.JavaFileObject 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.compiler/javax/tools/JavaFileObject.html">JavaFileObject</a></code></code></code></code></i></li>
+					<li class="S"><i class="PUBLIC"></i><code><a href="api/evergarden.VioletEvergarden.html#host()">host</a></code><code class="LB">()</code><i class="J"><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.host.Hosting" href="api/evergarden.host.Hosting.html">Hosting</a></code></code></code></i></li>
+					<li class="S"><i class="FINAL"><i class="PUBLIC"></i></i><code><a href="api/evergarden.VioletEvergarden.html#useExternalJDKDoc()">useExternalJDKDoc</a></code><code class="LB">()</code><i class="J"><code><a aria-label="evergarden.VioletEvergarden" href="api/evergarden.VioletEvergarden.html">VioletEvergarden</a></code></i></li>
+					<li class="S"><i class="FINAL"><i class="PUBLIC"></i></i><code><a href="api/evergarden.VioletEvergarden.html#useExternalDoc(java.lang.String...)">useExternalDoc</a></code><code class="LB">(<code array="var"><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">urls</code>)</code><i class="J"><code><a aria-label="evergarden.VioletEvergarden" href="api/evergarden.VioletEvergarden.html">VioletEvergarden</a></code></i></li>
+					<li class="S"><i class="FINAL"><i class="PUBLIC"></i></i><code><a href="api/evergarden.VioletEvergarden.html#write()">write</a></code><code class="LB">()</code><i class="J"><code><a aria-label="evergarden.Letter" href="api/evergarden.Letter.html">Letter</a></code></i></li>
 				</ul>
 			</div>
 		</aside>
-		<footer class="R"/>
+		<footer class="GB">
+			<p>Powered by <a href="https://github.com/teletha/evergarden" target="_">Evergarden</a></p>
+		</footer>
 	</body>
 	<script src="root.js"></script>
 	<script src="main.js" type="module"></script>

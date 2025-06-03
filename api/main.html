@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta content="width=device-width, initial-scale=1" name="viewport"/>
+		<meta content="Explains how to use evergarden and its API. " name="description"/>
+		<link href="https://cdn.jsdelivr.net" rel="preconnect"/>
+		<link href="https://fonts.googleapis.com" rel="preconnect"/>
+		<link crossorigin="null" href="https://fonts.gstatic.com" rel="preconnect"/>
+		<link as="style" fetchpriority="high" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter" rel="preload"/>
+		<link href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter" media="print" onload="this.media=&apos;all&apos;" rel="stylesheet"/>
+		<link as="style" fetchpriority="high" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Material+Icons" rel="preload"/>
+		<link href="https://fonts.googleapis.com/css2?display=swap&amp;family=Material+Icons" media="print" onload="this.media=&apos;all&apos;" rel="stylesheet"/>
+		<link as="style" fetchpriority="high" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Vollkorn" rel="preload"/>
+		<link href="https://fonts.googleapis.com/css2?display=swap&amp;family=Vollkorn" media="print" onload="this.media=&apos;all&apos;" rel="stylesheet"/>
+		<title>evergarden API</title>
+		<base href="../"/>
+		<script src="mimic.js" type="module"></script>
+		<link href="https://cdn.jsdelivr.net/npm/ress@4.0.0/dist/ress.min.css" rel="stylesheet"/>
+		<link href="main.css" rel="stylesheet"/>
+	</head>
+	<body class="JB">
+		<header class="e" date="2025-06-03">
+			<h1 class="f"><a href="index.html"><code>evergarden</code></a></h1>
+			<nav class="g"><a href="api/main.html" id="API"><svg class="package">
+						<use href="main.svg#package"/>
+					</svg>
+				</a><a href="doc/changelog.html" id="Activity"><svg class="activity">
+						<use href="main.svg#activity"/>
+					</svg>
+				</a><a href="https://github.com/teletha/evergarden/discussions" id="Community" target="_blank"><svg class="user">
+						<use href="main.svg#user"/>
+					</svg>
+				</a><a href="https://github.com/teletha/evergarden" id="Repository" target="_blank"><svg class="github">
+						<use href="main.svg#github"/>
+					</svg>
+				</a></nav>
+			<div class="b"><a aria-label="Change color scheme" id="theme"><svg class="sun">
+						<use href="main.svg#sun"/>
+					</svg><svg class="moon">
+						<use href="main.svg#moon"/>
+					</svg>
+				</a></div>
+		</header>
+		<nav class="v"></nav>
+		<article class="FB" id="Article">
+			<div class="h">
+				<section class="A">
+					<h2>evergarden API Overview</h2>
+					<p>This page provides a concise overview of the available APIs, including their purpose, key functionalities, and usage patterns. It serves as a starting point for developers to understand how to integrate and interact with the system effectively.</p>
+					<section class="A">
+						<h4>🛠️ Interface</h4>
+						<table>
+							<tr>
+								<td><code><a href="api/evergarden.design.EvergardenDSL.html">EvergardenDSL</a></code></td>
+								<td>Base style for Javadng.</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.Document.html">Document</a></code></td>
+								<td>A fragile vessel for words, carrying a document&apos;s identity, title, and memory.</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.host.Hosting.html">Hosting</a></code></td>
+								<td>Represents an abstraction for repository hosting platforms (e.g., GitHub).</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.Violet.ÅssignableAll.html">Violet.ÅssignableAll</a></code></td>
+								<td>Internal aggregated API.</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.Violet.ÅssignableÅrbitrary.html">Violet.ÅssignableÅrbitrary</a></code></td>
+								<td>Property assignment API.</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.Violet.ÅssignableTitle.html">Violet.ÅssignableTitle</a></code></td>
+								<td>Property assignment API.</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.Violet.ÅssignableAddress.html">Violet.ÅssignableAddress</a></code></td>
+								<td>Property assignment API.</td>
+							</tr>
+						</table>
+					</section>
+					<section class="A">
+						<h4>🛠️ Class</h4>
+						<table>
+							<tr>
+								<td><code><a href="api/evergarden.javadoc.TypeResolver.html">TypeResolver</a></code></td>
+								<td>no description</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.javadoc.Markdown.html">Markdown</a></code></td>
+								<td>no description</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.javadoc.ClassInfo.html">ClassInfo</a></code></td>
+								<td>no description</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.javadoc.FieldInfo.html">FieldInfo</a></code></td>
+								<td>no description</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.javadoc.DocumentInfo.html">DocumentInfo</a></code></td>
+								<td>no description</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.javadoc.ExecutableInfo.html">ExecutableInfo</a></code></td>
+								<td>no description</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.javadoc.MethodInfo.html">MethodInfo</a></code></td>
+								<td>no description</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.javadoc.SourceCode.html">SourceCode</a></code></td>
+								<td>no description</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.design.EvergardenDesignScheme.html">EvergardenDesignScheme</a></code></td>
+								<td>no description</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.design.Styles.html">Styles</a></code></td>
+								<td>no description</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.page.LandingPage.html">LandingPage</a></code></td>
+								<td>no description</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.page.DocumentPage.html">DocumentPage</a></code></td>
+								<td>no description</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.page.ActivityPage.html">ActivityPage</a></code></td>
+								<td>no description</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.page.DocumentOnePage.html">DocumentOnePage</a></code></td>
+								<td>no description</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.page.APIPage.html">APIPage</a></code></td>
+								<td>no description</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.page.APIMainPage.html">APIMainPage</a></code></td>
+								<td>no description</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.web.CodeHighlight.html">CodeHighlight</a></code></td>
+								<td>no description</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.Tool.html">Tool</a></code></td>
+								<td>Utility class for accessing and operating on elements of the Javadoc model
+within a custom Doclet implementation.</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.host.REST.html">REST</a></code></td>
+								<td>A simple REST response cache that persists data locally using Storable.</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.VioletEvergarden.APIDoclet.html">VioletEvergarden.APIDoclet</a></code></td>
+								<td>Internal Doclet specifically for processing API source files.</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.VioletEvergarden.DocumentDoclet.html">VioletEvergarden.DocumentDoclet</a></code></td>
+								<td>Internal Doclet specifically for processing document and sample source files.</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.SiteBuilder.html">SiteBuilder</a></code></td>
+								<td>A builder class responsible for generating static site assets such as HTML, CSS, JS, and JSONP.</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.Violet.html">Violet</a></code></td>
+								<td>Generated model for VioletEvergarden.</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.Violet.Ìnstantiator.html">Violet.Ìnstantiator</a></code></td>
+								<td>Namespace for Violet  builder methods.</td>
+							</tr>
+						</table>
+					</section>
+					<section class="A">
+						<h4>🛠️ Record</h4>
+						<table>
+							<tr>
+								<td><code><a href="api/evergarden.Doodle.html">Doodle</a></code></td>
+								<td>Represents a unit of sample code associated with a specific class and method.
+Includes optional documentation comment.</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.Region.html">Region</a></code></td>
+								<td>Represents a specific region within a document, identified by a location (e.g., file path or URL)
+and an optional line range.</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.host.Contributor.html">Contributor</a></code></td>
+								<td>no description</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.host.Release.html">Release</a></code></td>
+								<td>no description</td>
+							</tr>
+							<tr>
+								<td><code><a href="api/evergarden.Letter.Doc.html">Letter.Doc</a></code></td>
+								<td>Represents a logical unit or node within the documentation structure, typically
+corresponding to a file (e.g., Markdown) or a conceptual section.</td>
+							</tr>
+						</table>
+					</section>
+				</section>
+			</div>
+		</article>
+		<aside class="m"></aside>
+		<footer class="GB">
+			<p>Powered by <a href="https://github.com/teletha/evergarden" target="_">Evergarden</a></p>
+		</footer>
+	</body>
+	<script src="root.js"></script>
+	<script src="main.js" type="module"></script>
+</html>
