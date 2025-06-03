@@ -16,4 +16,4 @@ if [ ! -f "$bee" ]; then
         curl -#L -o "$bee" --create-dirs https://jitpack.io/com/github/teletha/bee/0.77.1/bee-0.77.1.jar
     fi
 fi
-java -javaagent:"$bee" -cp "$bee" bee.Bee "$@"
+java -XX:+TieredCompilation -XX:TieredStopAtLevel=1  -XX:AOTCache=bee.aot -XX:+IgnoreUnrecognizedVMOptions -cp "$bee" bee.Bee "$@"
