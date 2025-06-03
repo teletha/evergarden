@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/teletha/evergarden/compare/1.0.0...1.0.1) (2025-06-03)
+
+
+### Bug Fixes
+
+* update ci ([ce03c86](https://github.com/teletha/evergarden/commit/ce03c861133f2c894da5f9424adcd2201baa14bf))
+
 ## 1.0.0 (2025-05-08)
 
 
