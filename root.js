@@ -55,6 +55,13 @@ const root = {
 		{
 			"modifiers": {
 				"#": "java.util.Collections$UnmodifiableSet",},
+			"name": "Contributor",
+			"packageName": "evergarden.host",
+			"type": "Record"
+		},
+		{
+			"modifiers": {
+				"#": "java.util.Collections$UnmodifiableSet",},
 			"name": "Document",
 			"packageName": "evergarden",
 			"type": "Interface"
@@ -153,6 +160,13 @@ const root = {
 		{
 			"modifiers": {
 				"#": "java.util.Collections$UnmodifiableSet",},
+			"name": "Markdown",
+			"packageName": "evergarden.javadoc",
+			"type": "Class"
+		},
+		{
+			"modifiers": {
+				"#": "java.util.Collections$UnmodifiableSet",},
 			"name": "MemberInfo",
 			"packageName": "evergarden.javadoc",
 			"type": "AbstractClass"
@@ -181,8 +195,22 @@ const root = {
 		{
 			"modifiers": {
 				"#": "java.util.Collections$UnmodifiableSet",},
+			"name": "REST",
+			"packageName": "evergarden.host",
+			"type": "Class"
+		},
+		{
+			"modifiers": {
+				"#": "java.util.Collections$UnmodifiableSet",},
 			"name": "Region",
 			"packageName": "evergarden",
+			"type": "Record"
+		},
+		{
+			"modifiers": {
+				"#": "java.util.Collections$UnmodifiableSet",},
+			"name": "Release",
+			"packageName": "evergarden.host",
 			"type": "Record"
 		},
 		{

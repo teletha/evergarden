@@ -14,7 +14,7 @@
 		<link as="style" fetchpriority="high" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Vollkorn" rel="preload"/>
 		<link href="https://fonts.googleapis.com/css2?display=swap&amp;family=Vollkorn" media="print" onload="this.media=&apos;all&apos;" rel="stylesheet"/>
 		<title>Evergarden API</title>
-		<base href=""/>
+		<base href="../"/>
 		<script src="mimic.js" type="module"></script>
 		<link href="https://cdn.jsdelivr.net/npm/ress@4.0.0/dist/ress.min.css" rel="stylesheet"/>
 		<link href="main.css" rel="stylesheet"/>
@@ -43,8 +43,39 @@
 				</a></div>
 		</header>
 		<nav class="a"></nav>
-		<article class="p" id="Article"></article>
-		<aside class="M"></aside>
+		<article class="p" id="Article">
+			<section class="S"><code class="n">evergarden.host</code>
+				<h2 class="Class T"><code class="P">REST</code></h2>
+				<div class="O">
+					<ul class="C F">
+						<li><code>kiss.Storable<code class="parameters"><code><a aria-label="evergarden.host.REST" href="api/evergarden.host.REST.html">REST</a></code></code></code></li>
+					</ul>
+				</div><span class="B"><p>A simple REST response cache that persists data locally using Storable.</p><p>
+ This class retrieves remote JSON data via <code>I.json(String)</code>, and caches
+ the result for a fixed period (1 hour). Cached data is stored as Base64-encoded
+ serialized objects. The cache is automatically restored on initialization.
+ </p></span></section>
+			<section class="S" id="data(java.lang.String)">
+				<h2 class="H"><i class="PUBLIC"></i><code class="P">data</code><code class="J">(<code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">url</code>)</code><i class="Z"><code>kiss.JSON</code></i></h2>
+				<table class="g">
+					<tr class="m">
+						<td><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">url</code></td>
+						<td><span><p>the URL to fetch data from</p></span></td>
+					</tr>
+					<tr class="V">
+						<td><code>kiss.JSON</code></td>
+						<td><span><p>the fetched or cached JSON object</p></span></td>
+					</tr>
+				</table><span class="B"><p>Fetches JSON data from the given URL, using a 1-hour cache expiration policy.</p></span></section>
+		</article>
+		<aside class="M">
+			<div class="U">
+				<h5 class="q">Methods</h5>
+				<ul>
+					<li class="s"><i class="PUBLIC"></i><code><a href="api/evergarden.host.REST.html#data(java.lang.String)">data</a></code><code class="J">(<code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">url</code>)</code><i class="r"><code>kiss.JSON</code></i></li>
+				</ul>
+			</div>
+		</aside>
 		<footer class="W"/>
 	</body>
 	<script src="root.js"></script>
