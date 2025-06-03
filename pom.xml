@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.teletha</groupId>
 	<artifactId>evergarden</artifactId>
-	<version>1.0</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	<name>evergarden</name>
 	<description/>
@@ -16,7 +16,7 @@
 		<dependency>
 			<groupId>com.github.teletha</groupId>
 			<artifactId>antibug</artifactId>
-			<version>1.13.1</version>
+			<version>1.14.0</version>
 			<scope>test</scope>
 			<exclusions/>
 		</dependency>
@@ -65,14 +65,14 @@
 		<dependency>
 			<groupId>com.github.teletha</groupId>
 			<artifactId>sinobu</artifactId>
-			<version>4.9.0</version>
+			<version>4.12.0</version>
 			<scope>compile</scope>
 			<exclusions/>
 		</dependency>
 		<dependency>
 			<groupId>com.github.teletha</groupId>
 			<artifactId>stylist</artifactId>
-			<version>1.14.0</version>
+			<version>1.16.0</version>
 			<scope>compile</scope>
 			<exclusions/>
 		</dependency>
