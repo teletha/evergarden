@@ -6,6 +6,9 @@
     <a href="https://teletha.github.io/evergarden"><img src="https://img.shields.io/website.svg?down_color=red&down_message=CLOSE&label=Official%20Site&up_color=green&up_message=OPEN&url=https%3A%2F%2Fteletha.github.io%2Fevergarden"></a>
 </p>
 
+## Summary
+Evergarden is both a Doclet that generates Javadoc written in modern HTML and CSS/JS, and an SSG that automatically generates software project sites.
+<p align="right"><a href="#top">back to top</a></p>
 
 
 
@@ -102,8 +105,8 @@ Evergarden depends on the following products on runtime.
 * [javaparser-core-3.26.4](https://mvnrepository.com/artifact/com.github.javaparser/javaparser-core/3.26.4)
 * [lycoris-1.1.0](https://mvnrepository.com/artifact/com.github.teletha/lycoris/1.1.0)
 * [psychopath-2.2.1](https://mvnrepository.com/artifact/com.github.teletha/psychopath/2.2.1)
-* [sinobu-4.12.0](https://mvnrepository.com/artifact/com.github.teletha/sinobu/4.12.0)
-* [stylist-1.16.0](https://mvnrepository.com/artifact/com.github.teletha/stylist/1.16.0)
+* [sinobu-4.11.1](https://mvnrepository.com/artifact/com.github.teletha/sinobu/4.11.1)
+* [stylist-1.15.0](https://mvnrepository.com/artifact/com.github.teletha/stylist/1.15.0)
 <p align="right"><a href="#top">back to top</a></p>
 
 

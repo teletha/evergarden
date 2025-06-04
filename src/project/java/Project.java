@@ -28,5 +28,9 @@ public class Project extends bee.api.Project {
         require("org.commonmark", "commonmark-ext-gfm-tables");
 
         versionControlSystem("https://github.com/teletha/evergarden");
+
+        describe("""
+                Evergarden is both a Doclet that generates Javadoc written in modern HTML and CSS/JS, and an SSG that automatically generates software project sites.
+                """);
     }
 }
