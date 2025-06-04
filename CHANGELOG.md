@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.3](https://github.com/teletha/evergarden/compare/1.0.2...1.0.3) (2025-06-04)
+
+
+### Bug Fixes
+
+* avoid navi flicker ([8ff401a](https://github.com/teletha/evergarden/commit/8ff401a256c66748084d2a74178a2a98a2d7826b))
+* handle empty data well ([ad0fcce](https://github.com/teletha/evergarden/commit/ad0fcce72c132c5ec6ece41b1805480b131df2a2))
+
 ## [1.0.2](https://github.com/teletha/evergarden/compare/1.0.1...1.0.2) (2025-06-03)
 
 
