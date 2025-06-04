@@ -30,6 +30,7 @@ import evergarden.Region;
 import evergarden.javadoc.Markdown;
 import kiss.I;
 import kiss.JSON;
+import kiss.Variable;
 import kiss.XML;
 
 class Github implements Hosting {
@@ -139,7 +140,7 @@ class Github implements Hosting {
      */
     @Override
     public String description() {
-        return metadata().text("description");
+        return Variable.of(metadata().text("description")).or("");
     }
 
     /**

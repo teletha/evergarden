@@ -166,12 +166,6 @@ public class Violet extends VioletEvergarden {
     private static final MethodHandle classpathUpdater = handler(classpathField);
 
     /** The final property updater. */
-    private static final Field descriptionField = updater("description");
-
-    /** The fast final property updater. */
-    private static final MethodHandle descriptionUpdater = handler(descriptionField);
-
-    /** The final property updater. */
     private static final Field encodingField = updater("encoding");
 
     /** The fast final property updater. */
@@ -208,9 +202,6 @@ public class Violet extends VioletEvergarden {
     public final List<Location> classpath;
 
     /** The exposed property. */
-    public final String description;
-
-    /** The exposed property. */
     public final Charset encoding;
 
     /** The exposed property. */
@@ -229,7 +220,6 @@ public class Violet extends VioletEvergarden {
         this.documents = super.documents();
         this.articles = super.articles();
         this.classpath = super.classpath();
-        this.description = super.description();
         this.encoding = super.encoding();
         this.listener = super.listener();
         this.host = super.host();
@@ -468,45 +458,6 @@ public class Violet extends VioletEvergarden {
     }
 
     /**
-     * Provides a short description or tagline for the project.
-     *  Used in the generated website metadata or headers.
-     *  Defaults to an empty string if not specified.
-     * 
-     *  @return The project description string.
-     */
-    @Override
-    public final String description() {
-        return this.description;
-    }
-
-    /**
-     * Provide classic getter API.
-     *
-     * @return A value of description property.
-     */
-    @SuppressWarnings("unused")
-    private final String getDescription() {
-        return this.description;
-    }
-
-    /**
-     * Provide classic setter API.
-     *
-     * @paran value A new value of description property to assign.
-     */
-    private final void setDescription(String value) {
-        if (value == null) {
-            value = super.description();
-        }
-        try {
-            descriptionUpdater.invoke(this, value);
-        } catch (UnsupportedOperationException e) {
-        } catch (Throwable e) {
-            throw quiet(e);
-        }
-    }
-
-    /**
      * Specifies the character encoding of the source files.
      *  Defaults to the system's default charset. It's recommended to explicitly set this
      *  (e.g., to {@code StandardCharsets.UTF_8}).
@@ -634,7 +585,6 @@ public class Violet extends VioletEvergarden {
         builder.append("documents=").append(documents).append(", ");
         builder.append("articles=").append(articles).append(", ");
         builder.append("classpath=").append(classpath).append(", ");
-        builder.append("description=").append(description).append(", ");
         builder.append("encoding=").append(encoding).append(", ");
         builder.append("listener=").append(listener).append(", ");
         builder.append("host=").append(host).append("]");
@@ -648,7 +598,7 @@ public class Violet extends VioletEvergarden {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(address, title, sources, documents, articles, classpath, description, encoding, listener, host);
+        return Objects.hash(address, title, sources, documents, articles, classpath, encoding, listener, host);
     }
 
     /**
@@ -669,7 +619,6 @@ public class Violet extends VioletEvergarden {
         if (!Objects.equals(documents, other.documents)) return false;
         if (!Objects.equals(articles, other.articles)) return false;
         if (!Objects.equals(classpath, other.classpath)) return false;
-        if (!Objects.equals(description, other.description)) return false;
         if (!Objects.equals(encoding, other.encoding)) return false;
         if (!Objects.equals(listener, other.listener)) return false;
         if (!Objects.equals(host, other.host)) return false;
@@ -981,17 +930,6 @@ public class Violet extends VioletEvergarden {
         }
 
         /**
-         * Assign description property.
-         * 
-         * @param value A new value to assign.
-         * @return The next assignable model.
-         */
-        default Next description(String value) {
-            ((Violet) this).setDescription(value);
-            return (Next) this;
-        }
-
-        /**
          * Assign encoding property.
          * 
          * @param value A new value to assign.
@@ -1082,7 +1020,6 @@ public class Violet extends VioletEvergarden {
         static final String Documents = "documents";
         static final String Articles = "articles";
         static final String Classpath = "classpath";
-        static final String Description = "description";
         static final String Encoding = "encoding";
         static final String Listener = "listener";
         static final String Host = "host";

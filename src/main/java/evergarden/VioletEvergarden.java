@@ -125,14 +125,6 @@ public abstract class VioletEvergarden {
          * {@inheritDoc}
          */
         @Override
-        public String description() {
-            return VioletEvergarden.this.description();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
         public Charset encoding() {
             return VioletEvergarden.this.encoding();
         }
@@ -270,18 +262,6 @@ public abstract class VioletEvergarden {
     @Icy.Intercept("title")
     private String upper(String title) {
         return Character.toUpperCase(title.charAt(0)) + title.substring(1);
-    }
-
-    /**
-     * Provides a short description or tagline for the project.
-     * Used in the generated website metadata or headers.
-     * Defaults to an empty string if not specified.
-     *
-     * @return The project description string.
-     */
-    @Icy.Property
-    public String description() {
-        return "";
     }
 
     /**

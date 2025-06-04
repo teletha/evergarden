@@ -348,7 +348,7 @@ public abstract class Page<T> extends HTML {
         };
 
         Style article = () -> {
-            display.opacity(1);
+            display.opacity(1).width(100, percent);
             font.letterSpacing(-0.025, rem);
             transition.duration(0.15, s).ease().whenever();
 

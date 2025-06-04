@@ -96,7 +96,7 @@ public class Styles implements EvergardenDSL {
     public static Style HLJS = Style.named(".hljs", () -> {
         block();
         font.family(Theme.mono).size(0.9, em).lineHeight(1.6);
-        border.radius(Theme.radius).width(1, px).solid().color(Theme.surface.lighten(Theme.front, 6));
+        border.radius(Theme.radius).width(1, px).solid().color(Theme.surface.lighten(Theme.front, 10));
         padding.left(1.6, em).vertical(1.2, em);
         position.relative();
         background.color(Theme.surface.lighten(Theme.front, 3));

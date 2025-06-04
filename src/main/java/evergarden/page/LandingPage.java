@@ -50,7 +50,7 @@ public class LandingPage extends Page<List<ClassInfo>> {
                         .map(Hosting::releases)
                         .map(List::getFirst)
                         .map(Release::url)
-                        .or("")), css.button, text("Download " + letter.title()));
+                        .or("")), css.button, text("Download"));
             });
 
             I.signal(contents)
@@ -173,6 +173,7 @@ public class LandingPage extends Page<List<ClassInfo>> {
         });
 
         Style card = Styles.ACTIVATABLE_BOX.with(() -> {
+            display.grid().row(Numeric.num(4, ch), Numeric.num(1, fr), Numeric.num(2, ch)).rowGap(5, px);
             padding.horizontal(1.6, em).vertical(1.2, em);
             text.decoration.none();
 

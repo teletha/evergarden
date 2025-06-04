@@ -95,7 +95,9 @@ public abstract class Letter {
      *
      * @return the project description string. Can be empty but should not be null.
      */
-    public abstract String description();
+    public String description() {
+        return authority().map(Hosting::description).or("");
+    }
 
     /**
      * Returns the character set (encoding) used for reading source files and
