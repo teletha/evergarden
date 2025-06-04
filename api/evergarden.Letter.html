@@ -19,10 +19,10 @@
 		<link href="https://cdn.jsdelivr.net/npm/ress@4.0.0/dist/ress.min.css" rel="stylesheet"/>
 		<link href="main.css" rel="stylesheet"/>
 	</head>
-	<body class="l">
-		<header class="Z" date="2025-06-03">
-			<h1 class="a"><a href="index.html"><code>Evergarden</code></a></h1>
-			<nav class="b"><a href="api/main.html" id="API"><svg class="package">
+	<body class="IB">
+		<header class="j" date="2025-06-03">
+			<h1 class="O"><a href="index.html"><code>Evergarden</code></a></h1>
+			<nav class="k"><a href="api/main.html" id="API"><svg class="package">
 						<use href="main.svg#package"/>
 					</svg>
 				</a><a href="doc/changelog.html" id="Activity"><svg class="activity">
@@ -35,18 +35,18 @@
 						<use href="main.svg#github"/>
 					</svg>
 				</a></nav>
-			<div class="c"><a aria-label="Change color scheme" id="theme"><svg class="sun">
+			<div class="l"><a aria-label="Change color scheme" id="theme"><svg class="sun">
 						<use href="main.svg#sun"/>
 					</svg><svg class="moon">
 						<use href="main.svg#moon"/>
 					</svg>
 				</a></div>
 		</header>
-		<nav class="S"></nav>
-		<article class="m" id="Article">
-			<section class="v"><code class="O">evergarden</code>
-				<h2 class="AbstractClass q"><code class="Y">Letter</code></h2>
-				<div class="V"></div><span class="A"><p>Represents the central metadata and configuration for a documentation project.</p><p>
+		<nav class="v"></nav>
+		<article class="CB" id="Article">
+			<section class="d"><code class="h">evergarden</code>
+				<h2 class="AbstractClass r"><code class="M">Letter</code></h2>
+				<div class="S"></div><span class="A"><p>Represents the central metadata and configuration for a documentation project.</p><p>
  This abstract class serves as a container for various pieces of information gathered
  during the documentation generation process, such as discovered modules, packages,
  parsed class information, and the structure of external documentation files.
@@ -58,78 +58,78 @@
 </p>
 					</p>
 				</span></section>
-			<section class="v" id="modules">
-				<h2 class="LB"><i class="PUBLIC"></i><code class="Y">modules</code><i class="J"><code class="return"><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></code></code></i></h2><span class="A"><p>The list of JPMS (Java Platform Module System) module names declared in the project.
+			<section class="d" id="modules">
+				<h2 class="AB"><i class="PUBLIC"></i><code class="M">modules</code><i class="JB"><code class="return"><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></code></code></i></h2><span class="A"><p>The list of JPMS (Java Platform Module System) module names declared in the project.
 This list is populated during the scanning phase.</p></span></section>
-			<section class="v" id="packages">
-				<h2 class="LB"><i class="PUBLIC"></i><code class="Y">packages</code><i class="J"><code class="return"><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></code></code></i></h2><span class="A"><p>The list of Java package names discovered within the project&apos;s source code
+			<section class="d" id="packages">
+				<h2 class="AB"><i class="PUBLIC"></i><code class="M">packages</code><i class="JB"><code class="return"><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></code></code></i></h2><span class="A"><p>The list of Java package names discovered within the project&apos;s source code
 during scanning.</p></span></section>
-			<section class="v" id="types">
-				<h2 class="LB"><i class="PUBLIC"></i><code class="Y">types</code><i class="J"><code class="return"><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="evergarden.javadoc.ClassInfo" href="api/evergarden.javadoc.ClassInfo.html">ClassInfo</a></code></code></code></i></h2><span class="A"><p>A collection of <code><a aria-label="evergarden.javadoc.ClassInfo" href="api/evergarden.javadoc.ClassInfo.html">ClassInfo</a></code> objects representing type definitions
+			<section class="d" id="types">
+				<h2 class="AB"><i class="PUBLIC"></i><code class="M">types</code><i class="JB"><code class="return"><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="evergarden.javadoc.ClassInfo" href="api/evergarden.javadoc.ClassInfo.html">ClassInfo</a></code></code></code></i></h2><span class="A"><p>A collection of <code><a aria-label="evergarden.javadoc.ClassInfo" href="api/evergarden.javadoc.ClassInfo.html">ClassInfo</a></code> objects representing type definitions
 (classes, interfaces, enums, records) parsed from the project&apos;s Java source files.</p></span></section>
-			<section class="v" id="docs">
-				<h2 class="LB"><i class="PUBLIC"></i><code class="Y">docs</code><i class="J"><code class="return"><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="evergarden.Letter.Doc" href="api/evergarden.Letter.Doc.html">Doc</a></code></code></code></i></h2><span class="A"><p>A tree structure representing external documentation files (e.g., Markdown files)
+			<section class="d" id="docs">
+				<h2 class="AB"><i class="PUBLIC"></i><code class="M">docs</code><i class="JB"><code class="return"><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="evergarden.Letter.Doc" href="api/evergarden.Letter.Doc.html">Doc</a></code></code></code></i></h2><span class="A"><p>A tree structure representing external documentation files (e.g., Markdown files)
 and their logical hierarchy, defined using <code><a aria-label="evergarden.Letter.Doc" href="api/evergarden.Letter.Doc.html">Doc</a></code> nodes. This typically
 forms the main navigation structure of the generated documentation site.</p></span></section>
-			<section class="v" id="Letter()">
-				<h2 class="LB"><i class="PUBLIC"></i><code class="Y">Letter</code><code class="j">()</code></h2>
+			<section class="d" id="Letter()">
+				<h2 class="AB"><i class="PUBLIC"></i><code class="M">Letter</code><code class="g">()</code></h2>
 			</section>
-			<section class="v" id="address()">
-				<h2 class="LB"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code class="Y">address</code><code class="j">()</code><i class="J"><code>psychopath.Directory</code></i></h2>
-				<table class="R">
-					<tr class="r">
+			<section class="d" id="address()">
+				<h2 class="AB"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code class="M">address</code><code class="g">()</code><i class="JB"><code>psychopath.Directory</code></i></h2>
+				<table class="FB">
+					<tr class="Y">
 						<td><code>psychopath.Directory</code></td>
 						<td><span><p>the root directory</p></span></td>
 					</tr>
 				</table><span class="A"><p>Gets the root directory of this documentation project.</p></span></section>
-			<section class="v" id="title()">
-				<h2 class="LB"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code class="Y">title</code><code class="j">()</code><i class="J"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></i></h2>
-				<table class="R">
-					<tr class="r">
+			<section class="d" id="title()">
+				<h2 class="AB"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code class="M">title</code><code class="g">()</code><i class="JB"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></i></h2>
+				<table class="FB">
+					<tr class="Y">
 						<td><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></td>
 						<td><span><p>a human-readable title string. Should not be null or empty.</p></span></td>
 					</tr>
 				</table><span class="A"><p>Returns the main title of this documentation project.
 This title is typically displayed prominently on the generated site.</p></span></section>
-			<section class="v" id="description()">
-				<h2 class="LB"><i class="PUBLIC"></i><code class="Y">description</code><code class="j">()</code><i class="J"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></i></h2>
-				<table class="R">
-					<tr class="r">
+			<section class="d" id="description()">
+				<h2 class="AB"><i class="PUBLIC"></i><code class="M">description</code><code class="g">()</code><i class="JB"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></i></h2>
+				<table class="FB">
+					<tr class="Y">
 						<td><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></td>
 						<td><span><p>the project description string. Can be empty but should not be null.</p></span></td>
 					</tr>
 				</table><span class="A"><p>Returns a brief description of the project.
 This description might be used in meta tags or introductory sections.</p></span></section>
-			<section class="v" id="encoding()">
-				<h2 class="LB"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code class="Y">encoding</code><code class="j">()</code><i class="J"><code><a aria-label="java.nio.charset.Charset 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/nio/charset/Charset.html">Charset</a></code></i></h2>
-				<table class="R">
-					<tr class="r">
+			<section class="d" id="encoding()">
+				<h2 class="AB"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code class="M">encoding</code><code class="g">()</code><i class="JB"><code><a aria-label="java.nio.charset.Charset 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/nio/charset/Charset.html">Charset</a></code></i></h2>
+				<table class="FB">
+					<tr class="Y">
 						<td><code><a aria-label="java.nio.charset.Charset 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/nio/charset/Charset.html">Charset</a></code></td>
 						<td><span><p>the <code><a aria-label="java.nio.charset.Charset 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/nio/charset/Charset.html">Charset</a></code> for the project. Must not be null.</p></span></td>
 					</tr>
 				</table><span class="A"><p>Returns the character set (encoding) used for reading source files and
 writing output files within this project.</p></span></section>
-			<section class="v" id="authority()">
-				<h2 class="LB"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code class="Y">authority</code><code class="j">()</code><i class="J"><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.host.Hosting" href="api/evergarden.host.Hosting.html">Hosting</a></code></code></code></i></h2>
-				<table class="R">
-					<tr class="r">
+			<section class="d" id="authority()">
+				<h2 class="AB"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code class="M">authority</code><code class="g">()</code><i class="JB"><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.host.Hosting" href="api/evergarden.host.Hosting.html">Hosting</a></code></code></code></i></h2>
+				<table class="FB">
+					<tr class="Y">
 						<td><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.host.Hosting" href="api/evergarden.host.Hosting.html">Hosting</a></code></code></code></td>
 						<td><span><p>a variable representing hosting information</p></span></td>
 					</tr>
 				</table><span class="A"><p>Returns the hosting context or origin authority of the documentation.</p></span></section>
-			<section class="v" id="doc()">
-				<h2 class="LB"><i class="FINAL"><i class="PUBLIC"></i></i><code class="Y">doc</code><code class="j">()</code><i class="J"><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.Letter.Doc" href="api/evergarden.Letter.Doc.html">Doc</a></code></code></code></i></h2>
-				<table class="R">
-					<tr class="r">
+			<section class="d" id="doc()">
+				<h2 class="AB"><i class="FINAL"><i class="PUBLIC"></i></i><code class="M">doc</code><code class="g">()</code><i class="JB"><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.Letter.Doc" href="api/evergarden.Letter.Doc.html">Doc</a></code></code></code></i></h2>
+				<table class="FB">
+					<tr class="Y">
 						<td><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.Letter.Doc" href="api/evergarden.Letter.Doc.html">Doc</a></code></code></code></td>
 						<td><span><p>a Variable containing the root <code><a aria-label="evergarden.Letter.Doc" href="api/evergarden.Letter.Doc.html">Doc</a></code>. Empty if <code><a aria-label="evergarden.Letter" href="api/evergarden.Letter.html#docs">#docs</a></code> is empty.</p></span></td>
 					</tr>
 				</table><span class="A"><p>Returns the root documentation node from the <code><a aria-label="evergarden.Letter" href="api/evergarden.Letter.html#docs">#docs</a></code> list, if available.
 This is often used as the entry point for navigating the external documentation structure.</p></span></section>
-			<section class="v" id="api()">
-				<h2 class="LB"><i class="FINAL"><i class="PUBLIC"></i></i><code class="Y">api</code><code class="j">()</code><i class="J"><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.javadoc.ClassInfo" href="api/evergarden.javadoc.ClassInfo.html">ClassInfo</a></code></code></code></i></h2>
-				<table class="R">
-					<tr class="r">
+			<section class="d" id="api()">
+				<h2 class="AB"><i class="FINAL"><i class="PUBLIC"></i></i><code class="M">api</code><code class="g">()</code><i class="JB"><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.javadoc.ClassInfo" href="api/evergarden.javadoc.ClassInfo.html">ClassInfo</a></code></code></code></i></h2>
+				<table class="FB">
+					<tr class="Y">
 						<td><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.javadoc.ClassInfo" href="api/evergarden.javadoc.ClassInfo.html">ClassInfo</a></code></code></code></td>
 						<td><span><p>a Variable containing the first <code><a aria-label="evergarden.javadoc.ClassInfo" href="api/evergarden.javadoc.ClassInfo.html">ClassInfo</a></code>. Empty if <code><a aria-label="evergarden.Letter" href="api/evergarden.Letter.html#types">#types</a></code> is
 empty.</p></span></td>
@@ -137,46 +137,46 @@ empty.</p></span></td>
 				</table><span class="A"><p>Returns the primary API documentation entry point, typically the first discovered
 <code><a aria-label="evergarden.javadoc.ClassInfo" href="api/evergarden.javadoc.ClassInfo.html">ClassInfo</a></code> from the <code><a aria-label="evergarden.Letter" href="api/evergarden.Letter.html#types">#types</a></code> list, if available. This might represent
 the main class or entry point of the documented library/application.</p></span></section>
-			<section class="v" id="doodle(java.lang.String)">
-				<h2 class="LB"><i class="FINAL"><i class="PUBLIC"></i></i><code class="Y">doodle</code><code class="j">(<code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">id</code>)</code><i class="J"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="evergarden.Doodle" href="api/evergarden.Doodle.html">Doodle</a></code></code></code></i></h2>
-				<table class="R">
-					<tr class="CB">
+			<section class="d" id="doodle(java.lang.String)">
+				<h2 class="AB"><i class="FINAL"><i class="PUBLIC"></i></i><code class="M">doodle</code><code class="g">(<code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">id</code>)</code><i class="JB"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="evergarden.Doodle" href="api/evergarden.Doodle.html">Doodle</a></code></code></code></i></h2>
+				<table class="FB">
+					<tr class="f">
 						<td><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">id</code></td>
 						<td><span><p>the sample identifier</p></span></td>
 					</tr>
-					<tr class="r">
+					<tr class="Y">
 						<td><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="evergarden.Doodle" href="api/evergarden.Doodle.html">Doodle</a></code></code></code></td>
 						<td><span><p>a list of matching sample information entries</p></span></td>
 					</tr>
 				</table><span class="A"><p>Retrieves sample code blocks associated with a given identifier.</p></span></section>
 		</article>
-		<aside class="n">
-			<div class="Q">
-				<h5 class="FB">Constructors</h5>
+		<aside class="c">
+			<div class="P">
+				<h5 class="Q">Constructors</h5>
 				<ul>
-					<li class="w"><i class="PUBLIC"></i><code><a href="api/evergarden.Letter.html#Letter()">Letter</a></code><code class="j">()</code></li>
+					<li class="K"><i class="PUBLIC"></i><code><a href="api/evergarden.Letter.html#Letter()">Letter</a></code><code class="g">()</code></li>
 				</ul>
-				<h5 class="FB">Fields</h5>
+				<h5 class="Q">Fields</h5>
 				<ul>
-					<li class="w"><i class="PUBLIC"></i><code><a href="api/evergarden.Letter.html#modules">modules</a></code><i class="f"><code class="return"><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></code></code></i></li>
-					<li class="w"><i class="PUBLIC"></i><code><a href="api/evergarden.Letter.html#packages">packages</a></code><i class="f"><code class="return"><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></code></code></i></li>
-					<li class="w"><i class="PUBLIC"></i><code><a href="api/evergarden.Letter.html#types">types</a></code><i class="f"><code class="return"><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="evergarden.javadoc.ClassInfo" href="api/evergarden.javadoc.ClassInfo.html">ClassInfo</a></code></code></code></i></li>
-					<li class="w"><i class="PUBLIC"></i><code><a href="api/evergarden.Letter.html#docs">docs</a></code><i class="f"><code class="return"><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="evergarden.Letter.Doc" href="api/evergarden.Letter.Doc.html">Doc</a></code></code></code></i></li>
+					<li class="K"><i class="PUBLIC"></i><code><a href="api/evergarden.Letter.html#modules">modules</a></code><i class="EB"><code class="return"><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></code></code></i></li>
+					<li class="K"><i class="PUBLIC"></i><code><a href="api/evergarden.Letter.html#packages">packages</a></code><i class="EB"><code class="return"><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></code></code></i></li>
+					<li class="K"><i class="PUBLIC"></i><code><a href="api/evergarden.Letter.html#types">types</a></code><i class="EB"><code class="return"><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="evergarden.javadoc.ClassInfo" href="api/evergarden.javadoc.ClassInfo.html">ClassInfo</a></code></code></code></i></li>
+					<li class="K"><i class="PUBLIC"></i><code><a href="api/evergarden.Letter.html#docs">docs</a></code><i class="EB"><code class="return"><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="evergarden.Letter.Doc" href="api/evergarden.Letter.Doc.html">Doc</a></code></code></code></i></li>
 				</ul>
-				<h5 class="FB">Methods</h5>
+				<h5 class="Q">Methods</h5>
 				<ul>
-					<li class="w"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code><a href="api/evergarden.Letter.html#address()">address</a></code><code class="j">()</code><i class="f"><code>psychopath.Directory</code></i></li>
-					<li class="w"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code><a href="api/evergarden.Letter.html#title()">title</a></code><code class="j">()</code><i class="f"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></i></li>
-					<li class="w"><i class="PUBLIC"></i><code><a href="api/evergarden.Letter.html#description()">description</a></code><code class="j">()</code><i class="f"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></i></li>
-					<li class="w"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code><a href="api/evergarden.Letter.html#encoding()">encoding</a></code><code class="j">()</code><i class="f"><code><a aria-label="java.nio.charset.Charset 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/nio/charset/Charset.html">Charset</a></code></i></li>
-					<li class="w"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code><a href="api/evergarden.Letter.html#authority()">authority</a></code><code class="j">()</code><i class="f"><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.host.Hosting" href="api/evergarden.host.Hosting.html">Hosting</a></code></code></code></i></li>
-					<li class="w"><i class="FINAL"><i class="PUBLIC"></i></i><code><a href="api/evergarden.Letter.html#doc()">doc</a></code><code class="j">()</code><i class="f"><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.Letter.Doc" href="api/evergarden.Letter.Doc.html">Doc</a></code></code></code></i></li>
-					<li class="w"><i class="FINAL"><i class="PUBLIC"></i></i><code><a href="api/evergarden.Letter.html#api()">api</a></code><code class="j">()</code><i class="f"><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.javadoc.ClassInfo" href="api/evergarden.javadoc.ClassInfo.html">ClassInfo</a></code></code></code></i></li>
-					<li class="w"><i class="FINAL"><i class="PUBLIC"></i></i><code><a href="api/evergarden.Letter.html#doodle(java.lang.String)">doodle</a></code><code class="j">(<code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">id</code>)</code><i class="f"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="evergarden.Doodle" href="api/evergarden.Doodle.html">Doodle</a></code></code></code></i></li>
+					<li class="K"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code><a href="api/evergarden.Letter.html#address()">address</a></code><code class="g">()</code><i class="EB"><code>psychopath.Directory</code></i></li>
+					<li class="K"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code><a href="api/evergarden.Letter.html#title()">title</a></code><code class="g">()</code><i class="EB"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></i></li>
+					<li class="K"><i class="PUBLIC"></i><code><a href="api/evergarden.Letter.html#description()">description</a></code><code class="g">()</code><i class="EB"><code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code></i></li>
+					<li class="K"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code><a href="api/evergarden.Letter.html#encoding()">encoding</a></code><code class="g">()</code><i class="EB"><code><a aria-label="java.nio.charset.Charset 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/nio/charset/Charset.html">Charset</a></code></i></li>
+					<li class="K"><i class="ABSTRACT"><i class="PUBLIC"></i></i><code><a href="api/evergarden.Letter.html#authority()">authority</a></code><code class="g">()</code><i class="EB"><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.host.Hosting" href="api/evergarden.host.Hosting.html">Hosting</a></code></code></code></i></li>
+					<li class="K"><i class="FINAL"><i class="PUBLIC"></i></i><code><a href="api/evergarden.Letter.html#doc()">doc</a></code><code class="g">()</code><i class="EB"><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.Letter.Doc" href="api/evergarden.Letter.Doc.html">Doc</a></code></code></code></i></li>
+					<li class="K"><i class="FINAL"><i class="PUBLIC"></i></i><code><a href="api/evergarden.Letter.html#api()">api</a></code><code class="g">()</code><i class="EB"><code>kiss.Variable<code class="parameters"><code><a aria-label="evergarden.javadoc.ClassInfo" href="api/evergarden.javadoc.ClassInfo.html">ClassInfo</a></code></code></code></i></li>
+					<li class="K"><i class="FINAL"><i class="PUBLIC"></i></i><code><a href="api/evergarden.Letter.html#doodle(java.lang.String)">doodle</a></code><code class="g">(<code><a aria-label="java.lang.String 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html">String</a></code><code class="parameterName">id</code>)</code><i class="EB"><code><a aria-label="java.util.List 🚀" href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html">List</a><code class="parameters"><code><a aria-label="evergarden.Doodle" href="api/evergarden.Doodle.html">Doodle</a></code></code></code></i></li>
 				</ul>
 			</div>
 		</aside>
-		<footer class="W">
+		<footer class="R">
 			<p>Powered by <a href="https://github.com/teletha/evergarden" target="_">Evergarden</a></p>
 		</footer>
 	</body>
