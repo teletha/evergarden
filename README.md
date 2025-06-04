@@ -35,7 +35,7 @@ Add it into in the dependencies element like so:
 <dependency>
     <groupId>com.github.teletha</groupId>
     <artifactId>evergarden</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 #### [Gradle](https://gradle.org/)
@@ -48,7 +48,7 @@ repositories {
 Add it into the dependencies section like so:
 ```gradle
 dependencies {
-    implementation 'com.github.teletha:evergarden:1.0.2'
+    implementation 'com.github.teletha:evergarden:1.0.3'
 }
 ```
 #### [SBT](https://www.scala-sbt.org/)
@@ -58,7 +58,7 @@ resolvers += "jitpack" at "https://jitpack.io"
 ```
 Add it into the libraryDependencies section like so:
 ```scala
-libraryDependencies += "com.github.teletha" % "evergarden" % "1.0.2"
+libraryDependencies += "com.github.teletha" % "evergarden" % "1.0.3"
 ```
 #### [Leiningen](https://leiningen.org/)
 Add JitPack repository at the end of repositories in your project().clj:
@@ -67,12 +67,12 @@ Add JitPack repository at the end of repositories in your project().clj:
 ```
 Add it into the dependencies section like so:
 ```clj
-:dependencies [[com.github.teletha/evergarden "1.0.2"]]
+:dependencies [[com.github.teletha/evergarden "1.0.3"]]
 ```
 #### [Bee](https://teletha.github.io/bee)
 Add it into your project definition class like so:
 ```java
-require("com.github.teletha", "evergarden", "1.0.2");
+require("com.github.teletha", "evergarden", "1.0.3");
 ```
 <p align="right"><a href="#top">back to top</a></p>
 
