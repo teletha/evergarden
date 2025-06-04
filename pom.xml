@@ -5,7 +5,7 @@
 	<version>1.0.2</version>
 	<packaging>jar</packaging>
 	<name>evergarden</name>
-	<description/>
+	<description>Evergarden is both a Doclet that generates Javadoc written in modern HTML and CSS/JS, and an SSG that automatically generates software project sites.</description>
 	<licenses>
 		<license>
 			<name>MIT License</name>
