@@ -3,17 +3,27 @@ const root = {
 	"modules": [],
 	"packages": [
 		"evergarden",
-		"evergarden.javadoc",
-		"evergarden.design",
 		"evergarden.page",
 		"evergarden.web",
+		"evergarden.javadoc",
+		"evergarden.design",
 		"evergarden.host"
 	],
 	"types": [
 		{
-			"name": "Doodle",
+			"name": "Document",
 			"packageName": "evergarden",
-			"type": "Record"
+			"type": "Interface"
+		},
+		{
+			"name": "SiteBuilder",
+			"packageName": "evergarden",
+			"type": "Class"
+		},
+		{
+			"name": "Tool",
+			"packageName": "evergarden",
+			"type": "Class"
 		},
 		{
 			"name": "Region",
@@ -21,92 +31,7 @@ const root = {
 			"type": "Record"
 		},
 		{
-			"name": "TypeResolver",
-			"packageName": "evergarden.javadoc",
-			"type": "Class"
-		},
-		{
-			"name": "MemberInfo",
-			"packageName": "evergarden.javadoc",
-			"type": "AbstractClass"
-		},
-		{
-			"name": "Markdown",
-			"packageName": "evergarden.javadoc",
-			"type": "Class"
-		},
-		{
-			"name": "ClassInfo",
-			"packageName": "evergarden.javadoc",
-			"type": "Class"
-		},
-		{
-			"name": "FieldInfo",
-			"packageName": "evergarden.javadoc",
-			"type": "Class"
-		},
-		{
-			"name": "ParameterizableInfo",
-			"packageName": "evergarden.javadoc",
-			"type": "AbstractClass"
-		},
-		{
-			"name": "DocumentInfo",
-			"packageName": "evergarden.javadoc",
-			"type": "Class"
-		},
-		{
-			"name": "ExecutableInfo",
-			"packageName": "evergarden.javadoc",
-			"type": "Class"
-		},
-		{
-			"name": "MethodInfo",
-			"packageName": "evergarden.javadoc",
-			"type": "Class"
-		},
-		{
-			"name": "SourceCode",
-			"packageName": "evergarden.javadoc",
-			"type": "Class"
-		},
-		{
-			"name": "EvergardenDesignScheme",
-			"packageName": "evergarden.design",
-			"type": "Class"
-		},
-		{
-			"name": "EvergardenDSL",
-			"packageName": "evergarden.design",
-			"type": "Interface"
-		},
-		{
-			"name": "Styles",
-			"packageName": "evergarden.design",
-			"type": "Class"
-		},
-		{
-			"name": "LandingPage",
-			"packageName": "evergarden.page",
-			"type": "Class"
-		},
-		{
-			"name": "DocumentPage",
-			"packageName": "evergarden.page",
-			"type": "Class"
-		},
-		{
-			"name": "ActivityPage",
-			"packageName": "evergarden.page",
-			"type": "Class"
-		},
-		{
-			"name": "DocumentOnePage",
-			"packageName": "evergarden.page",
-			"type": "Class"
-		},
-		{
-			"name": "APIPage",
+			"name": "APIMainPage",
 			"packageName": "evergarden.page",
 			"type": "Class"
 		},
@@ -116,7 +41,27 @@ const root = {
 			"type": "AbstractClass"
 		},
 		{
-			"name": "APIMainPage",
+			"name": "ActivityPage",
+			"packageName": "evergarden.page",
+			"type": "Class"
+		},
+		{
+			"name": "LandingPage",
+			"packageName": "evergarden.page",
+			"type": "Class"
+		},
+		{
+			"name": "APIPage",
+			"packageName": "evergarden.page",
+			"type": "Class"
+		},
+		{
+			"name": "DocumentPage",
+			"packageName": "evergarden.page",
+			"type": "Class"
+		},
+		{
+			"name": "DocumentOnePage",
 			"packageName": "evergarden.page",
 			"type": "Class"
 		},
@@ -124,11 +69,6 @@ const root = {
 			"name": "Page",
 			"packageName": "evergarden.page",
 			"type": "AbstractClass"
-		},
-		{
-			"name": "Document",
-			"packageName": "evergarden",
-			"type": "Interface"
 		},
 		{
 			"name": "CodeHighlight",
@@ -141,8 +81,68 @@ const root = {
 			"type": "AbstractClass"
 		},
 		{
-			"name": "Tool",
-			"packageName": "evergarden",
+			"name": "DocumentInfo",
+			"packageName": "evergarden.javadoc",
+			"type": "Class"
+		},
+		{
+			"name": "ClassInfo",
+			"packageName": "evergarden.javadoc",
+			"type": "Class"
+		},
+		{
+			"name": "TypeResolver",
+			"packageName": "evergarden.javadoc",
+			"type": "Class"
+		},
+		{
+			"name": "FieldInfo",
+			"packageName": "evergarden.javadoc",
+			"type": "Class"
+		},
+		{
+			"name": "Markdown",
+			"packageName": "evergarden.javadoc",
+			"type": "Class"
+		},
+		{
+			"name": "MemberInfo",
+			"packageName": "evergarden.javadoc",
+			"type": "AbstractClass"
+		},
+		{
+			"name": "SourceCode",
+			"packageName": "evergarden.javadoc",
+			"type": "Class"
+		},
+		{
+			"name": "ExecutableInfo",
+			"packageName": "evergarden.javadoc",
+			"type": "Class"
+		},
+		{
+			"name": "ParameterizableInfo",
+			"packageName": "evergarden.javadoc",
+			"type": "AbstractClass"
+		},
+		{
+			"name": "MethodInfo",
+			"packageName": "evergarden.javadoc",
+			"type": "Class"
+		},
+		{
+			"name": "EvergardenDSL",
+			"packageName": "evergarden.design",
+			"type": "Interface"
+		},
+		{
+			"name": "EvergardenDesignScheme",
+			"packageName": "evergarden.design",
+			"type": "Class"
+		},
+		{
+			"name": "Styles",
+			"packageName": "evergarden.design",
 			"type": "Class"
 		},
 		{
@@ -151,9 +151,9 @@ const root = {
 			"type": "Interface"
 		},
 		{
-			"name": "REST",
+			"name": "Release",
 			"packageName": "evergarden.host",
-			"type": "Class"
+			"type": "Record"
 		},
 		{
 			"name": "Contributor",
@@ -161,8 +161,18 @@ const root = {
 			"type": "Record"
 		},
 		{
-			"name": "Release",
+			"name": "REST",
 			"packageName": "evergarden.host",
+			"type": "Class"
+		},
+		{
+			"name": "Letter",
+			"packageName": "evergarden",
+			"type": "AbstractClass"
+		},
+		{
+			"name": "Letter.Doc",
+			"packageName": "evergarden",
 			"type": "Record"
 		},
 		{
@@ -181,19 +191,9 @@ const root = {
 			"type": "Class"
 		},
 		{
-			"name": "Letter",
-			"packageName": "evergarden",
-			"type": "AbstractClass"
-		},
-		{
-			"name": "Letter.Doc",
+			"name": "Doodle",
 			"packageName": "evergarden",
 			"type": "Record"
-		},
-		{
-			"name": "SiteBuilder",
-			"packageName": "evergarden",
-			"type": "Class"
 		},
 		{
 			"name": "Violet",
