@@ -23,14 +23,14 @@
 		<dependency>
 			<groupId>org.commonmark</groupId>
 			<artifactId>commonmark</artifactId>
-			<version>0.24.0</version>
+			<version>0.25.1</version>
 			<scope>compile</scope>
 			<exclusions/>
 		</dependency>
 		<dependency>
 			<groupId>org.commonmark</groupId>
 			<artifactId>commonmark-ext-gfm-tables</artifactId>
-			<version>0.24.0</version>
+			<version>0.25.1</version>
 			<scope>compile</scope>
 			<exclusions/>
 		</dependency>
@@ -44,7 +44,7 @@
 		<dependency>
 			<groupId>com.github.javaparser</groupId>
 			<artifactId>javaparser-core</artifactId>
-			<version>3.26.4</version>
+			<version>3.27.0</version>
 			<scope>compile</scope>
 			<exclusions/>
 		</dependency>
@@ -65,7 +65,7 @@
 		<dependency>
 			<groupId>com.github.teletha</groupId>
 			<artifactId>sinobu</artifactId>
-			<version>4.12.0</version>
+			<version>4.13.1</version>
 			<scope>compile</scope>
 			<exclusions/>
 		</dependency>
@@ -79,7 +79,7 @@
 		<dependency>
 			<groupId>com.github.teletha</groupId>
 			<artifactId>viewtify</artifactId>
-			<version>2.34.0</version>
+			<version>2.35.0</version>
 			<scope>test</scope>
 			<exclusions/>
 		</dependency>
