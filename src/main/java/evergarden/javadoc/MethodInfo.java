@@ -45,7 +45,7 @@ public class MethodInfo extends ExecutableInfo {
      */
     @Override
     public XML createReturnComment() {
-        return returnTag.isPresent() ? returnTag.v.clone() : null;
+        return returnTag.isPresent() ? returnTag.get().clone() : null;
     }
 
     /**

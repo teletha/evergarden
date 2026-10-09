@@ -241,7 +241,7 @@ public class DocumentInfo {
      * @return
      */
     public final XML contents() {
-        return comment.isAbsent() ? null : comment.v.clone();
+        return comment.isAbsent() ? null : comment.get().clone();
     }
 
     /**

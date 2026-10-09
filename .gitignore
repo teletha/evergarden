@@ -94,3 +94,4 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/Java,Maven,Windows,Linux
 /bin/
+!/.gitattributes

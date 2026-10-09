@@ -13,16 +13,16 @@ import javax.lang.model.SourceVersion;
 public class Project extends bee.api.Project {
 
     {
-        product("com.github.teletha", "evergarden", ref("version.txt"));
+        product("io.github.teletha", "evergarden", ref("version.txt"));
         require(SourceVersion.latest(), SourceVersion.RELEASE_21);
 
-        require("com.github.teletha", "sinobu");
-        require("com.github.teletha", "stylist");
-        require("com.github.teletha", "psychopath");
-        require("com.github.teletha", "lycoris");
+        require("io.github.teletha", "sinobu");
+        require("io.github.teletha", "stylist");
+        require("io.github.teletha", "psychopath");
+        require("io.github.teletha", "lycoris");
         require("com.github.teletha", "icymanipulator").atAnnotation();
-        require("com.github.teletha", "antibug").atTest();
-        require("com.github.teletha", "viewtify").atTest();
+        require("io.github.teletha", "antibug").atTest();
+        require("io.github.teletha", "viewtify").atTest();
         require("com.github.javaparser", "javaparser-core");
         require("org.commonmark", "commonmark");
         require("org.commonmark", "commonmark-ext-gfm-tables");

@@ -342,7 +342,7 @@ public class ClassInfo extends ParameterizableInfo implements Document, Comparab
             if (children().isEmpty()) {
                 lines = new int[] {1, 1};
             } else {
-                lines = new int[] {children().getFirst().region().v.startLine(), children().getLast().region().v.endLine()};
+                lines = new int[] {children().getFirst().region().get().startLine(), children().getLast().region().get().endLine()};
             }
         }
 
