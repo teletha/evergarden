@@ -1,6 +1,6 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.github.teletha</groupId>
+	<groupId>io.github.teletha</groupId>
 	<artifactId>evergarden</artifactId>
 	<version>1.0.3</version>
 	<packaging>jar</packaging>
@@ -14,23 +14,23 @@
 	</licenses>
 	<dependencies>
 		<dependency>
-			<groupId>com.github.teletha</groupId>
+			<groupId>io.github.teletha</groupId>
 			<artifactId>antibug</artifactId>
-			<version>1.14.0</version>
+			<version>1.16.1</version>
 			<scope>test</scope>
 			<exclusions/>
 		</dependency>
 		<dependency>
 			<groupId>org.commonmark</groupId>
 			<artifactId>commonmark</artifactId>
-			<version>0.25.1</version>
+			<version>0.30.0</version>
 			<scope>compile</scope>
 			<exclusions/>
 		</dependency>
 		<dependency>
 			<groupId>org.commonmark</groupId>
 			<artifactId>commonmark-ext-gfm-tables</artifactId>
-			<version>0.25.1</version>
+			<version>0.30.0</version>
 			<scope>compile</scope>
 			<exclusions/>
 		</dependency>
@@ -44,42 +44,42 @@
 		<dependency>
 			<groupId>com.github.javaparser</groupId>
 			<artifactId>javaparser-core</artifactId>
-			<version>3.27.0</version>
+			<version>3.28.2</version>
 			<scope>compile</scope>
 			<exclusions/>
 		</dependency>
 		<dependency>
-			<groupId>com.github.teletha</groupId>
+			<groupId>io.github.teletha</groupId>
 			<artifactId>lycoris</artifactId>
-			<version>1.1.0</version>
+			<version>1.1.1</version>
 			<scope>compile</scope>
 			<exclusions/>
 		</dependency>
 		<dependency>
-			<groupId>com.github.teletha</groupId>
+			<groupId>io.github.teletha</groupId>
 			<artifactId>psychopath</artifactId>
-			<version>2.2.1</version>
+			<version>2.3.0</version>
 			<scope>compile</scope>
 			<exclusions/>
 		</dependency>
 		<dependency>
-			<groupId>com.github.teletha</groupId>
+			<groupId>io.github.teletha</groupId>
 			<artifactId>sinobu</artifactId>
-			<version>4.13.1</version>
+			<version>4.14.0</version>
 			<scope>compile</scope>
 			<exclusions/>
 		</dependency>
 		<dependency>
-			<groupId>com.github.teletha</groupId>
+			<groupId>io.github.teletha</groupId>
 			<artifactId>stylist</artifactId>
-			<version>1.16.0</version>
+			<version>1.16.1</version>
 			<scope>compile</scope>
 			<exclusions/>
 		</dependency>
 		<dependency>
-			<groupId>com.github.teletha</groupId>
+			<groupId>io.github.teletha</groupId>
 			<artifactId>viewtify</artifactId>
-			<version>2.35.0</version>
+			<version>2.35.1</version>
 			<scope>test</scope>
 			<exclusions/>
 		</dependency>
@@ -109,7 +109,6 @@
 	<developers>
 		<developer>
 			<name>teletha</name>
-			<email/>
 			<url>https://github.com/teletha</url>
 		</developer>
 	</developers>
@@ -120,7 +119,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.14.0</version>
 				<configuration>
-					<release>24</release>
+					<release>25</release>
 					<encoding>UTF-8</encoding>
 					<compilerId>javac</compilerId>
 					<compilerArgs>
@@ -133,7 +132,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.5.2</version>
 				<configuration>
-					<argLine>-ea   -Dfile.encoding=UTF-8</argLine>
+					<argLine>-ea --enable-native-access=ALL-UNNAMED -Dfile.encoding=UTF-8</argLine>
 					<reportFormat>plain</reportFormat>
 					<consoleOutputReporter>
 						<disable>true</disable>
