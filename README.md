@@ -100,12 +100,12 @@ If you think something might be a bug, but you're not sure, ask on StackOverflow
 
 ## Dependency
 Evergarden depends on the following products on runtime.
-* [commonmark-0.30.0](https://mvnrepository.com/artifact/org.commonmark/commonmark/0.30.0)
-* [commonmark-ext-gfm-tables-0.30.0](https://mvnrepository.com/artifact/org.commonmark/commonmark-ext-gfm-tables/0.30.0)
+* [commonmark-0.33.0](https://mvnrepository.com/artifact/org.commonmark/commonmark/0.33.0)
+* [commonmark-ext-gfm-tables-0.33.0](https://mvnrepository.com/artifact/org.commonmark/commonmark-ext-gfm-tables/0.33.0)
 * [javaparser-core-3.28.2](https://mvnrepository.com/artifact/com.github.javaparser/javaparser-core/3.28.2)
 * [lycoris-1.1.1](https://mvnrepository.com/artifact/io.github.teletha/lycoris/1.1.1)
 * [psychopath-2.3.0](https://mvnrepository.com/artifact/io.github.teletha/psychopath/2.3.0)
-* [sinobu-4.14.0](https://mvnrepository.com/artifact/io.github.teletha/sinobu/4.14.0)
+* [sinobu-4.16.0](https://mvnrepository.com/artifact/io.github.teletha/sinobu/4.16.0)
 * [stylist-1.16.1](https://mvnrepository.com/artifact/io.github.teletha/stylist/1.16.1)
 <p align="right"><a href="#top">back to top</a></p>
 
