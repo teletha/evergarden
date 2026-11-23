@@ -18,7 +18,6 @@ import evergarden.design.EvergardenDSL;
 import evergarden.design.Styles;
 import evergarden.host.Contributor;
 import evergarden.host.Hosting;
-import evergarden.host.Release;
 import evergarden.javadoc.ClassInfo;
 import kiss.I;
 import kiss.XML;
@@ -46,11 +45,13 @@ public class LandingPage extends Page<List<ClassInfo>> {
 
             $("div", css.box, () -> {
                 $("a", href(letter.doc().map(Doc::path).or("")), css.button, text("Getting started"));
-                $("a", href(letter.authority()
-                        .map(Hosting::releases)
-                        .map(List::getFirst)
-                        .map(Release::url)
-                        .or("")), css.button, text("Download"));
+                $("a", href(letter.authority().map(Hosting::releases).map(x -> {
+                    if (x.isEmpty()) {
+                        return "";
+                    } else {
+                        return x.getFirst().url();
+                    }
+                }).or("")), css.button, text("Download"));
             });
 
             I.signal(contents)
