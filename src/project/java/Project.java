@@ -14,7 +14,7 @@ public class Project extends bee.api.Project {
 
     {
         product("io.github.teletha", "evergarden", ref("version.txt"));
-        require(SourceVersion.latest(), SourceVersion.RELEASE_21);
+        require(SourceVersion.latest(), SourceVersion.RELEASE_25);
 
         require("io.github.teletha", "sinobu");
         require("io.github.teletha", "stylist");

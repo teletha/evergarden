@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://docs.oracle.com/en/java/javase/21/"><img src="https://img.shields.io/badge/Java-Release%2021-green"/></a>
+    <a href="https://docs.oracle.com/en/java/javase/25/"><img src="https://img.shields.io/badge/Java-Release%2025-green"/></a>
     <span>&nbsp;</span>
     <a href="https://jitpack.io/#io.github.teletha/evergarden"><img src="https://img.shields.io/jitpack/version/io.github.teletha/evergarden?label=Repository&color=green"></a>
     <span>&nbsp;</span>
@@ -16,7 +16,7 @@ Evergarden is both a Doclet that generates Javadoc written in modern HTML and CS
 
 
 ## Prerequisites
-Evergarden runs on all major operating systems and requires only [Java version 21](https://docs.oracle.com/en/java/javase/21/) or later to run.
+Evergarden runs on all major operating systems and requires only [Java version 25](https://docs.oracle.com/en/java/javase/25/) or later to run.
 To check, please run `java -version` on your terminal.
 <p align="right"><a href="#top">back to top</a></p>
 
@@ -100,12 +100,12 @@ If you think something might be a bug, but you're not sure, ask on StackOverflow
 
 ## Dependency
 Evergarden depends on the following products on runtime.
-* [commonmark-0.30.0](https://mvnrepository.com/artifact/org.commonmark/commonmark/0.30.0)
-* [commonmark-ext-gfm-tables-0.30.0](https://mvnrepository.com/artifact/org.commonmark/commonmark-ext-gfm-tables/0.30.0)
+* [commonmark-0.33.0](https://mvnrepository.com/artifact/org.commonmark/commonmark/0.33.0)
+* [commonmark-ext-gfm-tables-0.33.0](https://mvnrepository.com/artifact/org.commonmark/commonmark-ext-gfm-tables/0.33.0)
 * [javaparser-core-3.28.2](https://mvnrepository.com/artifact/com.github.javaparser/javaparser-core/3.28.2)
 * [lycoris-1.1.1](https://mvnrepository.com/artifact/io.github.teletha/lycoris/1.1.1)
 * [psychopath-2.3.0](https://mvnrepository.com/artifact/io.github.teletha/psychopath/2.3.0)
-* [sinobu-4.14.0](https://mvnrepository.com/artifact/io.github.teletha/sinobu/4.14.0)
+* [sinobu-4.16.0](https://mvnrepository.com/artifact/io.github.teletha/sinobu/4.16.0)
 * [stylist-1.16.1](https://mvnrepository.com/artifact/io.github.teletha/stylist/1.16.1)
 <p align="right"><a href="#top">back to top</a></p>
 

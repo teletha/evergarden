@@ -1,10 +1,10 @@
 jdk:
-  - openjdk21
+  - openjdk25
 
 before_install:
-  - sdk install java 21-open
-  - sdk use java 21-open
-  - export PATH="$HOME/.sdkman/candidates/java/21-open/bin:$PATH"
+  - sdk install java 25-open
+  - sdk use java 25-open
+  - export PATH="$HOME/.sdkman/candidates/java/25-open/bin:$PATH"
 
 install: |
   if [ -f "./bee" ]; then
@@ -44,6 +44,9 @@ install: |
   # not the VERSION in the environment variable. The carriage return is removed
   # because a version.txt written on Windows may end with a CRLF.
   ProductVersion=$(tr -d '\r' < version.txt | xargs)
+
+  # JitPack expects the artifact in the Maven log line to be lowercase.
+  ARTIFACT=${ARTIFACT,,}
 
   # Until the end of 2024, Jitpack would recognize it as an Artifact if I put the appropriate
   # Jar files, etc. in the right place. However, since 2025, Jitpack no longer recognizes them.
